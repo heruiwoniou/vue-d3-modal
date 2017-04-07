@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .b {
+            margin: auto;
+            transition: width .2s ease, height .2s ease, margin .2s ease;
+        }
+        
+        .content {
+            position: absolute;
+            left: 9%;
+            top: 9%;
+            bottom: 9%;
+            right: 9%;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script>
+        function init(){
+            var canvas  = d3.select('body').append('svg');
+        }
+        window.onload = init;
+    </script>
+</body>
+
+</html>
