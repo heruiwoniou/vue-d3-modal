@@ -11,6 +11,8 @@ var path = require('path'),
     webpack = require('webpack-stream'),
     rename = require('gulp-rename');
 
+var styles = ['src/styles/pages/index.styl']
+
 gulp.task('doc', function (cb) {
     gulp.src([
         'README.md', './src/**/*.js'
@@ -29,7 +31,7 @@ gulp.task('image', function () {
 gulp.task('css', function () {
     gulp.run('image');
     gulp
-        .src(['src/styles/index.styl'])
+        .src(styles)
         .pipe(stylus({
             use: [autoprefixer({
                     browsers: [
@@ -39,13 +41,32 @@ gulp.task('css', function () {
                 })]
         }))
         .pipe(cleancss())
-        .pipe(rename('common.css'))
+        .pipe(gulp.dest('dist/styles'));
+
+    gulp
+        .src(['src/styles/common.styl'])
+        .pipe(stylus({
+            use: [autoprefixer({
+                    browsers: [
+                        'last 5 versions', 'ie >= 8'
+                    ],
+                    cascade: false
+                })]
+        }))
+        .pipe(cleancss())
         .pipe(gulp.dest('dist/styles'));
 });
 
 gulp.task('script', function () {
     gulp
-        .src(['node_modules/jquery/dist/jquery.min.js','node_modules/es6-promise/dist/es6-promise.auto.js', 'node_modules/vue/dist/vue.min.js', 'src/libs/lodash/lodash.min.js','node_modules/d3/build/d3.min.js'])
+        .src([
+        'node_modules/jquery/dist/jquery.min.js',
+        'src/libs/jquery.mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js',
+        'node_modules/es6-promise/dist/es6-promise.auto.js',
+        'node_modules/vue/dist/vue.min.js',
+        'src/libs/lodash/lodash.min.js',
+        'node_modules/d3/build/d3.min.js'
+    ])
         .pipe(concat('common.js'))
         .pipe(gulp.dest('dist/scripts/'));
     gulp
@@ -56,6 +77,9 @@ gulp.task('script', function () {
 gulp.task('default', function () {
     server.run({port: 3000})
     gulp.run('doc', 'image', 'css', 'script');
+    gulp.watch(styles,function(){
+        gulp.run('css');
+    })
     gulp.watch([
         'README.md', './src/**/*.js'
     ], function () {

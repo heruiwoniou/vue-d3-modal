@@ -1,0 +1,309 @@
+@import "common"
+$bg=rgba(255,255,255,.1)
+$left-hover-bg=rgb(0,103,179)
+$wrap-width=1920px
+$normal-width=1788px
+$change-width=1200px
+html
+    height: 100%
+body
+    height: 100%
+    min-width: 1200px
+    overflow-x: auto
+.wrap
+    position: relative
+    width: $wrap-width
+    height: 974px
+    background: url("../../images/background.png") no-repeat
+.header
+    height: 100px
+    width: $normal-width
+    margin-bottom: 20px
+    margin-left: auto
+    margin-right: auto
+    .logo
+        width: 330px
+        height: 100%
+        background: url("../../images/logo.png") no-repeat center
+        float: left
+    .nav
+        height: 100px
+        margin-left: 130px
+        float: left
+        position: relative
+        a 
+            float: left
+            position: relative
+            color: white
+            width: 60px
+            height: 30px
+            margin-left: 20px
+            margin-top: 50px-(@height/2)
+            text-align: center
+            line-height: 24px
+            font-size: 16px
+        .solid
+            border-top: 3px solid rgb(103,103,103)
+            border-bottom: 3px solid rgb(103,103,103)
+        .circle-red
+            &:after
+                content:""
+                width: 10px
+                height: 10px
+                background: red
+                position: absolute
+                top: 1px
+                right: 4px
+                border-radius: 50%
+    .search
+        float: right
+        height: 100px
+        width: 360px
+        input
+            width: 245px
+            height: 40px
+            background: rgba(38,38,38,.5) url("../../images/search.png") no-repeat
+            background-position: 215px 12px
+            border-radius: 50px
+            border:none
+            color: white
+            padding-left: 20px
+            margin-top: 50px-(@height/2)
+            position: relative
+            padding-right: 40px
+        .btn1
+            float: right
+            width: 40px
+            height: 100px
+            background: url("../../images/btn2.png") no-repeat center
+            margin-left: 15px
+            cursor: pointer
+            position: relative
+        .btn2
+            float: right
+            width: 40px
+            height: 100px
+            background: url("../../images/btn1.png") no-repeat center
+            cursor: pointer
+            position: relative
+        .circle-red2
+            &:after
+                content:""
+                width: 10px
+                height: 10px
+                background: red
+                position: absolute
+                top: 24px
+                right: 4px
+                border-radius: 50%
+
+            
+.content
+    position: relative
+    width: $normal-width
+    min-height: 780px
+    margin: 0 auto
+.left
+    width: 250px
+    min-height: 650px
+    position: absolute
+    left: 0
+    top: 0
+    .service:nth-child(1),
+    .service:nth-child(2)
+        margin-top: 0
+    .service
+        width: 120px
+        height: 120px
+        background: $bg
+        text-align: center
+        float: left
+        margin-top: 10px
+        cursor: pointer
+        border-radius: 10px
+        &:hover
+            background: $left-hover-bg
+        &:nth-child(even)
+            margin-left: 10px
+        img
+            margin-top: 20px
+        p 
+            margin-top: 20px
+            color: white
+            font-size: 14px
+            overflow: hidden
+            white-space: nowrap
+.right
+    width: 300px
+    height: 650px
+    position: absolute
+    right: 0
+    top: 0
+    .weather
+        min-height: 125px
+        position: relative
+        .weathcer-1
+            height: 90px
+            background: $bg
+            border-top-left-radius: 10px
+            border-top-right-radius: 10px
+            .light
+                position: absolute
+                top: -20px
+                left: 14px
+            .temp
+                font-size: 40px
+                color: white
+                text-align:right
+                padding: 10px 10px 0 0
+            .pm
+                color: white
+                text-align: right
+                padding:5px 10px 0 0
+                color: rgb(160,155,152)
+        .weathcer-2
+            height:35px
+            background: $bg
+            color: white
+            line-height: 35px
+            padding: 0  10px 0 14px
+            border-bottom-left-radius: 10px
+            border-bottom-right-radius: 10px
+            span:nth-child(2)
+                float: right
+    .person
+        margin-top:10px
+        .person-floor1
+            height: 128px
+            background: $bg
+            border-radius: 10px
+            .self
+                float: left;
+                width: 95px
+                height: 94px
+                margin-top: 64px-(@height/2)
+                cursor: pointer
+                margin-left: 10px
+            .name
+                float: left
+                width: 195px
+                height: 70px
+                border-bottom: 1px solid rgb(106,106,106)
+                p:nth-child(1)
+                    font-size: 22px
+                    color: rgb(156,191,210)
+                    padding: 10px 0 0 10px
+                p:nth-child(2)
+                    color: rgb(106,106,106)
+                    padding: 10px 0 0 10px
+            .person-btn
+                img
+                    float: right
+                    width: 40px
+                    height: 40px
+                    margin-top: 29px-(@height/2)
+                    cursor: pointer
+                    margin-right: 10px
+        .person-floor2
+            height: 378px
+            margin-top: 10px
+            background: $bg
+            border-radius: 10px
+            overflow: auto
+            .person-title
+                color: white
+                font-size: 14px
+                padding: 20px 0 0 20px
+            .collection
+                margin: 20px 0 0 20px
+                .person2-btn
+                    float: left
+                &>p 
+                    float: left
+                    color: white
+                    padding-left: 10px
+                    line-height: 14px
+                    width: 200px
+                    overflow: hidden
+                    white-space: nowrap
+                .star
+                    margin:10px 0 0 10px
+                    float: left
+                &>span
+                    float: right
+                    color: rgb(115,115,115)
+                    margin: 10px 5px 0 0
+.main
+    height: 650px
+    position: absolute
+    left: 270px
+    right: 320px
+    background: $bg
+    border-radius: 10px
+    overflow: auto
+    .money
+        font-size: 30px
+        color: white
+        padding-left: 30px
+        padding-top: 20px
+    .action
+        float: left
+        width: 12.5%
+        height: 115px
+        margin-top: 30px
+        text-align: center
+        img 
+            border: none
+        p 
+            color: rgb(160,155,152)
+            font-size: 12px
+            margin-top: 15px
+            overflow: hidden
+            white-space: nowrap
+.footer
+    width: 365px
+    height: 90px
+    border-radius: 90px
+    background: $bg
+    position: absolute
+    bottom: 20px
+    left: 50%
+    margin-left: -(@width/2)
+
+    &>div
+        width: 25%
+        text-align: center
+        height: 100%
+        float: left
+        position: relative
+    .circle-white
+        position: absolute
+        width: 5px;
+        height: 5px;
+        background: #ffffff;
+        border-radius: 50%;
+        bottom: 3px
+        left: 40px
+    img 
+        cursor: pointer
+        height: 64px
+        margin-top: 45px-(@height/2)
+    .alert
+        position: absolute
+        width: 120px
+        height: 30px
+        top: -47px
+        left: -13px
+        text-align: center
+        line-height: 30px
+        border-radius: 3px
+        background: rgba(255,255,255,.1)
+        font-size: 14px
+        color: white
+    .alert:after
+        content: ""
+        position: absolute
+        bottom: -16px
+        left: 53px
+        border: 8px solid transparent 
+        border-top-color: rgba(255,255,255,.1)
