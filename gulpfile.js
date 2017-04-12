@@ -8,7 +8,6 @@ var path = require('path'),
     cleancss = require('gulp-clean-css'),
     server = require('gulp-ss-server'),
     concat = require('gulp-concat'),
-    webpack = require('webpack-stream'),
     rename = require('gulp-rename');
 
 var styles = ['src/styles/pages/index.styl']
