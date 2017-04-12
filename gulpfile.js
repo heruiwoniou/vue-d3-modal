@@ -70,7 +70,7 @@ gulp.task('script', function () {
         .pipe(concat('common.js'))
         .pipe(gulp.dest('dist/scripts/'));
     gulp
-        .src(['src/main.js'])
+        .src(['src/*.js'])
         .pipe(gulp.dest('dist/scripts/'));
 });
 

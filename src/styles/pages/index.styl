@@ -1,91 +1,99 @@
+@import '../var';
 $panelBackground = rgba(255,255,255,.1)
 html
     height: 100%
+    font-size: unit( $baseFontSize ,'px')
+    *
+        font-size: toRem(12);
 body
     height: 100%
-    min-width: 1200px
 .index-wrap
     position: relative
     height: 100%;
     .header
-        height: 100px
+        height: toRem(100)
         position: relative
         z-index: 1;
-        padding: 0 20px;
+        padding: 0 toRem(20);
         .logo
-            width: 330px
-            height: 100%
-            background: url("./images/logo.png") no-repeat center
+            width: toRem(330)
+            height: toRem(100)
+            line-height: toRem(100)
             float: left
+            img
+                vertical-align: middle;
         .nav
-            height: 100px
-            margin-left: 130px
+            height: toRem(100)
+            line-height: toRem(100)
+            margin-left: toRem(130)
             float: left
-            position: relative
+            font-size: 0px;
             a 
-                float: left
-                position: relative
+                display: inline-block;
+                vertical-align: middle;
                 color: white
-                width: 60px
-                height: 30px
-                margin-left: 20px
-                margin-top: 50px-(@height/2)
+                width: toRem(75)
+                height: toRem(30)
+                margin: 0 toRem(30);
                 text-align: center
-                line-height: 24px
-                font-size: 16px
+                line-height: toRem(24)
+                font-size: toRem(16)
+                position: relative;
+                box-sizing: content-box;
+                line-height: toRem(30)
             .solid
-                border-top: 3px solid rgb(103,103,103)
-                border-bottom: 3px solid rgb(103,103,103)
+                border-top: toRem(2) solid rgb(103,103,103)
+                border-bottom: toRem(2) solid rgb(103,103,103)
             .circle-red
                 &:after
                     content:""
-                    width: 10px
-                    height: 10px
+                    width: toRem(10)
+                    height: toRem(10)
                     background: red
                     position: absolute
-                    top: 1px
-                    right: 4px
+                    top: toRem(1)
+                    right: toRem(4)
                     border-radius: 50%
         .search
             float: right
-            height: 100px
-            width: 360px
+            height: toRem(100)
+            font-size: 0;
+            line-height: toRem(100)
             input
-                width: 245px
-                height: 40px
-                background: rgba(38,38,38,.5) url("./images/search.png") no-repeat
-                background-position: 215px 12px
-                border-radius: 50px
+                width: toRem(245)
+                height: toRem(40)
+                background: rgba(255,255,255,.2) url("./images/search.png") no-repeat
+                background-position: toRem(215) toRem(12)
+                background-size: toRem(16)
+                border-radius: toRem(50)
                 border:none
                 color: white
-                padding-left: 20px
-                margin-top: 50px-(@height/2)
+                padding-left: toRem(20)
+                padding-right: toRem(40)
+                vertical-align: middle;
+            .btn0,.btn1,.btn2
+                float: right
+                width: toRem(40)
+                height: toRem(100)
+                background-size: contain;
+                cursor: pointer
                 position: relative
-                padding-right: 40px
+                margin-left: toRem(15)
+            .btn0
+                background: url("./images/btn0.png") no-repeat center
             .btn1
-                float: right
-                width: 40px
-                height: 100px
                 background: url("./images/btn2.png") no-repeat center
-                margin-left: 15px
-                cursor: pointer
-                position: relative
             .btn2
-                float: right
-                width: 40px
-                height: 100px
                 background: url("./images/btn1.png") no-repeat center
-                cursor: pointer
-                position: relative
             .circle-red2
                 &:after
                     content:""
-                    width: 10px
-                    height: 10px
+                    width: toRem(10)
+                    height: toRem(10)
                     background: red
                     position: absolute
-                    top: 24px
-                    right: 4px
+                    top: toRem(24)
+                    right: toRem(4)
                     border-radius: 50%
 
                 
@@ -93,190 +101,199 @@ body
         position: relative
         height: auto;
         min-height: 100%;
-        margin-top: -100px;
-        padding: 120px 20px 0 20px;
-        margin-bottom: -100px;
+        margin-top: toRem(-100);
+        padding: toRem(120) toRem(20) 0 toRem(20);
+        margin-bottom: toRem(-100);
         background: url("./images/background.png") no-repeat
         background-size: cover;
         &:after
             content: '';
             display: block;
             width: 100%;
-            height: 175px;
+            height: toRem(175);
     .left
-        width: 250px
-        min-height: 650px
+        width: toRem(250)
+        min-height: toRem(650)
         position: absolute
-        left: 20px
-        top: 120px
+        left: toRem(20)
+        top: toRem(120)
         .service:nth-child(1),
         .service:nth-child(2)
             margin-top: 0
         .service
-            width: 120px
-            height: 120px
+            width: toRem(120)
+            height: toRem(120)
             background: $panelBackground
             text-align: center
             float: left
-            margin-top: 10px
+            margin-top: toRem(10)
             cursor: pointer
-            border-radius: 10px
+            border-radius: toRem(10)
             &:hover
                 background: rgb(0,103,179)
             &:nth-child(even)
-                margin-left: 10px
-            img
-                margin-top: 20px
+                margin-left: toRem(10)
+            .service-img-container
+                height: toRem(50)
+                width: toRem(100);
+                line-height: toRem(50);
+                margin: toRem(20) auto 0 auto;
+                img
+                    height: 100%
             p 
-                margin-top: 20px
-                color: white
-                font-size: 14px
+                margin-top: toRem(20)
+                color: rgb(255,255,255,.6)
+                font-size: toRem(16)
                 overflow: hidden
                 white-space: nowrap
     .right
-        width: 300px
-        height: 650px
+        width: toRem(300)
+        height: toRem(650)
         position: absolute
-        right: 20px;
-        top: 120px
+        right: toRem(20);
+        top: toRem(120)
         .weather
-            min-height: 125px
+            min-height: toRem(125)
             position: relative
-            .weathcer-1
-                height: 90px
+            .weather-1
+                height: toRem(90)
                 background: $panelBackground
-                border-top-left-radius: 10px
-                border-top-right-radius: 10px
+                border-top-left-radius: toRem(10)
+                border-top-right-radius: toRem(10)
                 .light
                     position: absolute
-                    top: -20px
-                    left: 14px
+                    top: toRem(-20)
+                    left: toRem(14);
+                    width: toRem(93);
                 .temp
-                    font-size: 40px
+                    font-size: toRem(40)
                     color: white
                     text-align:right
-                    padding: 10px 10px 0 0
+                    padding: toRem(10) toRem(10) 0 0
                 .pm
                     color: white
                     text-align: right
-                    padding:5px 10px 0 0
+                    padding:toRem(5) toRem(10) 0 0
                     color: rgb(160,155,152)
-            .weathcer-2
-                height:35px
-                background: $panelBackground
+            .weather-2
+                height:toRem(35)
+                background: rgba(255,255,255,.2)
                 color: white
-                line-height: 35px
-                padding: 0  10px 0 14px
-                border-bottom-left-radius: 10px
-                border-bottom-right-radius: 10px
+                line-height: toRem(35)
+                padding: 0  toRem(10) 0 toRem(14)
+                border-bottom-left-radius: toRem(10)
+                border-bottom-right-radius: toRem(10)
                 span:nth-child(2)
                     float: right
         .person
-            margin-top:10px
+            margin-top:toRem(10)
             .person-floor1
-                height: 128px
+                height: toRem(128)
                 background: $panelBackground
-                border-radius: 10px
+                border-radius: toRem(10)
                 .self
                     float: left;
-                    width: 95px
-                    height: 94px
-                    margin-top: 64px-(@height/2)
+                    width: toRem(95)
+                    height: toRem(94)
+                    margin-top: toRem(17)
                     cursor: pointer
-                    margin-left: 10px
+                    margin-left: toRem(10)
                 .name
                     float: left
-                    width: 195px
-                    height: 70px
-                    border-bottom: 1px solid rgb(106,106,106)
+                    width: toRem(195)
+                    height: toRem(70)
+                    border-bottom: toRem(1) solid rgb(106,106,106)
                     p:nth-child(1)
-                        font-size: 22px
+                        font-size: toRem(22)
                         color: rgb(156,191,210)
-                        padding: 10px 0 0 10px
+                        padding: toRem(10) 0 0 toRem(10)
                     p:nth-child(2)
                         color: rgb(106,106,106)
-                        padding: 10px 0 0 10px
+                        padding: toRem(10) 0 0 toRem(10)
                 .person-btn
                     img
                         float: right
-                        width: 40px
-                        height: 40px
-                        margin-top: 29px-(@height/2)
+                        width: toRem(40)
+                        height: toRem(40)
+                        margin-top: toRem(9)
                         cursor: pointer
-                        margin-right: 10px
+                        margin-right: toRem(10)
             .person-floor2
-                height: 378px
-                margin-top: 10px
+                height: toRem(378)
+                margin-top: toRem(10)
                 background: $panelBackground
-                border-radius: 10px
+                border-radius: toRem(10)
                 overflow: auto
                 .person-title
                     color: white
-                    font-size: 14px
-                    padding: 20px 0 0 20px
+                    font-size: toRem(14)
+                    padding: toRem(20) 0 0 toRem(20)
                 .collection
-                    margin: 20px 0 0 20px
+                    margin: toRem(20) 0 0 toRem(20)
                     .person2-btn
                         float: left
                     &>p 
                         float: left
                         color: white
-                        padding-left: 10px
-                        line-height: 14px
-                        width: 200px
+                        padding-left: toRem(10)
+                        line-height: toRem(14)
+                        width: toRem(200)
                         overflow: hidden
                         white-space: nowrap
                     .star
-                        margin:10px 0 0 10px
+                        margin:toRem(10) 0 0 toRem(10)
                         float: left
                     &>span
                         float: right
                         color: rgb(115,115,115)
-                        margin: 10px 5px 0 0
+                        margin: toRem(10) toRem(5) 0 0
     .main
-        max-height: 650px
-        margin-left: 270px
-        margin-right: 320px
+        min-height: toRem(512);
+        margin-left: toRem(270)
+        margin-right: toRem(320)
         background: $panelBackground
-        border-radius: 10px
+        border-radius: toRem(10)
+        padding-bottom: toRem(17);
         overflow: auto
         .money
-            font-size: 30px
+            font-size: toRem(28)
             color: white
-            padding-left: 30px
-            padding-top: 20px
+            padding-left: toRem(30)
+            margin-top: toRem(30)
+            line-height: 1;
         .action
             float: left
             width: 11.1%
-            height: 115px
-            margin-top: 30px
+            height: toRem(115)
+            margin-top: toRem(30)
             text-align: center
             img 
                 border: none
+                width: toRem(64);
             p 
                 color: rgb(160,155,152)
-                font-size: 12px
-                margin-top: 15px
+                font-size: toRem(14)
+                margin-top: toRem(15)
                 overflow: hidden
                 white-space: nowrap
                 text-overflow:ellipsis;
     .footer
         width: 100%;
-        height: 90px
+        height: toRem(90)
         text-align: center;
         position: relative;
         .app-panel
-            font-size: 0px;
+            font-size: toRem(0);
             display: inline-block;
             vertical-align: top;
-            min-width: 100px
-            height: 90px
-            border-radius: 90px
+            min-width: toRem(100)
+            height: toRem(90)
+            border-radius: toRem(90)
             background: rgba(255,255,255,.1)
-            padding: 0 10px
+            padding: 0 toRem(10)
             white-space nowrap
             &>div
-                margin: 0 10px;
+                margin: 0 toRem(10);
                 text-align: center
                 height: 100%
                 display: inline-block;
@@ -284,32 +301,32 @@ body
                 position: relative
             .circle-white
                 position: absolute
-                width: 5px;
-                height: 5px;
+                width: toRem(5);
+                height: toRem(5);
                 background: #ffffff;
                 border-radius: 50%;
-                bottom: 3px
-                left: 40px
+                bottom: toRem(3)
+                left: toRem(40)
             img 
                 cursor: pointer
-                height: 64px
-                margin-top: 45px-(@height/2)
+                height: toRem(64)
+                margin-top: toRem(13)
             .alert
                 position: absolute
-                width: 120px
-                height: 30px
-                top: -47px
-                left: -30px
+                width: toRem(120)
+                height: toRem(30)
+                top: toRem(-47)
+                left: toRem(-30)
                 text-align: center
-                line-height: 30px
-                border-radius: 3px
+                line-height: toRem(30)
+                border-radius: toRem(3)
                 background: rgba(255,255,255,.1)
-                font-size: 14px
+                font-size: toRem(14)
                 color: white
             .alert:after
                 content: ""
                 position: absolute
-                bottom: -16px
-                left: 53px
-                border: 8px solid transparent 
+                bottom: toRem(-16)
+                left: toRem(53)
+                border: toRem(8) solid transparent 
                 border-top-color: rgba(255,255,255,.1)
