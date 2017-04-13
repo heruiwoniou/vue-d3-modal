@@ -72,6 +72,7 @@
                         glass: false,
 
                         mainMaxHeight: 0,
+                        mainCenterMaxHeight: 0,
                         searchMaxHeight: 0
                     },
 
@@ -79,6 +80,11 @@
                         mainContainerStyle: function () {
                             return {
                                 'max-height': this.mainMaxHeight + 'px'
+                            }
+                        },
+                        mainCenterContainerStyle:function(){
+                            return {
+                                'max-height': this.mainCenterMaxHeight + 'px'
                             }
                         },
                         mainSearchContentStyle: function(){
@@ -96,7 +102,7 @@
                             }
                         }
                     },
-                    mounted(){
+                    mounted:function(){
                         document.getElementById('app').style.display = "block";
                         function clickTab(a,b,_this){
                             if($(_this).hasClass(a)){
@@ -123,7 +129,7 @@
                         
                     },
                     methods:{
-                        calendarInit(){
+                        calendarInit:function(){
                             if(this.calendarInited) return;
                             this.calendarInited = true;
                             var date = new Date();
@@ -229,10 +235,10 @@
                         openSider:function(){
                             this.siderOpening = true;
                             this.sider = true;
-                        },
-                        sideAfterEnter:function(){
-                            this.glass = true;
-                            this.siderOpening = false;
+                            setTimeout(function(){
+                                this.glass = true;
+                                this.siderOpening = false;
+                            }.bind(this))
                         },
                         sideBeforeLeave:function(){
                             this.glass = false;
@@ -257,7 +263,9 @@
                         fontSize = 12 * clientWidth / 380.600;
                         docEl.style.fontSize = fontSize + 'px';
                         appVm.mainMaxHeight = docHeight - ( 383 / baseSeed ) * fontSize;
+                        appVm.mainCenterMaxHeight = docHeight - ( 322 / baseSeed ) * fontSize;
                         appVm.searchMaxHeight = docHeight - ( (280 + 175) / baseSeed ) * fontSize;
+                        
                         return recalc;
                     })();
                 if (!document.addEventListener) 

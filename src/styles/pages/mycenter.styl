@@ -131,8 +131,14 @@
 	.main
 		margin-left:toRem(310)
 		margin-right:toRem(390)
-		padding: toRem(15)
-		height:toRem(680)
+		overflow: hidden;
+		padding-right: 0
+		padding-left toRem(15)
+		padding-top: toRem(7)
+		padding-bottom: toRem(7)
+		&>div
+			padding-right: toRem(15)
+		// height:toRem(680)
 		.myData
 			position: absolute
 			line-height: toRem(50)
