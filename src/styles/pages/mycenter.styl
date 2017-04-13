@@ -1,0 +1,224 @@
+@import 'df-icon';
+#df-self
+	.left
+		width:toRem(300)
+		.userP
+			width:100%
+			height:toRem(120)
+			background:rgba(255,255,255,.1)
+			border-radius:toRem(5)
+			img
+				float:left;
+				width:toRem(95)
+				height:toRem(95)
+				margin:toRem(13) toRem(20) 0 toRem(13)
+			.userName
+				float:left
+				width:toRem(165)
+				margin-top:toRem(25)
+				.name
+					line-height: toRem(40)
+					font-size: toRem(22)
+					color:#b5d6e8;
+				.welcome
+					line-height: toRem(30)
+					font-size: toRem(14)
+					color:#adabab
+		.server
+			width:100%
+			height:toRem(600)
+			border-radius:toRem(5)
+			overflow: hidden;
+			background:rgba(255,255,255,.1)
+			margin-top:toRem(10)
+			.nav
+				height:toRem(40)
+				background:rgba(255,255,255,.1) url('./images/server-nav-bg.png') no-repeat center;
+				.list
+					width:50%;
+					float:left
+					display: block
+					text-align: center;
+					line-height: toRem(40)
+					font-size: toRem(16)
+					color:#fff;
+					i
+						margin-right:toRem(5)
+						vertical-align:middle
+				.active
+					color:#ef845c
+			.lists
+				height:toRem(560)
+				li
+					height:toRem(160)
+					border-top:toRem(1) solid #ada8a8
+					padding:toRem(10)
+					&:first-child
+						border:none
+					.stuHead
+						display: block
+						width:toRem(46);
+						height:toRem(46);
+						margin-right:toRem(10)
+						float:left;
+					.stuImp
+						float:left
+						width:toRem(220)
+						.stuName
+							color: #fff
+							font-size: toRem(16)
+							line-height: toRem(30)
+						.stuSpeak
+							line-height: toRem(20)
+							font-size: toRem(12)
+							color:#fff;
+						.display
+							width:100%
+							height:toRem(50)
+							border-radius:toRem(5)
+							background: rgba(255,255,255,.1)
+							overflow: hidden
+							margin-top:toRem(10)
+							.stuDicBox
+								width:toRem(50)
+								height:toRem(50)
+								background: rgba(255,255,255,.1)
+								float:left
+								overflow: hidden;
+								.stuDis
+									display: block
+									width:toRem(36)
+									height:toRem(36)
+									margin: toRem(7)
+							.disTextBox
+								float:left
+								width:toRem(155)
+								padding-left:toRem(10)
+								padding-top:toRem(5)
+								p
+									line-height: toRem(20)
+									color:#fff
+									opacity: 0.7
+								.disName
+									font-size: toRem(14);
+								.disSpeak
+									font-size: toRem(12);
+					.stuBottom
+						.stuTime
+							float:left
+							line-height: toRem(40)
+							color: #fff
+							opacity: 0.7
+							font-size: toRem(12)
+						.stuTake
+							float:right
+							width:toRem(17)
+							height:toRem(17)
+							margin-top:toRem(11)
+	.main
+		margin-left:toRem(310)
+		margin-right:toRem(390)
+	.right
+		width:toRem(380)
+		border-radius:toRem(5)
+		background: rgba(255,255,255,.1)
+		height:toRem(730)
+		overflow: hidden
+		.r-head
+			height:toRem(40)
+			background: rgba(255,255,255,.1)
+			a
+				width:33%
+				display: block
+				float:left
+				text-align: center
+				line-height: toRem(40)
+				color:#fff
+				font-size: toRem(16)
+				&:after
+					content:''
+					display: inline-block
+					width:toRem(1)
+					height:toRem(20)
+					float:left
+					margin-top:toRem(10)
+					background: rgba(255,255,255,.4)
+				&:first-child:after
+					display: none
+			a.r-active
+				color:#92d6ff
+		.r-listBox
+			padding-left:toRem(15)
+			padding-bottom:toRem(10)
+			width:100%
+			height:toRem(656)
+			overflow: hidden
+			li
+				height:toRem(130)
+				.listSec
+					height:toRem(95)
+					padding-top:toRem(25)
+					.waiting
+						background: #7dcdf4
+					.wait
+						background: #89a3d4
+					.noPass
+						background:#ea5532
+					.pass
+						background: #acacac
+					.state
+						float:left
+						width:toRem(52)
+						margin-right:toRem(10)
+						font-size: toRem(15)
+						color:#fff
+						border-radius:toRem(52)
+						line-height: toRem(52)
+						text-align: center
+					.listTti
+						float:left
+						width:toRem(302)
+						.listName
+							line-height: toRem(30)
+							font-size: toRem(15)
+						.listText
+							line-height: toRem(20)	
+							font-size: toRem(12)
+							opacity: 0.8
+						p
+							color:#fff
+				.listB
+					background: rgba(255,255,255,.1)		
+					height:toRem(35)
+					.tea
+						float:left
+						margin-left:toRem(10)
+						.teacher
+							font-size toRem(14)
+							line-height: toRem(35)
+							color: #fff
+							font-weight: 500
+						.teaSta
+							font-size toRem(14)
+							opacity: 0.9	
+							line-height: toRem(35)
+							color: #fff
+					.stuTime
+						float:right
+						margin-right:toRem(10)	
+						opacity: 0.8	
+						line-height: toRem(35)
+						color: #fff
+						font-size toRem(12)
+		.r-fotter
+			height:toRem(35);
+			border-top:toRem(1) solid #737373
+			text-align: center
+			line-height: toRem(35)
+			.r-more
+				color: #fff
+				opacity: 0.8
+				background: url('./images/more-bg.png') no-repeat left center;
+				padding-left:toRem(30)
+				font-size: toRem(12)
+				
