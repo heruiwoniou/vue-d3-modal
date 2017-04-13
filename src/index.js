@@ -5,6 +5,7 @@
             var appVm = new Vue({
                     el: 'body > .app',
                     data: {
+                        appPageIndex: 0,
                         navIndex: 0,
                         navs:[
                             { name: '人事服务', icons: 'service1.png' },
@@ -85,6 +86,29 @@
                                 'height': this.searchMaxHeight + 'px'
                             }
                         }
+                    },
+                    mounted(){
+                        function clickTab(a,b,_this){
+                            if($(_this).hasClass(a)){
+                                return
+                            }else{
+                                $(_this).siblings().removeClass(a);
+                                $(_this).addClass(a);
+                                $(b).not($(_this).index()).fadeOut(100);
+                                $(b).eq($(_this).index()).fadeIn(100);
+                            }
+                        }
+                        $('.server .lists ul').eq(0).show();
+                        $('.right .r-listBox ul').eq(0).show();
+
+                        $('.server .list').click(function(){
+                            var _this = this;
+                            clickTab('active','.server .lists ul',_this);
+                        });
+                        $('.right .r-head a').click(function(){
+                            var _this = this;
+                            clickTab('active','.right .r-listBox ul',_this);
+                        });
                     },
                     methods:{
                         navChange:function(index){
