@@ -64,6 +64,7 @@ gulp.task('scriptCommon', function () {
         'node_modules/es6-promise/dist/es6-promise.auto.js',
         'node_modules/vue/dist/vue.min.js',
         'src/libs/lodash/lodash.min.js',
+        'src/libs/clickoutside/index.js',
         'node_modules/d3/build/d3.min.js'
     ])
         .pipe(concat('common.js'))
@@ -77,7 +78,7 @@ gulp.task('script',()=>gulp
 gulp.task('default', function () {
     server.run({port: 3000})
     gulp.run('doc', 'image', 'css', 'script','scriptCommon');
-    gulp.watch(styles,function(){
+    gulp.watch(['src/styles/pages/**/*.styl'],function(){
         gulp.run('css');
     })
     gulp.watch('src/*.js',()=>gulp.run('script'))

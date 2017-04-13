@@ -9,75 +9,27 @@ body
     height: 100%
     &>.app
         height: 100%;
-.search-warp
-    position: absolute;
-    width: 100%;
-    z-index: -10;
-    .search-close
-        position: absolute
-        right: toRem(33)
-        top: toRem(33)
-        width: toRem(30)
-        height: toRem(30)
-        background: url('images/search-close.png') center no-repeat;
-        background-size: contain;
-    .search-bar
-        height: toRem(160)
-        margin-top: toRem(-160)
-        padding-top: 1px;
-        opacity: 0
-        input
-            display: block;
-            padding: 0;
-            border: none;
-            border-bottom: toRem(2) solid rgba(255,255,255,.5)
-            background: none;
-            color: white;
-            height: toRem(100)
-            font-size: toRem(30)
-            width: toRem(1160);
-            margin:toRem(60) auto 0 auto;
-    .search-container
-        width: toRem(1160);
-        position: absolute
-        top: toRem(300)
-        left: 50%
-        margin-left: toRem(-580)
-        opacity: 0
-    .search-header
-        display: inline-block;
-        height: toRem(120);
-        width: 100%;
-    .search-default-header
-        .history
-            padding-top: toRem(10)
-            height: toRem(82)
-            span
-                margin-right: toRem(5)
-                height: toRem(26)
-                display: inline-block;
-                padding: 0 toRem(6) 0 toRem(12)
-                line-height: toRem(26)
-                background: rgba(255,255,255,.2)
-                border-radius: 13px;
-                color: #bcbcbc;
-        h2
-            font-size: toRem(20)
-            line-height: toRem(38);
-            color:white;
-            font-weight: normal;
-    .search-bar,.search-container
-        transition: margin-top .2s cubic-bezier(0.2,1,0.3,1),opacity .2s cubic-bezier(0.2,1,0.3,1)
-    .search-container
-        transition: top .2s cubic-bezier(0.2,1,0.3,1);
-    &.search-warp--show
-        z-index: 10
-        .search-bar
-            margin-top: 0
-            opacity: 1
-        .search-container
-            top: toRem(160)
-            opacity: 1
+    .back-layer
+        z-index -5;
+    .button-panel
+        .button-enter,
+        .button-mark,
+        .button-share
+            margin-right: toRem(5)
+            height: toRem(10)
+            width: toRem(11)
+            display: inline-block;
+            background-size: contain
+            background-position: center
+            background-repeat: no-repeat
+        .button-enter
+            background-image: url(images/icon-enter.png)
+        .button-mark
+            background-image: url(images/icon-mark.png)
+            &.mark
+                background-image: url(images/icon-mark-marked.png)
+        .button-share
+            background-image: url(images/icon-share.png)
 .index-wrap
     position: absolute;
     height: 100%;
@@ -131,7 +83,11 @@ body
             height: toRem(100)
             font-size: 0;
             line-height: toRem(100)
+            width: toRem(330)
+            white-space: nowrap
+            direction: rtl;
             input
+                text-align: left;
                 width: toRem(245)
                 height: toRem(40)
                 background: rgba(255,255,255,.2) url("./images/search.png") no-repeat
@@ -142,9 +98,11 @@ body
                 color: white
                 padding-left: toRem(20)
                 padding-right: toRem(40)
-                vertical-align: middle;
+                vertical-align: top;
+                margin-top: toRem(31)
+                display: inline-block;
             .btn0,.btn1,.btn2
-                float: right
+                display: inline-block;
                 width: toRem(40)
                 height: toRem(100)
                 background-size: contain;
@@ -203,10 +161,11 @@ body
             margin-top: toRem(10)
             cursor: pointer
             border-radius: toRem(10)
+            &.active
             &:hover
                 background: rgb(0,103,179)
             &:nth-child(even)
-                margin-left: toRem(10)
+                margin-left: toRem(9)
             .service-img-container
                 height: toRem(50)
                 width: toRem(100);
@@ -226,6 +185,10 @@ body
         position: absolute
         right: toRem(20);
         top: toRem(120)
+        transition filter 1s cubic-bezier(0.2,1,0.3,1); 
+        &.glass
+            filter:blur(10px);
+            -ms-filter:unquote("progid:DXImageTransform.Microsoft.Blur(PixelRadius=10, MakeShadow=false)");
         .weather
             min-height: toRem(125)
             position: relative
@@ -340,27 +303,11 @@ body
                         white-space: nowrap
                         text-overflow: ellipsis;
                     .button-panel
-                        opacity: 0;
                         transition: opacity .1s ease-out;
                         padding-top: toRem(5)
                         float:left
                         margin-left toRem(70)
-                    .button-enter,
-                    .button-mark,
-                    .button-share
-                        margin-right: toRem(5)
-                        height: toRem(10)
-                        width: toRem(11)
-                        display: inline-block;
-                        background-size: contain
-                        background-position: center
-                        background-repeat: no-repeat
-                    .button-enter
-                        background-image: url(images/icon-enter.png)
-                    .button-mark
-                        background-image: url(images/icon-mark.png)
-                    .button-share
-                        background-image: url(images/icon-share.png)
+                        opacity: 0;
                     &:hover
                         &>p
                             font-size: toRem(16)
@@ -421,6 +368,9 @@ body
                 display: inline-block;
                 vertical-align: top;
                 position: relative
+                &:hover
+                    .alert
+                        display: block;
             .circle-white
                 position: absolute
                 width: toRem(5);
@@ -435,6 +385,7 @@ body
                 margin-top: toRem(13)
             .alert
                 position: absolute
+                display: none;
                 width: toRem(120)
                 height: toRem(30)
                 top: toRem(-47)
@@ -462,5 +413,8 @@ body
             .right,
             .main
                 opacity: 0
-
+@import 'effects/fade';
+@import 'effects/side';
+@import 'control/search';
+@import 'control/sider';
 @import 'mycenter';

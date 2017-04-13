@@ -1,0 +1,170 @@
+.search-warp
+    position: absolute;
+    width: 100%;
+    .search-close
+        position: absolute
+        right: toRem(33)
+        top: toRem(33)
+        width: toRem(30)
+        height: toRem(30)
+        background: url('images/search-close.png') center no-repeat;
+        background-size: contain;
+        transform: scale3d(0,0,1);
+        transition: transform .5s cubic-bezier(0.2,1,0.3,1);
+    .search-bar
+        height: toRem(160)
+        margin-top: toRem(-160)
+        padding-top: 1px;
+        opacity: 0
+        position: relative;
+        input
+            display: block;
+            padding: 0;
+            border: none;
+            border-bottom: toRem(2) solid rgba(255,255,255,.5)
+            background: none;
+            color: white;
+            height: toRem(100)
+            font-size: toRem(30)
+            width: toRem(1160);
+            margin:toRem(60) auto 0 auto;
+        a
+            height: toRem(100);
+            width: toRem(53);
+            background:url(images/search-icon.png) no-repeat center;
+            background-size: toRem(53) toRem(54);
+            position: absolute;
+            left: 50%;
+            margin-left: toRem(527)
+            bottom: 0;
+    .search-container
+        width: 100%;
+        position: absolute
+        top: toRem(300)
+        opacity: 0
+        &.loading
+            line-height: toRem(300)
+            font-size:toRem(14)
+            text-align: center;
+            color white;
+    .search-header
+        width: toRem(1160);
+        margin: 0 auto;
+        height: toRem(120);
+    .search-default-header
+        .history
+            padding-top: toRem(20)
+            height: toRem(82)
+            span
+                cursor: default;
+                margin-right: toRem(5)
+                height: toRem(26)
+                display: inline-block;
+                padding: 0 toRem(6) 0 toRem(12)
+                line-height: toRem(26)
+                background: rgba(255,255,255,.2)
+                border-radius: toRem(13);
+                color: #bcbcbc;
+                i
+                    display: inline-block;
+                    width: 10px;
+                    height: 10px;
+                    background: url(images/icon-close-small.png) no-repeat center;
+                    background-size: cover;
+                    margin-left: toRem(5)
+                    cursor: pointer;
+        h2
+            font-size: toRem(20)
+            line-height: toRem(38);
+            color:white;
+            font-weight: normal;
+    .search-result-header
+        ul
+            padding-top: toRem(50);
+            text-align: center;
+            li
+                display: inline-block;
+                padding: 0 toRem(10);
+                margin: 0 toRem(10)
+                border-bottom: toRem(2) solid transparent;
+                a
+                    line-height: 2
+                    color:white;
+                    font-size:toRem(18)
+                &.active
+                    border-bottom-color #0067b3;
+                    a
+                        color #0067b3;
+    .search-content
+        .search-result
+            width: toRem(1160);
+            margin: toRem(10) auto 0 auto;
+            ul
+                margin: 0 -0.5%;
+            h1,li,span
+                display: inline-block;
+                vertical-align: top;
+            h1
+                line-height: toRem(70)
+                font-size: toRem(14);
+                color: white;
+                font-weight: normal;
+                transition: line-height .2s cubic-bezier(0.2,1,0.3,1);
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                width: toRem(140);
+            span
+                width: toRem(67)
+                line-height: toRem(70)
+                text-align: center;
+                font-size: 0;
+                img
+                    width: 48px;
+                    vertical-align: middle;
+            li
+                width: 19%
+                height: toRem(70)
+                margin: 0 .5% 1% .5%;
+                background: rgba(255,255,255,.1)
+                border-radius: toRem(7)
+                position: relative;
+                overflow: hidden;
+                &:after
+                    content: ''
+                    display: block;
+                    margin-left toRem(67);
+                    height: toRem(70)
+                    width: 100%;
+                    background: rgba(255,255,255,.1);
+                    transform-origin: left top;
+                    transition: transform .2s cubic-bezier(0.2,1,0.3,1);
+                .button-panel
+                    position: absolute
+                    display: inline
+                    right: toRem(5)
+                    bottom: toRem(-50)
+                    z-index: 1;
+                    transition: bottom .2s cubic-bezier(0.2,1,0.3,1);
+                &:hover
+                    h1
+                        line-height: toRem(60)
+                    &:after
+                        transform: rotateZ(-16deg);
+                    .button-panel
+                        bottom: toRem(5)
+            
+    .search-bar
+        transition: margin-top .5s cubic-bezier(0.2,1,0.3,1),opacity .5s cubic-bezier(0.2,1,0.3,1)
+    .search-container
+        transition: top .5s cubic-bezier(0.2,1,0.3,1),margin-top .5s cubic-bezier(0.2,1,0.3,1),opacity .2s cubic-bezier(0.2,1,0.3,1);
+    &.search-warp--show
+        z-index: 10
+        .search-close
+            transform: scale3d(1,1,1)
+        .search-bar
+            margin-top: 0
+            opacity: 1
+        .search-container
+            top: toRem(160)
+            opacity: 1

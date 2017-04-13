@@ -11,7 +11,7 @@
 
 <body>
     <div id="app" class="app" style="display:none">
-        <div class="index-wrap clear" :class="[search?'index-wrap--content-hide':'']">
+        <div class="index-wrap clear" :class="[visible?'':'index-wrap--content-hide']">
             <div class="header">
                 <div class="logo">
                     <img src="dist/styles/images/logo.png" width="100%" alt="">
@@ -21,70 +21,26 @@
                     <a href="javascript:void(0)">我的</a>
                     <a href="javascript:void(0)" class="circle-red">资讯</a>
                 </div>
-                <div class="search">
-                    <input type="text" readonly name="" value="" @click="search = true" placeholder="输入服务名称">
-                    <div class="btn1"></div>
-                    <div class="btn2 circle-red2"></div>
-                    <div class="btn0"></div>
-                </div>
+                <transition name="fade">
+                    <div class="search" v-show="!sider">
+                        <div class="btn1"></div>
+                        <div class="btn2 circle-red2" @click="openSider"></div>
+                        <div class="btn0"></div>
+                        <input type="text" readonly name="" value="" @click="openSearch" placeholder="输入服务名称" ref="searchinput">
+                    </div>
+                </transition>
             </div>
             <div class="content clear">
                 <div class="left">
-                    <!--<div class="service">
-                        <img src="dist/styles/images/service1.png">
-                        <p>日程服务</p>
-                    </div>-->
-                    <div class="service">
+                    <div class="service" v-for="(nav, index) in navs" @click="navChange(index)" :class="[index == navIndex ? 'active': '']">
                         <div class="service-img-container">
-                            <img src="dist/styles/images/service2.png">
+                            <img :src="'dist/styles/images/' + nav.icons">
                         </div>
-                        <p>人事服务</p>
-                    </div>
-                    <div class="service">
-                        <div class="service-img-container">
-                            <img src="dist/styles/images/service3.png">
-                        </div>
-                        <p>科研服务</p>
-                    </div>
-                    <div class="service">
-                        <div class="service-img-container">
-                            <img src="dist/styles/images/service4.png">
-                        </div>
-                        <p>财务服务</p>
-                    </div>
-                    <div class="service">
-                        <div class="service-img-container">
-                            <img src="dist/styles/images/service5.png">
-                        </div>
-                        <p>后勤服务</p>
-                    </div>
-                    <div class="service">
-                        <div class="service-img-container">
-                            <img src="dist/styles/images/service6.png">
-                        </div>
-                        <p>招生服务</p>
-                    </div>
-                    <div class="service">
-                        <div class="service-img-container">
-                            <img src="dist/styles/images/service7.png">
-                        </div>
-                        <p>教学服务</p>
-                    </div>
-                    <div class="service">
-                        <div class="service-img-container">
-                            <img src="dist/styles/images/service8.png">
-                        </div>
-                        <p>就业服务</p>
-                    </div>
-                    <div class="service">
-                        <div class="service-img-container">
-                            <img src="dist/styles/images/service9.png">
-                        </div>
-                        <p>网信服务</p>
+                        <p>{{ nav.name }}</p>
                     </div>
                 </div>
                 <div class="main" id="main">
-                    <p class="money">财务服务</p>
+                    <p class="money">{{ navs[navIndex].name }}</p>
                     <div class="main-container mCustomScrollbar" data-mcs-theme="minimal" :style="mainContainerStyle">
                         <a v-for="service in services" class="action" href="javascript:void(0)">
                             <img :src="'dist/styles/images/' + service.icon" alt="">
@@ -92,7 +48,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="right">
+                <div class="right" :class="[glass?'glass':'']">
                     <div class="weather">
                         <div class="weather-1">
                             <img class="light" src="dist/styles/images/light.png" alt="">
@@ -139,10 +95,11 @@
                 <div class="app-panel">
                     <div>
                         <img class="footer-btn" src="dist/styles/images/footer-btn1.png">
+                        <div class="alert">校内讲座审批</div>
                     </div>
                     <div>
                         <img class="footer-btn" src="dist/styles/images/footer-btn2.png">
-                        <!--<i class="circle-white"></i>-->
+                        <div class="alert">校内讲座审批</div>
                     </div>
                     <div>
                         <img class="footer-btn" src="dist/styles/images/footer-btn3.png">
@@ -150,19 +107,20 @@
                     </div>
                     <div>
                         <img class="footer-btn" src="dist/styles/images/footer-btn4.png">
+                        <div class="alert">校内讲座审批</div>
                     </div>
                 </div>
             </div>
         </div>
-        <transition>
-            <div class="search-warp" :class="[search?'search-warp--show':'']">
-                <div class="search-close" @click="search = false"></div>
-                <div class="search-bar">
-                    <input type="text" placeholder="请输入服务名称…">
-                </div>
-                <div class="search-container">
+        <div class="search-warp" :class="[search?'search-warp--show':'',!search && visible ? 'back-layer':'']">
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="请输入服务名称…">
+                <a href="javascript:;" @click="doSearch"></a>
+            </div>
+            <transition name="fade-zoom">
+                <div class="search-container" v-if="!searching" key="content">
                     <div class="search-header">
-                        <div class="search-default-header">
+                        <div class="search-default-header" v-if="!searched">
                             <div class="history">
                                 <span>请假申请<i></i></span>
                                 <span>一卡通挂失<i></i></span>
@@ -172,18 +130,160 @@
                             </div>
                             <h2>我的足迹</h2>
                         </div>
-                        <div class="search-result-header">
-                            <!--<ul>
-                                <li><a href="javascript:;">全部</a></li>
+                        <div class="search-result-header" v-else>
+                            <ul>
+                                <li class="active"><a href="javascript:;">全部</a></li>
                                 <li><a href="javascript:;">学生服务</a></li>
                                 <li><a href="javascript:;">教学服务</a></li>
                                 <li><a href="javascript:;">科研服务</a></li>
                                 <li><a href="javascript:;">人事服务</a></li>
                                 <li><a href="javascript:;">财务服务</a></li>
-                            </ul>-->
+                            </ul>
                         </div>
                     </div>
-                    <div class="search-content" :style="mainSearchContentStyle"></div>
+                    <div class="search-content mCustomScrollbar" data-mcs-theme="minimal" :style="mainSearchContentStyle">
+                        <div class="search-result">
+                            <ul>
+                                <li v-for="i in 19">
+                                    <span>
+                                        <img :src="'dist/styles/images/action' + ((i % 19) + 1 ) + '.png'" alt="">
+                                    </span>
+                                    <h1>校内讲座审批</h1>
+                                    <div class="button-panel">
+                                        <a href="javascript:;" class="button-enter"></a>
+                                        <a href="javascript:;" class="button-mark"></a>
+                                        <a href="javascript:;" class="button-share"></a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="search-container loading" v-else key="loading">
+                    <svg width="57" height="57" viewBox="0 0 57 57" xmlns="http://www.w3.org/2000/svg" stroke="#fff">
+                        <g fill="none" fill-rule="evenodd">
+                            <g transform="translate(1 1)" stroke-width="2">
+                                <circle cx="5" cy="50" r="5">
+                                    <animate attributeName="cy"
+                                        begin="0s" dur="2.2s"
+                                        values="50;5;50;50"
+                                        calcMode="linear"
+                                        repeatCount="indefinite" />
+                                    <animate attributeName="cx"
+                                        begin="0s" dur="2.2s"
+                                        values="5;27;49;5"
+                                        calcMode="linear"
+                                        repeatCount="indefinite" />
+                                </circle>
+                                <circle cx="27" cy="5" r="5">
+                                    <animate attributeName="cy"
+                                        begin="0s" dur="2.2s"
+                                        from="5" to="5"
+                                        values="5;50;50;5"
+                                        calcMode="linear"
+                                        repeatCount="indefinite" />
+                                    <animate attributeName="cx"
+                                        begin="0s" dur="2.2s"
+                                        from="27" to="27"
+                                        values="27;49;5;27"
+                                        calcMode="linear"
+                                        repeatCount="indefinite" />
+                                </circle>
+                                <circle cx="49" cy="50" r="5">
+                                    <animate attributeName="cy"
+                                        begin="0s" dur="2.2s"
+                                        values="50;50;5;50"
+                                        calcMode="linear"
+                                        repeatCount="indefinite" />
+                                    <animate attributeName="cx"
+                                        from="49" to="49"
+                                        begin="0s" dur="2.2s"
+                                        values="49;5;27;49"
+                                        calcMode="linear"
+                                        repeatCount="indefinite" />
+                                </circle>
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+            </transition>
+            <div class="search-close" @click="closeSearch()"></div>
+        </div>
+        <transition name="side"
+            @after-enter="sideAfterEnter"
+            @before-leave="sideBeforeLeave">
+            <div class="sider-bar" v-clickoutside:click="closeSider" v-show="sider">
+                <div class="sider-header">
+                    <h1>消息</h1>
+                    <h2>
+                        <span>4月7日</span>
+                        <span>星期五</span>
+                    </h2>
+                    <h3>丁丑年三月十一</h3>
+                </div>
+                <div class="sider-content mCustomScrollbar" data-mcs-theme="minimal-dark">
+                    <div class="sider-panel">
+                        <div class="sider-panel-header">
+                            <span><img src="dist/styles/images/side-icon-1.png" alt=""></span>
+                            日程
+                        </div>
+                        <div class="sider-panel-content empty-tip">
+                            暂无日程
+                        </div>
+                    </div>
+                    <div class="sider-panel">
+                        <div class="sider-panel-header">
+                            <span><img src="dist/styles/images/side-icon-2.png" alt=""></span>
+                            未读消息
+                        </div>
+                        <div class="sider-panel-content message mCustomScrollbar" data-mcs-theme="minimal-dark">
+                            <ul>
+                                <li v-for="i in 10">
+                                    <div>
+                                        <h1>校园一卡通提示</h1>
+                                        <span>1分钟前</span>
+                                    </div>
+                                    <p>一卡通余额不足，请及时充值</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="sider-panel">
+                        <div class="sider-panel-header">
+                            <span><img src="dist/styles/images/side-icon-3.png" alt=""></span>
+                            未读新闻
+                        </div>
+                        <div class="sider-panel-content news">
+                            你有未读新闻5条
+                        </div>
+                    </div>
+                    <div class="sider-panel">
+                        <div class="sider-panel-header">
+                            <span><img src="dist/styles/images/side-icon-4.png" alt=""></span>
+                            分享
+                        </div>
+                        <div class="sider-panel-content share mCustomScrollbar" data-mcs-theme="minimal-dark">
+                            <ul>
+                                <li v-for="i in 5">
+                                    <span>
+                                        <img src="dist/styles/images/user-1.png" alt="">
+                                    </span>
+                                    <div>
+                                        <h1>陈小猫</h1>
+                                        <p>这个查成绩超方便啊</p>
+                                        <div class="item">
+                                            <span>
+                                                <img src="dist/styles/images/action3.png" alt="">
+                                            </span>
+                                            研究生中文成绩
+                                        </div>
+                                        <span>7小时</span>
+                                        <a href="javascript:;" class="comment"></a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </transition>

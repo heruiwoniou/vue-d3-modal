@@ -1,0 +1,9 @@
+.fade-enter-active, .fade-leave-active
+    transition: opacity .5s cubic-bezier(0.2,1,0.3,1) !important;
+.fade-enter, .fade-leave-active
+    opacity: 0 !important;
+.fade-zoom-enter-active, .fade-zoom-leave-active
+    transition: opacity .5s cubic-bezier(0.2,1,0.3,1), transform .5s cubic-bezier(0.2,1,0.3,1) !important;
+.fade-zoom-enter, .fade-zoom-leave-active
+    opacity: 0 !important;
+    transform: scale3d(.8,.8,1) !important;
