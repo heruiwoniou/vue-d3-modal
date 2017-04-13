@@ -64,7 +64,9 @@ gulp.task('scriptCommon', function () {
         'node_modules/es6-promise/dist/es6-promise.auto.js',
         'node_modules/vue/dist/vue.min.js',
         'src/libs/lodash/lodash.min.js',
-        'node_modules/d3/build/d3.min.js'
+        'node_modules/d3/build/d3.min.js',
+        'src/libs/fullcalendar.min.js',
+        'src/libs/jquery-ui-1.10.2.custom.min.js'
     ])
         .pipe(concat('common.js'))
         .pipe(gulp.dest('dist/scripts/'));
