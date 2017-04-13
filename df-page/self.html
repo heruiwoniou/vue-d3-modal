@@ -708,6 +708,11 @@
                 </div>
             </div>
             <div class="main mCustomScrollbar" data-mcs-theme="dark">
+<<<<<<< HEAD
+=======
+                <p class="myData">我的日程</p>
+                <div id='calendar'></div>
+>>>>>>> 20abf8de5fde5057a71c44e313051f4df5a66a20
             </div>
             <div class="right">
                 <div class="r-head">
@@ -1072,8 +1077,8 @@
         </div>
     </div>
     <script src="../dist/scripts/common.js"></script>
+    <script src="../dist/scripts/fullcalendar.min.js"></script>
     <script>
-        
         $('.server .lists ul').eq(0).show();
         $('.right .r-listBox ul').eq(0).show();
 
@@ -1098,29 +1103,106 @@
             }
         }
 
-(function () {
-    $(document)
-        .ready(function () {
-                var docEl = document.documentElement,
-                    fontSize,
-                    resizeEvt = 'orientationchange' in window
-                        ? 'orientationchange'
-                        : 'resize',
-                    recalc = (function recalc() {
-                        var clientWidth = docEl.clientWidth;
-                        var docHeight = document.documentElement.offsetHeight;
-                        if (!clientWidth) 
+        (function () {
+            $(document)
+                .ready(function () {
+                        var docEl = document.documentElement,
+                            fontSize,
+                            resizeEvt = 'orientationchange' in window
+                                ? 'orientationchange'
+                                : 'resize',
+                            recalc = (function recalc() {
+                                var clientWidth = docEl.clientWidth;
+                                var docHeight = document.documentElement.offsetHeight;
+                                if (!clientWidth) 
+                                    return;
+                                fontSize = 12 * clientWidth / 380.600;
+                                docEl.style.fontSize = fontSize + 'px';
+                                return recalc;
+                            })();
+                        if (!document.addEventListener) 
                             return;
-                        fontSize = 12 * clientWidth / 380.600;
-                        docEl.style.fontSize = fontSize + 'px';
-                        return recalc;
-                    })();
-                if (!document.addEventListener) 
-                    return;
-                window.addEventListener(resizeEvt, recalc, false);
-            })
-    })(jQuery)
+                        window.addEventListener(resizeEvt, recalc, false);
+                    })
+            })(jQuery)
     </script>
+    <script type="text/javascript">
+$(function() {
+	
+		var date = new Date();
+		var d = date.getDate();
+		var m = date.getMonth();
+		var y = date.getFullYear();
+		
+		$('#calendar').fullCalendar({
+			header: {
+				left: '',
+				center: 'title',
+				right: 'prev,today,next '
+			},
+			firstDay:1,
+			editable: true,
+			timeFormat: 'H:mm',
+			axisFormat: 'H:mm',
+			events: [
+				{
+					title: '全天计划\r\n#####\r\n写代码',
+					start: new Date(y, m, 1)
+				},
+				{
+					title: '张家界四日游',
+					start: new Date(y, m, d-5),
+					end: new Date(y, m, d-2)
+				},
+				{
+					id: 999,
+					title: '电话回访客户',
+					start: new Date(y, m, d-6, 16, 0),
+					allDay: false
+				},
+				{
+					id: 999,
+					title: '电话回访客户',
+					start: new Date(y, m, d+4, 16, 0),
+					allDay: false
+				},
+				{
+					title: '视频会议',
+					start: new Date(y, m, d, 10, 30),
+					allDay: false
+				},
+				{
+					title: '中秋放假',
+					start: '2013-09-19',
+					end: '2013-09-21',
+				},
+				{
+					title: '午饭',
+					start: new Date(y, m, d, 12, 0),
+					end: new Date(y, m, d, 14, 0),
+					allDay: false
+				},
+				{
+					title: '生日聚会',
+					start: new Date(y, m, d+1, 19, 0),
+					end: new Date(y, m, d+1, 22, 30),
+					allDay: false
+				},
+				{
+					title: '访问Helloweba主页',
+					start: new Date(y, m, 28),
+					end: new Date(y, m, 29),
+					url: 'http://helloweba.com/'
+				},
+				{
+					title: '实战训练课',
+					start: new Date(y, m, d+23)
+				},
+			]
+		});
+		
+	});
+</script>
 </body>
 
 </html>

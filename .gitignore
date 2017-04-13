@@ -219,4 +219,4 @@ dist
 pack
 *.zip
 *.7z
-docs
+docs/
