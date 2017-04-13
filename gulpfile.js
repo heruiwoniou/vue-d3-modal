@@ -56,7 +56,7 @@ gulp.task('css', function () {
         .pipe(gulp.dest('dist/styles'));
 });
 
-gulp.task('script', function () {
+gulp.task('scriptCommon', function () {
     gulp
         .src([
         'node_modules/jquery/dist/jquery.min.js',
@@ -68,17 +68,19 @@ gulp.task('script', function () {
     ])
         .pipe(concat('common.js'))
         .pipe(gulp.dest('dist/scripts/'));
-    gulp
-        .src(['src/*.js'])
-        .pipe(gulp.dest('dist/scripts/'));
+    
 });
+gulp.task('script',()=>gulp
+        .src(['src/*.js'])
+        .pipe(gulp.dest('dist/scripts/')))
 
 gulp.task('default', function () {
     server.run({port: 3000})
-    gulp.run('doc', 'image', 'css', 'script');
+    gulp.run('doc', 'image', 'css', 'script','scriptCommon');
     gulp.watch(styles,function(){
         gulp.run('css');
     })
+    gulp.watch('src/*.js',()=>gulp.run('script'))
     gulp.watch([
         'README.md', './src/**/*.js'
     ], function () {

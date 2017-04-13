@@ -7,9 +7,81 @@ html
         font-size: toRem(12);
 body
     height: 100%
+    &>.app
+        height: 100%;
+.search-warp
+    position: absolute;
+    width: 100%;
+    z-index: -10;
+    .search-close
+        position: absolute
+        right: toRem(33)
+        top: toRem(33)
+        width: toRem(30)
+        height: toRem(30)
+        background: url('images/search-close.png') center no-repeat;
+        background-size: contain;
+    .search-bar
+        height: toRem(160)
+        margin-top: toRem(-160)
+        padding-top: 1px;
+        opacity: 0
+        input
+            display: block;
+            padding: 0;
+            border: none;
+            border-bottom: toRem(2) solid rgba(255,255,255,.5)
+            background: none;
+            color: white;
+            height: toRem(100)
+            font-size: toRem(30)
+            width: toRem(1160);
+            margin:toRem(60) auto 0 auto;
+    .search-container
+        width: toRem(1160);
+        position: absolute
+        top: toRem(300)
+        left: 50%
+        margin-left: toRem(-580)
+        opacity: 0
+    .search-header
+        display: inline-block;
+        height: toRem(120);
+        width: 100%;
+    .search-default-header
+        .history
+            padding-top: toRem(10)
+            height: toRem(82)
+            span
+                margin-right: toRem(5)
+                height: toRem(26)
+                display: inline-block;
+                padding: 0 toRem(6) 0 toRem(12)
+                line-height: toRem(26)
+                background: rgba(255,255,255,.2)
+                border-radius: 13px;
+                color: #bcbcbc;
+        h2
+            font-size: toRem(20)
+            line-height: toRem(38);
+            color:white;
+            font-weight: normal;
+    .search-bar,.search-container
+        transition: margin-top .2s cubic-bezier(0.2,1,0.3,1),opacity .2s cubic-bezier(0.2,1,0.3,1)
+    .search-container
+        transition: top .2s cubic-bezier(0.2,1,0.3,1);
+    &.search-warp--show
+        z-index: 10
+        .search-bar
+            margin-top: 0
+            opacity: 1
+        .search-container
+            top: toRem(160)
+            opacity: 1
 .index-wrap
-    position: relative
+    position: absolute;
     height: 100%;
+    width: 100%;
     .header
         height: toRem(100)
         position: relative
@@ -76,15 +148,17 @@ body
                 width: toRem(40)
                 height: toRem(100)
                 background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
                 cursor: pointer
                 position: relative
                 margin-left: toRem(15)
             .btn0
-                background: url("./images/btn0.png") no-repeat center
+                background-image: url("./images/btn0.png")
             .btn1
-                background: url("./images/btn2.png") no-repeat center
+                background-image: url("./images/btn2.png")
             .btn2
-                background: url("./images/btn1.png") no-repeat center
+                background-image: url("./images/btn1.png")
             .circle-red2
                 &:after
                     content:""
@@ -191,6 +265,7 @@ body
                 height: toRem(128)
                 background: $panelBackground
                 border-radius: toRem(10)
+                overflow: hidden;
                 .self
                     float: left;
                     width: toRem(95)
@@ -210,6 +285,9 @@ body
                     p:nth-child(2)
                         color: rgb(106,106,106)
                         padding: toRem(10) 0 0 toRem(10)
+                        overflow: hidden
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
                 .person-btn
                     img
                         float: right
@@ -223,30 +301,72 @@ body
                 margin-top: toRem(10)
                 background: $panelBackground
                 border-radius: toRem(10)
-                overflow: auto
+                overflow: hidden
                 .person-title
                     color: white
-                    font-size: toRem(14)
-                    padding: toRem(20) 0 0 toRem(20)
+                    font-size: toRem(17)
+                    margin-top: toRem(19)
+                    margin-bottom:toRem(3)
+                    padding-left: toRem(20)
+                .person-floor2-container
+                    height:toRem(329)
                 .collection
-                    margin: toRem(20) 0 0 toRem(20)
-                    .person2-btn
-                        float: left
+                    margin: toRem(16) toRem(20) 0 toRem(20)
+                    border-bottom: 1px solid rgba(255,255,255,.1);
+                    padding-bottom: toRem(10)
+                    height: toRem(61);
+                    overflow: hidden;
+                    position: relative;
+                    .person2-btn-container
+                        width: toRem(60)
+                        height: toRem(50)
+                        line-height: toRem(50)
+                        text-align: left;
+                        position: absolute;
+                        img
+                            vertical-align: top;
+                            height: 100%
                     &>p 
+                        margin-left: toRem(60)
                         float: left
                         color: white
+                        width: toRem(195)
                         padding-left: toRem(10)
-                        line-height: toRem(14)
-                        width: toRem(200)
+                        margin-top: toRem(18)
+                        transition: margin-top .1s ease-out,font-size .1s  ease-out;
+                        line-height: 1
+                        font-size: toRem(13)
                         overflow: hidden
                         white-space: nowrap
-                    .star
-                        margin:toRem(10) 0 0 toRem(10)
-                        float: left
-                    &>span
-                        float: right
-                        color: rgb(115,115,115)
-                        margin: toRem(10) toRem(5) 0 0
+                        text-overflow: ellipsis;
+                    .button-panel
+                        opacity: 0;
+                        transition: opacity .1s ease-out;
+                        padding-top: toRem(5)
+                        float:left
+                        margin-left toRem(70)
+                    .button-enter,
+                    .button-mark,
+                    .button-share
+                        margin-right: toRem(5)
+                        height: toRem(10)
+                        width: toRem(11)
+                        display: inline-block;
+                        background-size: contain
+                        background-position: center
+                        background-repeat: no-repeat
+                    .button-enter
+                        background-image: url(images/icon-enter.png)
+                    .button-mark
+                        background-image: url(images/icon-mark.png)
+                    .button-share
+                        background-image: url(images/icon-share.png)
+                    &:hover
+                        &>p
+                            font-size: toRem(16)
+                            margin-top: toRem(7)
+                        .button-panel
+                            opacity: 1
     .main
         min-height: toRem(512);
         margin-left: toRem(270)
@@ -255,6 +375,8 @@ body
         border-radius: toRem(10)
         padding-bottom: toRem(17);
         overflow: auto
+        .main-container
+            overflow: hidden;
         .money
             font-size: toRem(28)
             color: white
@@ -330,4 +452,15 @@ body
                 left: toRem(53)
                 border: toRem(8) solid transparent 
                 border-top-color: rgba(255,255,255,.1)
+    .header,.content .left,.content .right,.content .main
+        transition: opacity .5s cubic-bezier(0.2,1,0.3,1)
+    &.index-wrap--content-hide
+        .header
+            opacity: 0
+        .content
+            .left,
+            .right,
+            .main
+                opacity: 0
+
 @import 'mycenter';

@@ -26,7 +26,7 @@
 					color:#adabab
 		.server
 			width:100%
-			height:toRem(600)
+			height:toRem(547)
 			border-radius:toRem(5)
 			overflow: hidden;
 			background:rgba(255,255,255,.1)
@@ -45,14 +45,18 @@
 					i
 						margin-right:toRem(5)
 						vertical-align:middle
+						width:toRem(20)
+						height:toRem(20)
 				.active
 					color:#ef845c
 			.lists
 				height:toRem(560)
+				ul
+					display: none
 				li
-					height:toRem(160)
 					border-top:toRem(1) solid #ada8a8
 					padding:toRem(10)
+					overflow: hidden
 					&:first-child
 						border:none
 					.stuHead
@@ -98,11 +102,16 @@
 								p
 									line-height: toRem(20)
 									color:#fff
-									opacity: 0.7
+									height:toRem(20)
+									text-overflow : ellipsis; 
+									white-space : nowrap; 
+									overflow : hidden; 
 								.disName
 									font-size: toRem(14);
+									opacity: 0.9
 								.disSpeak
 									font-size: toRem(12);
+									opacity: 0.7
 					.stuBottom
 						.stuTime
 							float:left
@@ -115,6 +124,9 @@
 							width:toRem(17)
 							height:toRem(17)
 							margin-top:toRem(11)
+							img
+								width:100%
+								height:100%
 	.main
 		margin-left:toRem(310)
 		margin-right:toRem(390)
@@ -122,7 +134,7 @@
 		width:toRem(380)
 		border-radius:toRem(5)
 		background: rgba(255,255,255,.1)
-		height:toRem(730)
+		height:toRem(680)
 		overflow: hidden
 		.r-head
 			height:toRem(40)
@@ -151,8 +163,10 @@
 			padding-left:toRem(15)
 			padding-bottom:toRem(10)
 			width:100%
-			height:toRem(656)
+			height:toRem(608)
 			overflow: hidden
+			ul
+				display: none
 			li
 				height:toRem(130)
 				.listSec
@@ -181,9 +195,15 @@
 						.listName
 							line-height: toRem(30)
 							font-size: toRem(15)
+							text-overflow : ellipsis; 
+							white-space : nowrap; 
+							overflow : hidden; 
 						.listText
 							line-height: toRem(20)	
 							font-size: toRem(12)
+							text-overflow : ellipsis; 
+							white-space : nowrap; 
+							overflow : hidden; 
 							opacity: 0.8
 						p
 							color:#fff
@@ -221,4 +241,5 @@
 				background: url('./images/more-bg.png') no-repeat left center;
 				padding-left:toRem(30)
 				font-size: toRem(12)
+				background-size:toRem(21) toRem(4)
 				

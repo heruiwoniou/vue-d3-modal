@@ -10,307 +10,186 @@
 </head>
 
 <body>
-    <div class="index-wrap clear" id="index-wrap">
-        <div class="header">
-            <div class="logo">
-                <img src="dist/styles/images/logo.png" width="100%" alt="">
-            </div>
-            <div class="nav">
-                <a href="javascript:void(0)" class="solid ">首页</a>
-                <a href="javascript:void(0)">我的</a>
-                <a href="javascript:void(0)" class="circle-red">资讯</a>
-            </div>
-            <div class="search">
-                <input type="text" name="" value="" placeholder="输入服务名称">
+    <div id="app" class="app" style="display:none">
+        <div class="index-wrap clear" :class="[search?'index-wrap--content-hide':'']">
+            <div class="header">
+                <div class="logo">
+                    <img src="dist/styles/images/logo.png" width="100%" alt="">
+                </div>
+                <div class="nav">
+                    <a href="javascript:void(0)" class="solid ">首页</a>
+                    <a href="javascript:void(0)">我的</a>
+                    <a href="javascript:void(0)" class="circle-red">资讯</a>
+                </div>
+                <div class="search">
+                    <input type="text" readonly name="" value="" @click="search = true" placeholder="输入服务名称">
                     <div class="btn1"></div>
-                <div class="btn2 circle-red2"></div>
-                <div class="btn0"></div>
-            </div>
-        </div>
-        <div class="content clear">
-            <div class="left">
-                <!--<div class="service">
-                    <img src="dist/styles/images/service1.png">
-                    <p>日程服务</p>
-                </div>-->
-                <div class="service">
-                    <div class="service-img-container">
-                        <img src="dist/styles/images/service2.png">
-                    </div>
-                    <p>人事服务</p>
-                </div>
-                <div class="service">
-                    <div class="service-img-container">
-                        <img src="dist/styles/images/service3.png">
-                    </div>
-                    <p>科研服务</p>
-                </div>
-                <div class="service">
-                    <div class="service-img-container">
-                        <img src="dist/styles/images/service4.png">
-                    </div>
-                    <p>财务服务</p>
-                </div>
-                <div class="service">
-                    <div class="service-img-container">
-                        <img src="dist/styles/images/service5.png">
-                    </div>
-                    <p>后勤服务</p>
-                </div>
-                <div class="service">
-                    <div class="service-img-container">
-                        <img src="dist/styles/images/service6.png">
-                    </div>
-                    <p>招生服务</p>
-                </div>
-                <div class="service">
-                    <div class="service-img-container">
-                        <img src="dist/styles/images/service7.png">
-                    </div>
-                    <p>教学服务</p>
-                </div>
-                <div class="service">
-                    <div class="service-img-container">
-                        <img src="dist/styles/images/service8.png">
-                    </div>
-                    <p>就业服务</p>
-                </div>
-                <div class="service">
-                    <div class="service-img-container">
-                        <img src="dist/styles/images/service9.png">
-                    </div>
-                    <p>网信服务</p>
+                    <div class="btn2 circle-red2"></div>
+                    <div class="btn0"></div>
                 </div>
             </div>
-            <div class="main">
-                <p class="money">财务服务</p>
-                <div class="main-container">
-                    <a v-for="app in apps" class="action" href="javascript:void(0)">
-                        <img :src="'dist/styles/images/action' + ((app % 19) + 1) + '.png''" alt="">
-                        <p>应用{{ app }}</p>
-                    </a>
-                    <!--<a class="action" href="javascript:void(0)">
-                        <img src="dist/styles/images/action2.png" alt="">
-                        <p>本科课程课表查询</p>
-                    </a>
-                    <a class="action" href="javascript:void(0)">
-                        <img src="dist/styles/images/action3.png" alt="">
-                        <p>研究生中文成绩.....</p>
-                    </a>
-                    <a class="action" href="javascript:void(0)">
-                        <img src="dist/styles/images/action4.png" alt="">
-                        <p>本科专科奖学金申请</p>
-                    </a>
-                    <a class="action" href="javascript:void(0)">
-                        <img src="dist/styles/images/action5.png" alt="">
-                        <p>教师借用</p>
-                    </a>
-                    <a class="action" href="javascript:void(0)">
-                        <img src="dist/styles/images/action6.png" alt="">
-                        <p>校内讲座审批</p>
-                    </a>
-                    <a class="action" href="javascript:void(0)">
-                        <img src="dist/styles/images/action7.png" alt="">
-                        <p>校园一卡通挂失</p>
-                    </a>
-                    <a class="action" href="javascript:void(0)">
-                        <img src="dist/styles/images/action8.png" alt="">
-                        <p>车辆临时进出</p>
-                    </a>
-                    <a class="action" href="javascript:void(0)">
-                        <img src="dist/styles/images/action9.png" alt="">
+            <div class="content clear">
+                <div class="left">
+                    <!--<div class="service">
+                        <img src="dist/styles/images/service1.png">
+                        <p>日程服务</p>
+                    </div>-->
+                    <div class="service">
+                        <div class="service-img-container">
+                            <img src="dist/styles/images/service2.png">
+                        </div>
+                        <p>人事服务</p>
+                    </div>
+                    <div class="service">
+                        <div class="service-img-container">
+                            <img src="dist/styles/images/service3.png">
+                        </div>
+                        <p>科研服务</p>
+                    </div>
+                    <div class="service">
+                        <div class="service-img-container">
+                            <img src="dist/styles/images/service4.png">
+                        </div>
                         <p>财务服务</p>
-                    </a>
-                    <a class="action" href="javascript:void(0)">
-                        <img src="dist/styles/images/action10.png" alt="">
-                        <p>本科生学籍证明</p>
-                    </a>
-                    <a class="action" href="javascript:void(0)">
-                        <img src="dist/styles/images/action11.png" alt="">
-                        <p>校内讲座审批</p>
-                    </a>
-                    <a class="action" href="javascript:void(0)">
-                        <img src="dist/styles/images/action12.png" alt="">
-                        <p>奖学金申请</p>
-                    </a>
-                    <a class="action" href="javascript:void(0)">
-                        <img src="dist/styles/images/action13.png" alt="">
-                        <p>教师借用</p>
-                    </a>
-                    <a class="action" href="javascript:void(0)">
-                        <img src="dist/styles/images/action14.png" alt="">
-                        <p>校内讲座审批</p>
-                    </a>
-                    <a class="action" href="javascript:void(0)">
-                        <img src="dist/styles/images/action15.png" alt="">
-                        <p>校内讲座审批</p>
-                    </a>
-                    <a class="action" href="javascript:void(0)">
-                        <img src="dist/styles/images/action16.png" alt="">
-                        <p>车辆临时进出</p>
-                    </a>
-                    <a class="action" href="javascript:void(0)">
-                        <img src="dist/styles/images/action17.png" alt="">
-                        <p>财务服务</p>
-                    </a>
-                    <a class="action" href="javascript:void(0)">
-                        <img src="dist/styles/images/action18.png" alt="">
-                        <p>本科生学籍证明.....</p>
-                    </a>
-                    <a class="action" href="javascript:void(0)">
-                        <img src="dist/styles/images/action19.png" alt="">
-                        <p>博士后基本信息维护</p>
-                    </a>
-                    <a class="action" href="javascript:void(0)">
-                        <img src="dist/styles/images/action19.png" alt="">
-                        <p>博士后基本信息维护</p>
-                    </a>
-                    <a class="action" href="javascript:void(0)">
-                        <img src="dist/styles/images/action19.png" alt="">
-                        <p>博士后基本信息维护</p>
-                    </a>
-                    <a class="action" href="javascript:void(0)">
-                        <img src="dist/styles/images/action19.png" alt="">
-                        <p>博士后基本信息维护</p>
-                    </a>-->
+                    </div>
+                    <div class="service">
+                        <div class="service-img-container">
+                            <img src="dist/styles/images/service5.png">
+                        </div>
+                        <p>后勤服务</p>
+                    </div>
+                    <div class="service">
+                        <div class="service-img-container">
+                            <img src="dist/styles/images/service6.png">
+                        </div>
+                        <p>招生服务</p>
+                    </div>
+                    <div class="service">
+                        <div class="service-img-container">
+                            <img src="dist/styles/images/service7.png">
+                        </div>
+                        <p>教学服务</p>
+                    </div>
+                    <div class="service">
+                        <div class="service-img-container">
+                            <img src="dist/styles/images/service8.png">
+                        </div>
+                        <p>就业服务</p>
+                    </div>
+                    <div class="service">
+                        <div class="service-img-container">
+                            <img src="dist/styles/images/service9.png">
+                        </div>
+                        <p>网信服务</p>
+                    </div>
+                </div>
+                <div class="main" id="main">
+                    <p class="money">财务服务</p>
+                    <div class="main-container mCustomScrollbar" data-mcs-theme="minimal" :style="mainContainerStyle">
+                        <a v-for="service in services" class="action" href="javascript:void(0)">
+                            <img :src="'dist/styles/images/' + service.icon" alt="">
+                            <p>{{service.name}}</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="weather">
+                        <div class="weather-1">
+                            <img class="light" src="dist/styles/images/light.png" alt="">
+                            <p class="temp">27°C</p>
+                            <p class="pm">PM:33</p>
+                        </div>
+                        <div class="weather-2">
+                            <span>北京  2017-01-02</span>
+                            <span>11°C/2°C</span>
+                        </div>
+                    </div>
+                    <div class="person">
+                        <div class="person-floor1">
+                            <img class="self" src="dist/styles/images/person.png">
+                            <div class="name">
+                                <p>张萌萌</p>
+                                <p>hello 欢迎来到服务大厅</p>
+                            </div>
+                            <div class="person-btn">
+                                <img src="dist/styles/images/person-btn2.png">
+                                <img src="dist/styles/images/person-btn1.png">
+                            </div>
+                        </div>
+                        <div class="person-floor2">
+                            <p class="person-title">推荐应用</p>
+                            <div class="person-floor2-container mCustomScrollbar" data-mcs-theme="minimal">
+                                <div class="collection clear" v-for="app in apps">
+                                    <div class="person2-btn-container">
+                                        <img class="person2-btn" :src="'dist/styles/images/' + app.icon" alt="">
+                                    </div>
+                                    <p>{{ app.name }}</p>
+                                    <div class="button-panel">
+                                        <a href="javascript:;" class="button-enter"></a>
+                                        <a href="javascript:;" class="button-mark"></a>
+                                        <a href="javascript:;" class="button-share"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="right">
-                <div class="weather">
-                    <div class="weather-1">
-                        <img class="light" src="dist/styles/images/light.png" alt="">
-                        <p class="temp">27°C</p>
-                        <p class="pm">PM:33</p>
+            <div class="footer">
+                <div class="app-panel">
+                    <div>
+                        <img class="footer-btn" src="dist/styles/images/footer-btn1.png">
                     </div>
-                    <div class="weather-2">
-                        <span>北京  2017-01-02</span>
-                        <span>11°C/2°C</span>
+                    <div>
+                        <img class="footer-btn" src="dist/styles/images/footer-btn2.png">
+                        <!--<i class="circle-white"></i>-->
                     </div>
-                </div>
-                <div class="person">
-                    <div class="person-floor1">
-                        <img class="self" src="dist/styles/images/person.png">
-                        <div class="name">
-                            <p>张萌萌</p>
-                            <p>hello 欢迎来到服务大厅</p>
-                        </div>
-                        <div class="person-btn">
-                            <img src="dist/styles/images/person-btn1.png">
-                            <img src="dist/styles/images/person-btn2.png">
-                        </div>
+                    <div>
+                        <img class="footer-btn" src="dist/styles/images/footer-btn3.png">
+                        <div class="alert">校内讲座审批</div>
                     </div>
-                    <div class="person-floor2 mCustomScrollbar" data-mcs-theme="dark">
-                        <p class="person-title">推荐应用</p>
-                        <div class="collection clear">
-                            <img class="person2-btn" src="dist/styles/images/person2-btn1.png" alt="">
-                            <p>本专科生学费减免申请</p>
-                            <div class="star">
-                                <img src="dist/styles/images/star-light.png" alt="">
-                                <img src="dist/styles/images/star-light.png" alt="">
-                                <img src="dist/styles/images/star-light.png" alt="">
-                                <img src="dist/styles/images/star-light.png" alt="">
-                                <img src="dist/styles/images/star-light.png" alt="">
-                            </div>
-                            <span>5120人收藏</span>
-                        </div>
-                        <div class="collection clear">
-                            <img class="person2-btn" src="dist/styles/images/person2-btn2.png" alt="">
-                            <p>本专科生学费减免申请</p>
-                            <div class="star">
-                                <img src="dist/styles/images/star-light.png" alt="">
-                                <img src="dist/styles/images/star-light.png" alt="">
-                                <img src="dist/styles/images/star-light.png" alt="">
-                                <img src="dist/styles/images/star-light.png" alt="">
-                                <img src="dist/styles/images/star-dark.png" alt="">
-                            </div>
-                            <span>5120人收藏</span>
-                        </div>
-                        <div class="collection clear">
-                            <img class="person2-btn" src="dist/styles/images/person2-btn3.png" alt="">
-                            <p>本专科生学费减免申请</p>
-                            <div class="star">
-                                <img src="dist/styles/images/star-light.png" alt="">
-                                <img src="dist/styles/images/star-light.png" alt="">
-                                <img src="dist/styles/images/star-light.png" alt="">
-                                <img src="dist/styles/images/star-light.png" alt="">
-                                <img src="dist/styles/images/star-dark.png" alt="">
-                            </div>
-                            <span>5120人收藏</span>
-                        </div>
-                        <div class="collection clear">
-                            <img class="person2-btn" src="dist/styles/images/person2-btn4.png" alt="">
-                            <p>本专科生学费减免申请</p>
-                            <div class="star">
-                                <img src="dist/styles/images/star-light.png" alt="">
-                                <img src="dist/styles/images/star-light.png" alt="">
-                                <img src="dist/styles/images/star-light.png" alt="">
-                                <img src="dist/styles/images/star-light.png" alt="">
-                                <img src="dist/styles/images/star-dark.png" alt="">
-                            </div>
-                            <span>5120人收藏</span>
-                        </div>
-                        <div class="collection clear">
-                            <img class="person2-btn" src="dist/styles/images/person2-btn5.png" alt="">
-                            <p>本专科生学费减免申请</p>
-                            <div class="star">
-                                <img src="dist/styles/images/star-light.png" alt="">
-                                <img src="dist/styles/images/star-light.png" alt="">
-                                <img src="dist/styles/images/star-light.png" alt="">
-                                <img src="dist/styles/images/star-light.png" alt="">
-                                <img src="dist/styles/images/star-dark.png" alt="">
-                            </div>
-                            <span>5120人收藏</span>
-                        </div>
-                        <div class="collection clear">
-                            <img class="person2-btn" src="dist/styles/images/person2-btn6.png" alt="">
-                            <p>本专科生学费减免申请</p>
-                            <div class="star">
-                                <img src="dist/styles/images/star-light.png" alt="">
-                                <img src="dist/styles/images/star-light.png" alt="">
-                                <img src="dist/styles/images/star-light.png" alt="">
-                                <img src="dist/styles/images/star-light.png" alt="">
-                                <img src="dist/styles/images/star-dark.png" alt="">
-                            </div>
-                            <span>5120人收藏</span>
-                        </div>
-
+                    <div>
+                        <img class="footer-btn" src="dist/styles/images/footer-btn4.png">
                     </div>
                 </div>
             </div>
         </div>
-        <div class="footer">
-            <div class="app-panel">
-                <div>
-                    <img class="footer-btn" src="dist/styles/images/footer-btn1.png">
+        <transition>
+            <div class="search-warp" :class="[search?'search-warp--show':'']">
+                <div class="search-close" @click="search = false"></div>
+                <div class="search-bar">
+                    <input type="text" placeholder="请输入服务名称…">
                 </div>
-                <div>
-                    <img class="footer-btn" src="dist/styles/images/footer-btn2.png">
-                    <!--<i class="circle-white"></i>-->
-                </div>
-                <div>
-                    <img class="footer-btn" src="dist/styles/images/footer-btn3.png">
-                    <div class="alert">校内讲座审批</div>
-                </div>
-                <div>
-                    <img class="footer-btn" src="dist/styles/images/footer-btn4.png">
+                <div class="search-container">
+                    <div class="search-header">
+                        <div class="search-default-header">
+                            <div class="history">
+                                <span>请假申请<i></i></span>
+                                <span>一卡通挂失<i></i></span>
+                                <span>成绩查询<i></i></span>
+                                <span>四六级考试<i></i></span>
+                                <span>选修课订阅<i></i></span>
+                            </div>
+                            <h2>我的足迹</h2>
+                        </div>
+                        <div class="search-result-header">
+                            <!--<ul>
+                                <li><a href="javascript:;">全部</a></li>
+                                <li><a href="javascript:;">学生服务</a></li>
+                                <li><a href="javascript:;">教学服务</a></li>
+                                <li><a href="javascript:;">科研服务</a></li>
+                                <li><a href="javascript:;">人事服务</a></li>
+                                <li><a href="javascript:;">财务服务</a></li>
+                            </ul>-->
+                        </div>
+                    </div>
+                    <div class="search-content" :style="mainSearchContentStyle"></div>
                 </div>
             </div>
-        </div>
+        </transition>
     </div>
     <script src="dist/scripts/common.js"></script>
     <script src="dist/scripts/index.js"></script>
 </body>
-<script>
-    window.onload = function(){
-        new Vue({
-            el:'#index-wrap',
-            data:{
-                apps: new Array(19).map((o,i)=>i)
-            },
-            created(){
-                console.log(this.apps)
-            }
-        })
-    }
-</script>
+
 </html>
