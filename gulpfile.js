@@ -67,7 +67,7 @@ gulp.task('scriptCommon', function () {
         'src/libs/clickoutside/index.js',
         'node_modules/d3/build/d3.min.js',
         'src/libs/fullcalendar.min.js',
-        'src/libs/jquery-ui-1.10.2.custom.min.js'
+        'src/libs/jquery-ui.min.js'
     ])
         .pipe(concat('common.js'))
         .pipe(gulp.dest('dist/scripts/'));

@@ -1,5 +1,8 @@
 @import '../var';
 $panelBackground = rgba(255,255,255,.1)
+html,body{
+    overflow: hidden;
+}
 html
     height: 100%
     font-size: unit( $baseFontSize ,'px')
@@ -30,6 +33,24 @@ body
                 background-image: url(images/icon-mark-marked.png)
         .button-share
             background-image: url(images/icon-share.png)
+    .action
+        width: toRem(142)
+        height: toRem(64)
+        margin-top: toRem(30)
+        text-align: center
+        overflow: hidden;
+        z-index: 2;
+        img 
+            border: none
+            width: toRem(64);
+        p
+            display: none;
+            color: rgb(160,155,152)
+            font-size: toRem(14)
+            margin-top: toRem(15)
+            overflow: hidden
+            white-space: nowrap
+            text-overflow:ellipsis;
 .index-wrap
     position: absolute;
     height: 100%;
@@ -315,7 +336,7 @@ body
                         .button-panel
                             opacity: 1
     .main
-        min-height: toRem(512);
+        //min-height: toRem(512);
         margin-left: toRem(270)
         margin-right: toRem(320)
         background: $panelBackground
@@ -334,23 +355,15 @@ body
             float: left
             width: 11.1%
             height: toRem(115)
-            margin-top: toRem(30)
-            text-align: center
-            img 
-                border: none
-                width: toRem(64);
+            z-index: 0;
             p 
-                color: rgb(160,155,152)
-                font-size: toRem(14)
-                margin-top: toRem(15)
-                overflow: hidden
-                white-space: nowrap
-                text-overflow:ellipsis;
+                display: block;
     .footer
         width: 100%;
         height: toRem(90)
         text-align: center;
         position: relative;
+        z-index: 2;
         .app-panel
             font-size: toRem(0);
             display: inline-block;
@@ -361,6 +374,15 @@ body
             background: rgba(255,255,255,.1)
             padding: 0 toRem(10)
             white-space nowrap
+            &.droppable
+                &>div.insertBefore:before
+                    content: ''
+                    display: inline-block;
+                    width: toRem(64)
+                &>div.insertAfter:after
+                    content: ''
+                    display: inline-block;
+                    width: toRem(64)
             &>div
                 margin: 0 toRem(10);
                 text-align: center
@@ -368,6 +390,8 @@ body
                 display: inline-block;
                 vertical-align: top;
                 position: relative
+                &.ui-draggable-dragging .alert
+                    display: none !important;
                 &:hover
                     .alert
                         display: block;
@@ -386,7 +410,8 @@ body
             .alert
                 position: absolute
                 display: none;
-                width: toRem(120)
+                min-width: toRem(100);
+                padding: 0 toRem(10)
                 height: toRem(30)
                 top: toRem(-47)
                 left: toRem(-30)
@@ -413,8 +438,20 @@ body
             .right,
             .main
                 opacity: 0
+.mask-layer
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0,.1);
+    z-index: 10;
+    svg
+        position: absolute;
+        top: 40%;
+        margin-top: -25px;
+        left: 50%;
 @import 'effects/fade';
 @import 'effects/side';
 @import 'control/search';
 @import 'control/sider';
+@import 'control/delete';
 @import 'mycenter';

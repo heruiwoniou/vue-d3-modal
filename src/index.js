@@ -2,6 +2,7 @@
     $(document)
         .ready(function () {
             var baseSeed  = 12 * 1920 / 380.600;
+            var dockPostion;
             var appVm = new Vue({
                     el: 'body > .app',
                     data: {
@@ -18,6 +19,8 @@
                             { name: '网信服务', icons: 'service8.png' },
                         ],
                         services: [
+                            //{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},
+                            
                             { name: '本专科奖学金申请' ,icon:'action1.png'},
                             { name: '本科课程表查询' ,icon:'action2.png'},
                             { name: '研究生中文成绩' ,icon:'action3.png'},
@@ -73,7 +76,19 @@
 
                         mainMaxHeight: 0,
                         mainCenterMaxHeight: 0,
-                        searchMaxHeight: 0
+                        searchMaxHeight: 0,
+
+                        taskBar:[
+                            { caseid: 1, name: '博士后基本信息维护' ,icon:'action18.png'},
+                            { caseid: 2,name: '奖学金申请' ,icon:'action19.png'}
+                        ],
+                        insertTaskIndex: -1,
+
+                        deletePanel: false,
+                        //drop后是否执行删除
+                        deleteAction: false,
+                        isInit: false,
+                        loading: true
                     },
 
                     computed: {
@@ -103,7 +118,6 @@
                         }
                     },
                     mounted:function(){
-                        document.getElementById('app').style.display = "block";
                         function clickTab(a,b,_this){
                             if($(_this).hasClass(a)){
                                 return
@@ -126,9 +140,86 @@
                             clickTab('active','.right .r-listBox ul',_this);
                         });
 
+                        var $dock = $('#dock');
                         
+                        $('#main .action').draggable({
+                            helper: "clone",
+                            appendTo:'body',
+                            containment:'.app',
+                            start:function( event, ui ){
+                                dockPostion = $dock.offset();
+                                dockPostion.width = $dock.width() + 20;
+                                dockPostion.itemWidth = dockPostion.width / $dock.find('>div').length;
+                            },
+                            drag:function( event, ui ){
+                                if(appVm.insertTaskIndex!=-1){
+                                    appVm.insertTaskIndex = Math.floor(( event.clientX - dockPostion.left + dockPostion.itemWidth / 2 ) / dockPostion.itemWidth)
+                                }
+                            }
+                        });
+                        $dock.droppable({
+                             accept: ".action",
+                             over:function( event, ui ){
+                                 appVm.insertTaskIndex = 0;
+                             },
+                             out:function( event, ui ){
+                                 appVm.insertTaskIndex = -1;
+                             },
+                             drop:function( event, ui ){
+                                 var index = (ui.helper.data('index'));
+                                 appVm.taskBar.splice(appVm.insertTaskIndex,0,$.extend({caseid : Math.round(Math.random() * 1e5)},appVm.services[index]));
+                                 appVm.$nextTick(function(){
+                                     appVm.taskBarInit();
+                                 })
+                                 appVm.insertTaskIndex = -1;
+                                 return false;
+                             }
+                        });
+                        this.taskBarInit();
+                        this.deletePanelInit();
+                        document.getElementById('app').style.display = "block";
+                        setTimeout(function(){
+                            this.isInit = true; //设置初始化完成
+                            this.loading = false; //设置进度条状态
+                        }.bind(this),2000)
                     },
                     methods:{
+                        deletePanelInit:function(){
+                            $(this.$refs.deletepanel).droppable({
+                                accept: ".task",
+                                over:function( event, ui ){
+                                    appVm.deleteAction = true;
+                                },
+                                out:function( event, ui ){
+                                    console.log('out')
+                                    appVm.deleteAction = false;
+                                },
+                                drop:function(event,ui){
+                                    if(appVm.deleteAction) {
+                                        var index = +ui.helper.data('index');
+                                        appVm.taskBar.splice(index,1);
+                                    }
+                                    appVm.deletePanel = false;
+                                    appVm.deleteAction = false;
+                                    return false;
+                                }
+                            })
+                        },
+                        taskBarInit:function(){
+                            $(this.$refs.dock).find('div:not(.draggable)').draggable({
+                                revert : 'invalid',
+                                revertDuration: 200,
+                                containment:'window',
+                                start:function(){
+                                    console.log('s')
+                                    appVm.deletePanel = true;
+                                },
+                                stop:function(){
+                                    console.log('stop')
+                                    appVm.deletePanel = false;
+                                }
+                            });
+                        },
                         calendarInit:function(){
                             if(this.calendarInited) return;
                             this.calendarInited = true;
@@ -203,6 +294,8 @@
                                     },
                                 ]
                             });
+
+                            
                         },
 
                         navChange:function(index){

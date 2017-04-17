@@ -10,8 +10,38 @@
 </head>
 
 <body>
+    <svg style="display:none;" xmlns="http://www.w3.org/2000/svg">
+        <symbol id="loading" viewBox="0 0 57 57" stroke="#fff">
+            <g fill="none" fill-rule="evenodd">
+                <g transform="translate(1 1)" stroke-width="2">
+                    <circle cx="5" cy="50" r="5">
+                        <animate attributeName="cy" begin="0s" dur="2.2s" values="50;5;50;50" calcMode="linear" repeatCount="indefinite" />
+                        <animate attributeName="cx" begin="0s" dur="2.2s" values="5;27;49;5" calcMode="linear" repeatCount="indefinite" />
+                    </circle>
+                    <circle cx="27" cy="5" r="5">
+                        <animate attributeName="cy" begin="0s" dur="2.2s" from="5" to="5" values="5;50;50;5" calcMode="linear" repeatCount="indefinite"
+                        />
+                        <animate attributeName="cx" begin="0s" dur="2.2s" from="27" to="27" values="27;49;5;27" calcMode="linear" repeatCount="indefinite"
+                        />
+                    </circle>
+                    <circle cx="49" cy="50" r="5">
+                        <animate attributeName="cy" begin="0s" dur="2.2s" values="50;50;5;50" calcMode="linear" repeatCount="indefinite" />
+                        <animate attributeName="cx" from="49" to="49" begin="0s" dur="2.2s" values="49;5;27;49" calcMode="linear" repeatCount="indefinite"
+                        />
+                    </circle>
+                </g>
+            </g>
+        </symbol>
+    </svg>
     <div id="app" class="app" style="display:none">
-        <div class="index-wrap clear" :class="[visible?'':'index-wrap--content-hide']">
+        <transition name="fade-zoom">
+            <div v-show="loading" class="mask-layer">
+                <svg width="57" height="57">
+                    <use xlink:href="#loading"></use>
+                </svg>
+            </div>
+        </transition>
+        <div class="index-wrap clear" :class="[visible ? ( isInit ? '': 'index-wrap--content-hide' ) : 'index-wrap--content-hide']">
             <div class="header">
                 <div class="logo">
                     <img src="dist/styles/images/logo.png" width="100%" alt="">
@@ -42,7 +72,7 @@
                 <div class="main" id="main">
                     <p class="money">{{ navs[navIndex].name }}</p>
                     <div class="main-container mCustomScrollbar" data-mcs-theme="minimal" :style="mainContainerStyle">
-                        <a v-for="service in services" class="action" href="javascript:void(0)">
+                        <a v-for="(service,index) in services" :data-index="index" class="action" href="javascript:void(0)">
                             <img :src="'dist/styles/images/' + service.icon" alt="">
                             <p>{{service.name}}</p>
                         </a>
@@ -92,7 +122,7 @@
                 </div>
             </div>
             <div class="content clear" v-show="appPageIndex == 1" id="df-self">
-                 <div class="left">
+                <div class="left">
                     <div class="userP">
                         <img src="dist/styles/images/person.png" alt="">
                         <div class="userName">
@@ -105,7 +135,7 @@
                             <a class="active list" href="javascript:;"><i class="icon-find"></i>发现服务</a>
                             <a class="list" href="javascript:;"> <i class="icon-recommend"></i>推荐服务</a>
                         </div>
-                        <div class="lists mCustomScrollbar" data-mcs-theme="minimal" >
+                        <div class="lists mCustomScrollbar" data-mcs-theme="minimal">
                             <ul>
                                 <li>
                                     <img class="stuHead" src="dist/styles/images/list-head1.png" alt="">
@@ -774,8 +804,8 @@
                     </div>
                 </div>
                 <div class="main">
-                    <div class="mCustomScrollbar"data-mcs-theme="minimal" :style="mainCenterContainerStyle">
-                         <p class="myData">我的日程</p>
+                    <div class="mCustomScrollbar" data-mcs-theme="minimal" :style="mainCenterContainerStyle">
+                        <p class="myData">我的日程</p>
                         <div id='calendar'></div>
                     </div>
                 </div>
@@ -801,7 +831,7 @@
                                         <span class="teaSta">审批中</span>
                                     </p>
                                     <p class="stuTime">
-                                        2016-09-03  10:00
+                                        2016-09-03 10:00
                                     </p>
                                 </div>
                             </li>
@@ -819,7 +849,7 @@
                                         <span class="teaSta">审批中</span>
                                     </p>
                                     <p class="stuTime">
-                                        2016-09-03  10:00
+                                        2016-09-03 10:00
                                     </p>
                                 </div>
                             </li>
@@ -837,7 +867,7 @@
                                         <span class="teaSta">审批中</span>
                                     </p>
                                     <p class="stuTime">
-                                        2016-09-03  10:00
+                                        2016-09-03 10:00
                                     </p>
                                 </div>
                             </li>
@@ -855,7 +885,7 @@
                                         <span class="teaSta">审批中</span>
                                     </p>
                                     <p class="stuTime">
-                                        2016-09-03  10:00
+                                        2016-09-03 10:00
                                     </p>
                                 </div>
                             </li>
@@ -873,7 +903,7 @@
                                         <span class="teaSta">审批中</span>
                                     </p>
                                     <p class="stuTime">
-                                        2016-09-03  10:00
+                                        2016-09-03 10:00
                                     </p>
                                 </div>
                             </li>
@@ -891,7 +921,7 @@
                                         <span class="teaSta">审批中</span>
                                     </p>
                                     <p class="stuTime">
-                                        2016-09-03  10:00
+                                        2016-09-03 10:00
                                     </p>
                                 </div>
                             </li>
@@ -911,7 +941,7 @@
                                         <span class="teaSta">审批中</span>
                                     </p>
                                     <p class="stuTime">
-                                        2016-09-03  10:00
+                                        2016-09-03 10:00
                                     </p>
                                 </div>
                             </li>
@@ -929,7 +959,7 @@
                                         <span class="teaSta">审批中</span>
                                     </p>
                                     <p class="stuTime">
-                                        2016-09-03  10:00
+                                        2016-09-03 10:00
                                     </p>
                                 </div>
                             </li>
@@ -947,7 +977,7 @@
                                         <span class="teaSta">审批中</span>
                                     </p>
                                     <p class="stuTime">
-                                        2016-09-03  10:00
+                                        2016-09-03 10:00
                                     </p>
                                 </div>
                             </li>
@@ -965,7 +995,7 @@
                                         <span class="teaSta">审批中</span>
                                     </p>
                                     <p class="stuTime">
-                                        2016-09-03  10:00
+                                        2016-09-03 10:00
                                     </p>
                                 </div>
                             </li>
@@ -983,7 +1013,7 @@
                                         <span class="teaSta">审批中</span>
                                     </p>
                                     <p class="stuTime">
-                                        2016-09-03  10:00
+                                        2016-09-03 10:00
                                     </p>
                                 </div>
                             </li>
@@ -1001,7 +1031,7 @@
                                         <span class="teaSta">审批中</span>
                                     </p>
                                     <p class="stuTime">
-                                        2016-09-03  10:00
+                                        2016-09-03 10:00
                                     </p>
                                 </div>
                             </li>
@@ -1021,7 +1051,7 @@
                                         <span class="teaSta">审批中</span>
                                     </p>
                                     <p class="stuTime">
-                                        2016-09-03  10:00
+                                        2016-09-03 10:00
                                     </p>
                                 </div>
                             </li>
@@ -1039,7 +1069,7 @@
                                         <span class="teaSta">审批中</span>
                                     </p>
                                     <p class="stuTime">
-                                        2016-09-03  10:00
+                                        2016-09-03 10:00
                                     </p>
                                 </div>
                             </li>
@@ -1057,7 +1087,7 @@
                                         <span class="teaSta">审批中</span>
                                     </p>
                                     <p class="stuTime">
-                                        2016-09-03  10:00
+                                        2016-09-03 10:00
                                     </p>
                                 </div>
                             </li>
@@ -1075,7 +1105,7 @@
                                         <span class="teaSta">审批中</span>
                                     </p>
                                     <p class="stuTime">
-                                        2016-09-03  10:00
+                                        2016-09-03 10:00
                                     </p>
                                 </div>
                             </li>
@@ -1093,7 +1123,7 @@
                                         <span class="teaSta">审批中</span>
                                     </p>
                                     <p class="stuTime">
-                                        2016-09-03  10:00
+                                        2016-09-03 10:00
                                     </p>
                                 </div>
                             </li>
@@ -1111,7 +1141,7 @@
                                         <span class="teaSta">审批中</span>
                                     </p>
                                     <p class="stuTime">
-                                        2016-09-03  10:00
+                                        2016-09-03 10:00
                                     </p>
                                 </div>
                             </li>
@@ -1122,23 +1152,11 @@
                     </div>
                 </div>
             </div>
-            <div class="footer">
-                <div class="app-panel">
-                    <div>
-                        <img class="footer-btn" src="dist/styles/images/footer-btn1.png">
-                        <div class="alert">校内讲座审批</div>
-                    </div>
-                    <div>
-                        <img class="footer-btn" src="dist/styles/images/footer-btn2.png">
-                        <div class="alert">校内讲座审批</div>
-                    </div>
-                    <div>
-                        <img class="footer-btn" src="dist/styles/images/footer-btn3.png">
-                        <div class="alert">校内讲座审批</div>
-                    </div>
-                    <div>
-                        <img class="footer-btn" src="dist/styles/images/footer-btn4.png">
-                        <div class="alert">校内讲座审批</div>
+            <div class="footer" v-show="isInit">
+                <div class="app-panel" ref="dock" :class="[insertTaskIndex !== -1 ? 'droppable':'']" id="dock">
+                    <div v-for="(task,index) in taskBar" :key="task.caseid" :data-index="index" class="task" :class="[insertTaskIndex == index ? 'insertBefore': insertTaskIndex >= taskBar.length && insertTaskIndex == index + 1 ? 'insertAfter' : '' ]">
+                        <img class="footer-btn" :src="'dist/styles/images/' + task.icon">
+                        <div class="alert">{{task.name}}</div>
                     </div>
                 </div>
             </div>
@@ -1191,57 +1209,14 @@
                     </div>
                 </div>
                 <div class="search-container loading" v-else key="loading">
-                    <svg width="57" height="57" viewBox="0 0 57 57" xmlns="http://www.w3.org/2000/svg" stroke="#fff">
-                        <g fill="none" fill-rule="evenodd">
-                            <g transform="translate(1 1)" stroke-width="2">
-                                <circle cx="5" cy="50" r="5">
-                                    <animate attributeName="cy"
-                                        begin="0s" dur="2.2s"
-                                        values="50;5;50;50"
-                                        calcMode="linear"
-                                        repeatCount="indefinite" />
-                                    <animate attributeName="cx"
-                                        begin="0s" dur="2.2s"
-                                        values="5;27;49;5"
-                                        calcMode="linear"
-                                        repeatCount="indefinite" />
-                                </circle>
-                                <circle cx="27" cy="5" r="5">
-                                    <animate attributeName="cy"
-                                        begin="0s" dur="2.2s"
-                                        from="5" to="5"
-                                        values="5;50;50;5"
-                                        calcMode="linear"
-                                        repeatCount="indefinite" />
-                                    <animate attributeName="cx"
-                                        begin="0s" dur="2.2s"
-                                        from="27" to="27"
-                                        values="27;49;5;27"
-                                        calcMode="linear"
-                                        repeatCount="indefinite" />
-                                </circle>
-                                <circle cx="49" cy="50" r="5">
-                                    <animate attributeName="cy"
-                                        begin="0s" dur="2.2s"
-                                        values="50;50;5;50"
-                                        calcMode="linear"
-                                        repeatCount="indefinite" />
-                                    <animate attributeName="cx"
-                                        from="49" to="49"
-                                        begin="0s" dur="2.2s"
-                                        values="49;5;27;49"
-                                        calcMode="linear"
-                                        repeatCount="indefinite" />
-                                </circle>
-                            </g>
-                        </g>
+                    <svg width="57" height="57">
+                        <use xlink:href="#loading"></use>
                     </svg>
                 </div>
             </transition>
             <div class="search-close" @click="closeSearch()"></div>
         </div>
-        <transition :name="appPageIndex == 0 ? 'side':'side-big'"
-            @before-leave="sideBeforeLeave">
+        <transition :name="appPageIndex == 0 ? 'side':'side-big'" @before-leave="sideBeforeLeave">
             <div class="sider-bar" :class="[appPageIndex == 1 ? 'big':'']" v-clickoutside:click="closeSider" v-show="sider">
                 <div class="sider-header">
                     <h1>消息</h1>
@@ -1254,8 +1229,7 @@
                 <div class="sider-content mCustomScrollbar" data-mcs-theme="minimal-dark">
                     <div class="sider-panel">
                         <div class="sider-panel-header">
-                            <span><img src="dist/styles/images/side-icon-1.png" alt=""></span>
-                            日程
+                            <span><img src="dist/styles/images/side-icon-1.png" alt=""></span> 日程
                         </div>
                         <div class="sider-panel-content empty-tip">
                             暂无日程
@@ -1263,8 +1237,7 @@
                     </div>
                     <div class="sider-panel">
                         <div class="sider-panel-header">
-                            <span><img src="dist/styles/images/side-icon-2.png" alt=""></span>
-                            未读消息
+                            <span><img src="dist/styles/images/side-icon-2.png" alt=""></span> 未读消息
                         </div>
                         <div class="sider-panel-content message mCustomScrollbar" data-mcs-theme="minimal-dark">
                             <ul>
@@ -1280,8 +1253,7 @@
                     </div>
                     <div class="sider-panel">
                         <div class="sider-panel-header">
-                            <span><img src="dist/styles/images/side-icon-3.png" alt=""></span>
-                            未读新闻
+                            <span><img src="dist/styles/images/side-icon-3.png" alt=""></span> 未读新闻
                         </div>
                         <div class="sider-panel-content news">
                             你有未读新闻5条
@@ -1289,8 +1261,7 @@
                     </div>
                     <div class="sider-panel">
                         <div class="sider-panel-header">
-                            <span><img src="dist/styles/images/side-icon-4.png" alt=""></span>
-                            分享
+                            <span><img src="dist/styles/images/side-icon-4.png" alt=""></span> 分享
                         </div>
                         <div class="sider-panel-content share mCustomScrollbar" data-mcs-theme="minimal-dark">
                             <ul>
@@ -1304,8 +1275,7 @@
                                         <div class="item">
                                             <span>
                                                 <img src="dist/styles/images/action3.png" alt="">
-                                            </span>
-                                            研究生中文成绩
+                                            </span> 研究生中文成绩
                                         </div>
                                         <span>7小时</span>
                                         <a href="javascript:;" class="comment"></a>
@@ -1317,9 +1287,13 @@
                 </div>
             </div>
         </transition>
+        <div class="remove-app" :style="{'z-index': deletePanel? 1:-1}">
+            <div class="delete-panel" :class="[deleteAction?'active':'']" ref="deletepanel"></div>
+        </div>
     </div>
     <script src="dist/scripts/common.js"></script>
     <script src="dist/scripts/index.js"></script>
+
 </body>
 
 </html>
