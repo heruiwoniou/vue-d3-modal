@@ -2,7 +2,7 @@
     $(document)
         .ready(function () {
             var baseSeed  = 12 * 1920 / 380.600;
-            var dockPostion;
+            var dockPostion,indexResizeTimer,centerResizeTimer;
             var appVm = new Vue({
                     el: 'body > .app',
                     data: {
@@ -41,6 +41,34 @@
                             { name: '本科生学籍证明' ,icon:'action17.png'},
                             { name: '博士后基本信息维护' ,icon:'action18.png'},
                             { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
                         ], 
                         apps: [
                             { name : '本专科生学费减免申请', icon:'person2-btn1.png'},
@@ -78,17 +106,25 @@
                         mainCenterMaxHeight: 0,
                         searchMaxHeight: 0,
 
+                        //doc内的内容项
                         taskBar:[
                             { caseid: 1, name: '博士后基本信息维护' ,icon:'action18.png'},
                             { caseid: 2,name: '奖学金申请' ,icon:'action19.png'}
                         ],
                         insertTaskIndex: -1,
-
+                        //删除app面板的状态控制
                         deletePanel: false,
                         //drop后是否执行删除
                         deleteAction: false,
+                        //是否已经初始化的状态控制
                         isInit: false,
-                        loading: true
+                        //加载进度条的状态控制
+                        loading: true,
+                        //弹框的状态控制
+                        modalStatus:false,
+                        modalURI:'about:blank;',
+                        //dock的状态控制
+                        footBarStatus: true
                     },
 
                     computed: {
@@ -115,6 +151,28 @@
                                     this.calendarInit();
                                 }.bind(this))
                             }
+                        },
+                        mainContainerStyle:function(){
+                            clearTimeout(centerResizeTimer);
+                            centerResizeTimer = setTimeout(function(){
+                                var $parent = $('#df-self .main > div');
+                                if($parent.is(':visible')){
+                                    $parent.find('div:first').css({
+                                        maxHeight: $parent.css('maxHeight')
+                                    })
+                                }
+                            }.bind(this))
+                        },
+                        mainCenterContainerStyle:function(){
+                            clearTimeout(indexResizeTimer);
+                            indexResizeTimer = setTimeout(function(){
+                                var $parent = $('#main .main-container');
+                                if($parent.is(':visible')){
+                                    $parent.find('div:first').css({
+                                        maxHeight: $parent.css('maxHeight')
+                                    })
+                                }
+                            }.bind(this))
                         }
                     },
                     mounted:function(){
@@ -184,6 +242,31 @@
                         }.bind(this),2000)
                     },
                     methods:{
+                        modal:function(src){
+                            return new Promise(function(resolve,reject){
+                                this.resolve = resolve;
+                                this.modalURI = src;
+                                this.visible = false;
+                                this.footBarStatus = false;
+                                setTimeout(function(){
+                                    this.modalStatus = true;
+                                }.bind(this),200)
+                            }.bind(this));
+                        },
+                        closeModal:function(){
+                            this.resolve();
+                            this.modalStatus = false;
+                            setTimeout(function(){
+                                this.visible = true;
+                                this.footBarStatus = true;
+                                this.modalURI = "about:blank;"
+                            }.bind(this),200)
+                        },
+                        gotoNews:function(){
+                            this.modal('news.html').then(function(){
+                                // alert('modal closed')
+                            });
+                        },
                         deletePanelInit:function(){
                             $(this.$refs.deletepanel).droppable({
                                 accept: ".task",
@@ -339,6 +422,18 @@
                         closeSider:function(){
                             if(!this.sider || this.siderOpening) return;
                             this.sider = false;
+                        },
+                        dialog(){
+                            WebApi.modal({
+                                title:'校内讲座审批',
+                                src: 'comments.html',
+                                width: 710,
+                                height: 730
+                            }).then(function(cmd){
+                                // this.modal('news.html').then(function(){
+                                // // alert('modal closed')
+                                // });
+                            }.bind(this))
                         }
                     }
                 })
@@ -355,10 +450,9 @@
                             return;
                         fontSize = 12 * clientWidth / 380.600;
                         docEl.style.fontSize = fontSize + 'px';
-                        appVm.mainMaxHeight = docHeight - ( 383 / baseSeed ) * fontSize;
+                        appVm.mainMaxHeight = docHeight - ( 423 / baseSeed ) * fontSize;
                         appVm.mainCenterMaxHeight = docHeight - ( 322 / baseSeed ) * fontSize;
                         appVm.searchMaxHeight = docHeight - ( (280 + 175) / baseSeed ) * fontSize;
-                        
                         return recalc;
                     })();
                 if (!document.addEventListener) 

@@ -5,7 +5,9 @@
     <title></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--[if lte IE 8]><style>body{display:none;}</style><script>(function(){window.onload = function(){document.write('<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><title>warn</title><style>html,body {height: 100%;margin: 0;padding: 0;}body {height: 80%;text-align: center;}body,div {white-space: nowrap;}body:before {content: \"\";display: inline-block;height: 100%;width: 1px;font-size: 0px;vertical-align: middle;}div,div span,div i {display: inline-block;vertical-align: middle;}div i {background: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAZQTFRF/+cAAAAA21cJzAAAAAJ0Uk5T/wDltzBKAAAAO0lEQVR42uzVqxEAMAhEwaP/pmOiYpkJgn0FrOKTahYAAPAByG0rkCcAYCvgHgD8RnMAsAsAwBhwBBgA5xsOoZKWuLoAAAAASUVORK5CYII=\");width: 64px;height: 64px;}div{*margin-top: 18%;}</style></head><body><div><i></i><span>\u5f53\u524d\u7248\u672c\u4e0d\u517c\u5bb9\u0049\u0045\u0038\u53ca\u4ee5\u4e0b\u7248\u672c\uff0c\u8bf7\u5207\u6362\u6a21\u5f0f\u6216\u4f7f\u7528\u5176\u5b83\u73b0\u4ee3\u6d4f\u89c8\u5668</span></div></body></html>');}})();</script><![endif]-->
     <link rel="stylesheet" href="dist/styles/common.css">
+    <link rel="stylesheet" href="dist/styles/components.css">
     <link href="dist/styles/index.css" rel="stylesheet">
 </head>
 
@@ -49,7 +51,7 @@
                 <div class="nav">
                     <a href="javascript:void(0)" @click="appPageIndex = 0" :class="[appPageIndex == 0 ? 'active':'']">首页</a>
                     <a href="javascript:void(0)" @click="appPageIndex = 1" :class="[appPageIndex == 1 ? 'active':'']">我的</a>
-                    <a href="javascript:void(0)" class="circle-red" :class="[appPageIndex == 2 ? 'active':'']">资讯</a>
+                    <a href="javascript:void(0)" @click="gotoNews" class="circle-red" :class="[appPageIndex == 2 ? 'active':'']">资讯</a>
                 </div>
                 <transition name="fade">
                     <div class="search" v-show="!sider">
@@ -72,14 +74,14 @@
                 <div class="main" id="main">
                     <p class="money">{{ navs[navIndex].name }}</p>
                     <div class="main-container mCustomScrollbar" data-mcs-theme="minimal" :style="mainContainerStyle">
-                        <a v-for="(service,index) in services" :data-index="index" class="action" href="javascript:void(0)">
+                        <a v-for="(service,index) in services" @click="dialog" :data-index="index" class="action" href="javascript:void(0)">
                             <img :src="'dist/styles/images/' + service.icon" alt="">
                             <p>{{service.name}}</p>
                         </a>
                     </div>
                 </div>
                 <div class="right" :class="[glass?'glass':'']">
-                    <div class="weather">
+                    <!--<div class="weather">
                         <div class="weather-1">
                             <img class="light" src="dist/styles/images/light.png" alt="">
                             <p class="temp">27°C</p>
@@ -89,7 +91,7 @@
                             <span>北京  2017-01-02</span>
                             <span>11°C/2°C</span>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="person">
                         <div class="person-floor1">
                             <img class="self" src="dist/styles/images/person.png">
@@ -811,7 +813,7 @@
                 </div>
                 <div class="right" :class="[glass?'glass':'']">
                     <div class="r-head">
-                        <a class='r-active' href="javascript:;">我的申请</a>
+                        <a class='active' href="javascript:;">我的申请</a>
                         <a href="javascript:;">我的审批</a>
                         <a href="javascript:;">我的关注</a>
                     </div>
@@ -1038,111 +1040,66 @@
                         </ul>
                         <ul>
                             <li>
-                                <div class="listSec">
-                                    <p class="state pass">同意</p>
-                                    <div class="listTti">
-                                        <p class="listName">场地借用申请3</p>
-                                        <p class="listText">[事由]工会活动场地借用申请工会活动场地借用申请</p>
-                                    </div>
+                                <p class="newName">聚焦全国高校思想政治会议</p>
+                                <div class="newCenter">
+                                    全国高校思想政治工作会议12月7日至8日，在中共中央总书记，国家主席，国家军事委员会主席那个那个的带领下进行了召开全国高校思想政治工作会议12月7日至8日，在中共中央总书记，国家主席，国家军事委员会主席那个那个的带领下进行了召开
                                 </div>
-                                <div class="listB">
-                                    <p class="tea">
-                                        <span class="teacher">刘主任</span>
-                                        <span class="teaSta">审批中</span>
-                                    </p>
-                                    <p class="stuTime">
-                                        2016-09-03 10:00
-                                    </p>
+                                <div class="newTime">
+                                    <span>4月13日 10：00</span>
                                 </div>
                             </li>
                             <li>
-                                <div class="listSec">
-                                    <p class="state pass">同意</p>
-                                    <div class="listTti">
-                                        <p class="listName">场地借用申请</p>
-                                        <p class="listText">[事由]工会活动场地借用申请工会活动场地借用申请</p>
-                                    </div>
+                                <p class="newName">聚焦全国高校思想政治会议</p>
+                                <div class="newCenter">
+                                    全国高校思想政治工作会议12月7日至8日，在中共中央总书记，国家主席，国家军事委员会主席那个那个的带领下进行了召开全国高校思想政治工作会议12月7日至8日，在中共中央总书记，国家主席，国家军事委员会主席那个那个的带领下进行了召开
                                 </div>
-                                <div class="listB">
-                                    <p class="tea">
-                                        <span class="teacher">刘主任</span>
-                                        <span class="teaSta">审批中</span>
-                                    </p>
-                                    <p class="stuTime">
-                                        2016-09-03 10:00
-                                    </p>
+                                <div class="newTime">
+                                    <span>4月13日 10：00</span>
                                 </div>
                             </li>
                             <li>
-                                <div class="listSec">
-                                    <p class="state waiting">审批中</p>
-                                    <div class="listTti">
-                                        <p class="listName">场地借用申请</p>
-                                        <p class="listText">[事由]工会活动场地借用申请工会活动场地借用申请</p>
-                                    </div>
+                                <p class="newName">聚焦全国高校思想政治会议</p>
+                                <div class="newCenter">
+                                    全国高校思想政治工作会议12月7日至8日，在中共中央总书记，国家主席，国家军事委员会主席那个那个的带领下进行了召开全国高校思想政治工作会议12月7日至8日，在中共中央总书记，国家主席，国家军事委员会主席那个那个的带领下进行了召开
                                 </div>
-                                <div class="listB">
-                                    <p class="tea">
-                                        <span class="teacher">刘主任</span>
-                                        <span class="teaSta">审批中</span>
-                                    </p>
-                                    <p class="stuTime">
-                                        2016-09-03 10:00
-                                    </p>
+                                <div class="newTime">
+                                    <span>4月13日 10：00</span>
                                 </div>
                             </li>
                             <li>
-                                <div class="listSec">
-                                    <p class="state wait">待审批</p>
-                                    <div class="listTti">
-                                        <p class="listName">场地借用申请</p>
-                                        <p class="listText">[事由]工会活动场地借用申请工会活动场地借用申请</p>
-                                    </div>
+                                <p class="newName">聚焦全国高校思想政治会议</p>
+                                <div class="newCenter">
+                                    全国高校思想政治工作会议12月7日至8日，在中共中央总书记，国家主席，国家军事委员会主席那个那个的带领下进行了召开全国高校思想政治工作会议12月7日至8日，在中共中央总书记，国家主席，国家军事委员会主席那个那个的带领下进行了召开
                                 </div>
-                                <div class="listB">
-                                    <p class="tea">
-                                        <span class="teacher">刘主任</span>
-                                        <span class="teaSta">审批中</span>
-                                    </p>
-                                    <p class="stuTime">
-                                        2016-09-03 10:00
-                                    </p>
+                                <div class="newTime">
+                                    <span>4月13日 10：00</span>
                                 </div>
                             </li>
                             <li>
-                                <div class="listSec">
-                                    <p class="state noPass">不同意</p>
-                                    <div class="listTti">
-                                        <p class="listName">场地借用申请</p>
-                                        <p class="listText">[事由]工会活动场地借用申请工会活动场地借用申请</p>
-                                    </div>
+                                <p class="newName">聚焦全国高校思想政治会议</p>
+                                <div class="newCenter">
+                                    全国高校思想政治工作会议12月7日至8日，在中共中央总书记，国家主席，国家军事委员会主席那个那个的带领下进行了召开全国高校思想政治工作会议12月7日至8日，在中共中央总书记，国家主席，国家军事委员会主席那个那个的带领下进行了召开
                                 </div>
-                                <div class="listB">
-                                    <p class="tea">
-                                        <span class="teacher">刘主任</span>
-                                        <span class="teaSta">审批中</span>
-                                    </p>
-                                    <p class="stuTime">
-                                        2016-09-03 10:00
-                                    </p>
+                                <div class="newTime">
+                                    <span>4月13日 10：00</span>
                                 </div>
                             </li>
                             <li>
-                                <div class="listSec">
-                                    <p class="state pass">同意</p>
-                                    <div class="listTti">
-                                        <p class="listName">场地借用申请</p>
-                                        <p class="listText">[事由]工会活动场地借用申请工会活动场地借用申请</p>
-                                    </div>
+                                <p class="newName">聚焦全国高校思想政治会议</p>
+                                <div class="newCenter">
+                                    全国高校思想政治工作会议12月7日至8日，在中共中央总书记，国家主席，国家军事委员会主席那个那个的带领下进行了召开全国高校思想政治工作会议12月7日至8日，在中共中央总书记，国家主席，国家军事委员会主席那个那个的带领下进行了召开
                                 </div>
-                                <div class="listB">
-                                    <p class="tea">
-                                        <span class="teacher">刘主任</span>
-                                        <span class="teaSta">审批中</span>
-                                    </p>
-                                    <p class="stuTime">
-                                        2016-09-03 10:00
-                                    </p>
+                                <div class="newTime">
+                                    <span>4月13日 10：00</span>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="newName">聚焦全国高校思想政治会议</p>
+                                <div class="newCenter">
+                                    全国高校思想政治工作会议12月7日至8日，在中共中央总书记，国家主席，国家军事委员会主席那个那个的带领下进行了召开全国高校思想政治工作会议12月7日至8日，在中共中央总书记，国家主席，国家军事委员会主席那个那个的带领下进行了召开
+                                </div>
+                                <div class="newTime">
+                                    <span>4月13日 10：00</span>
                                 </div>
                             </li>
                         </ul>
@@ -1152,7 +1109,7 @@
                     </div>
                 </div>
             </div>
-            <div class="footer" v-show="isInit">
+            <div class="footer" v-show="isInit && footBarStatus">
                 <div class="app-panel" ref="dock" :class="[insertTaskIndex !== -1 ? 'droppable':'']" id="dock">
                     <div v-for="(task,index) in taskBar" :key="task.caseid" :data-index="index" class="task" :class="[insertTaskIndex == index ? 'insertBefore': insertTaskIndex >= taskBar.length && insertTaskIndex == index + 1 ? 'insertAfter' : '' ]">
                         <img class="footer-btn" :src="'dist/styles/images/' + task.icon">
@@ -1290,8 +1247,15 @@
         <div class="remove-app" :style="{'z-index': deletePanel? 1:-1}">
             <div class="delete-panel" :class="[deleteAction?'active':'']" ref="deletepanel"></div>
         </div>
+        <transition name="fade-zoom">
+            <div class="app-modal" v-show="modalStatus">
+                <div class="modal-close" @click="closeModal"></div>
+                <iframe :src="modalURI" frameborder="0"></iframe>
+            </div>
+        </transition>
     </div>
     <script src="dist/scripts/common.js"></script>
+    <script src="dist/scripts/components.js"></script>
     <script src="dist/scripts/index.js"></script>
 
 </body>

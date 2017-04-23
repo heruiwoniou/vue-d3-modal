@@ -10,7 +10,12 @@ var path = require('path'),
     concat = require('gulp-concat'),
     rename = require('gulp-rename');
 
-var styles = ['src/styles/pages/index.styl']
+var styles = [
+    'src/styles/pages/index.styl',
+    'src/styles/pages/news.styl',
+    'src/styles/pages/comment.styl',
+    'src/styles/pages/comments.styl',
+]
 
 gulp.task('doc', function (cb) {
     gulp.src([

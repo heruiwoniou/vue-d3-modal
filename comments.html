@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="dist/styles/common.css">
+    <link href="dist/styles/comments.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="app" class="app">
+        <div class="content-container">
+            <div class="left">
+                <div class="img-container">
+                    <img src="dist/styles/images/action6.png" alt="">
+                </div>
+                <div class="button-panel">
+                    <a class="button-mark mark" href="javascript:;"></a>
+                    <a class="button-share" href="javascript:;"></a>
+                </div>
+                <button>进入服务</button>
+                <h1>
+                    用户评分
+                    <span>9.3分</span>
+                </h1>
+                <div class="star-panel">
+                    <span class="mark"></span>
+                    <span class="mark"></span>
+                    <span class="mark"></span>
+                    <span class="mark"></span>
+                    <span></span>
+                </div>
+                <p>
+                    90份评价
+                </p>
+            </div>
+            <div class="right mCustomScrollbar" data-mcs-theme="dark">
+                <h1>服务介绍</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor
+                    sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus
+                    et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate,
+                    felis tellus mollis orci, sed rhoncus sapien nunc eget. Lorem ipsum dolor sit amet, consectetur adipiscing
+                    elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.
+                    Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur
+                    ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus
+                    sapien nunc eget.
+                </p>
+                <hr>
+                <h2>给此款服务做个评价吧<a href="javascript:;" @click="toggleComment">撰写评价</a></h2>
+                <div class="comment" v-show="commentState">
+                    <h2></h2>
+                    <hr>
+                    <div class="star-panel">
+                        <span class="mark"></span>
+                        <span class="mark"></span>
+                        <span class="mark"></span>
+                        <span class="mark"></span>
+                        <span></span>
+                        <i>满意</i>
+                    </div>
+                    <div class="history">
+                        <a href="javascript:;" class="mark">轻松找到</a>
+                        <a href="javascript:;">值得拥有</a>
+                        <a href="javascript:;">轻松找到</a>
+                        <a href="javascript:;">轻松找到</a>
+                        <a href="javascript:;">轻松找到</a>
+                        <a href="javascript:;">轻松找到</a>
+                        <a href="javascript:;">轻松找到</a>
+                    </div>
+                    <div class="area">
+                        <textarea placeholder="写其他建议或意见" name="" id="" cols="30" rows="12"></textarea>
+                    </div>
+                    <div class="button-panel">
+                        <button>提交评价</button>
+                    </div>
+                </div>
+                <ul>
+                    <li v-for="i in 5">
+                        <p class="content">很好用啊，很方便。推荐！</p>
+                        <p><span>评论人：张海龙</span><i>2017-01-02</i></p>
+                    </li>
+                    <li class="more">
+                        <a href="javascript:;">更多...</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-container">
+            
+            <label>
+                <input type="checkbox">不再显示此弹框
+            </label>
+        </div>
+    </div>
+</body>
+<script src="dist/scripts/common.js"></script>
+<script src="dist/scripts/comments.js"></script>
+<script>
+    function comment() {
+        window.parent.WebApi.modal({
+            title: "撰写评论",
+            width: 665,
+            height: 550,
+            src: 'comment.html',
+            borderRadius: 8,
+            titleHeight: 60,
+            titleAlign: 'center'
+        })
+    }
+
+</script>
+
+</html>

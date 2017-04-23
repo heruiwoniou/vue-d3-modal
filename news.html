@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="dist/styles/common.css">
+    <link rel="stylesheet" href="dist/styles/news.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app" class="container">
+        <div class="header">
+            <a href="javascript:;" @click="menuIndex = 0" :class="[ menuIndex == 0 ? 'active':'' ]">资讯</a>
+            <a href="javascript:;" @click="menuIndex = 1" :class="[ menuIndex == 1 ? 'active':'' ]">我的关注</a>
+            <div class="control-panel" v-show="menuIndex == 1">
+                <div class="search-wrap" :class="[searchWrapState?'isfocus':'']" v-clickoutside:click="searchWrapFold">
+                    <input type="text" ref="searchinput">
+                    <a href="javascript:;" @click="searchWrapExpand"></a>
+                </div>
+                <div class="datetime-wrap">
+                    <input type="hidden">
+                    <a href="javascript:;"></a>
+                </div>
+            </div>
+        </div>
+        <transition-group name="fade-zoom">
+            <div v-show="menuIndex == 0" key="news" class="panel-container news">
+                <div class="panel">
+                    <h1>北航新闻</h1>
+                    <a href="javascript:;" class="more">更多</a>
+                    <ul>
+                        <template v-for="(i,index) in 12">
+                            <!--<li v-if="index==0">
+                                <span class="img">
+                                    <img src="dist/styles/images/nopic.jpg" alt="">
+                                </span>
+                                <h2>04-07</h2>
+                                <p>我校与四川省签署省校合作协议北航西部国际创新港开工</p>
+                            </li>-->
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="button-mark"></i> 《成都日报》：北航西部国际创新港 正式开工建设<span class="datetime">[2017-04-10]</span>
+                                </a>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+                <div class="panel">
+                    <h1>通知公告</h1>
+                    <a href="javascript:;" class="more">更多</a>
+                    <ul>
+                        <template v-for="(i,index) in 12">
+                            <!--<li v-if="index==0">
+                                <span class="img">
+                                    <img src="dist/styles/images/nopic.jpg" alt="">
+                                </span>
+                                <h2>04-07</h2>
+                                <p>我校与四川省签署省校合作协议北航西部国际创新港开工</p>
+                            </li>-->
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="button-mark"></i> 《成都日报》：北航西部国际创新港 正式开工建设<span class="datetime">[2017-04-10]</span>
+                                </a>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+                <div class="panel">
+                    <h1>活动资讯</h1>
+                    <a href="javascript:;" class="more">更多</a>
+                    <ul>
+                        <template v-for="(i,index) in 12">
+                            <!--<li v-if="index==0">
+                                <span class="img">
+                                    <img src="dist/styles/images/nopic.jpg" alt="">
+                                </span>
+                                <h2>04-07</h2>
+                                <p>我校与四川省签署省校合作协议北航西部国际创新港开工</p>
+                            </li>-->
+                            <li>
+                                <a href="javascript:;">
+                                    《成都日报》：北航西部国际创新港 正式开工建设
+                                    <i class="button-mark"></i>
+                                    <span class="datetime">[2017-04-10]</span>
+                                </a>
+                            </li>
+                        </template>
+                </div>
+            </div>
+            <div v-show="menuIndex == 1" key="attention" class="panel-container attention mCustomScrollbar" data-mcs-theme="minimal">
+                <div>
+                    <div class="date-group" v-for="i in 5">
+                        <h1>今天</h1>
+                        <ul>
+                            <li v-for="j in 12">
+                                <a href="javascript:;">
+                                    <h1>北极地区发展报告(2015)发布会在举行</h1>
+                                    <p>作者：孙善浩   2016-10-09<i class="button-mark mark"></i></p>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </transition-group>
+    </div>
+</body>
+<script src="dist/scripts/common.js"></script>
+<script src="dist/scripts/news.js"></script>
+
+</html>

@@ -1,7 +1,11 @@
-import modal from './modal';
+import Modal , { close } from './modal';
+import Alert from './alert';
 /**
  * @namespace {Object} WebApi
  */
 export default {
-    modal: modal
+    modal: Modal,
+    close: close,
+
+    alert: Alert
 }
