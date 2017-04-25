@@ -239,7 +239,7 @@
                         setTimeout(function(){
                             this.isInit = true; //设置初始化完成
                             this.loading = false; //设置进度条状态
-                        }.bind(this),2000)
+                        }.bind(this),200)
                     },
                     methods:{
                         modal:function(src){
@@ -274,7 +274,6 @@
                                     appVm.deleteAction = true;
                                 },
                                 out:function( event, ui ){
-                                    console.log('out')
                                     appVm.deleteAction = false;
                                 },
                                 drop:function(event,ui){
@@ -318,13 +317,13 @@
                                     right: 'prev today next '
                                 },
                                 firstDay:1,
-                                editable: true,
+                                editable: false,
                                 timeFormat: 'H:mm',
                                 axisFormat: 'H:mm',
                                 events: [
                                     {
                                         title: '全天计划\r\n#####\r\n写代码',
-                                        start: new Date(y, m, 1)
+                                        start: new Date(y, m, 2)
                                     },
                                     {
                                         title: '张家界四日游',
@@ -375,7 +374,31 @@
                                         title: '实战训练课',
                                         start: new Date(y, m, d+23)
                                     },
-                                ]
+                                ],
+                                eventClick:function(jsEvt,event){
+                                    // var $target = $(event.target).closest('.fc-event-inner');
+                                    // var offset = $target.offset();
+                                    // var width = $target.width();
+                                    // if(offset){
+                                        jsEvt.backgroundColor="#ea5532";
+                                        $('#calendar').fullCalendar( 'updateEvent', jsEvt )
+                                        WebApi.modal({
+                                            title:'新建日程',
+                                            src: 'calendar.html',
+                                            width: 500,
+                                            height: 410
+                                        }).then(function(cmd){
+                                            // this.modal('news.html').then(function(){
+                                            // // alert('modal closed')
+                                            // });
+                                            if(cmd == 'success'){
+                                                alert('保存成功，进行更新！')
+                                            }
+                                            delete jsEvt.backgroundColor;
+                                            $('#calendar').fullCalendar( 'updateEvent', jsEvt )
+                                        }.bind(this))
+                                    // }
+                                }
                             });
 
                             
@@ -407,7 +430,19 @@
                                 this.searched = true;
                             }.bind(this),2000)
                         },
-
+                        openShare:function(){
+                             WebApi.modal({
+                                title:'请选择你需要分享的同学',
+                                src: 'share.html',
+                                width: 710,
+                                height: 730
+                            }).then(function(cmd){
+                                console.log(cmd);
+                                // this.modal('news.html').then(function(){
+                                // // alert('modal closed')
+                                // });
+                            }.bind(this))
+                        },
                         openSider:function(){
                             this.siderOpening = true;
                             this.sider = true;

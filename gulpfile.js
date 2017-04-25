@@ -15,6 +15,8 @@ var styles = [
     'src/styles/pages/news.styl',
     'src/styles/pages/comment.styl',
     'src/styles/pages/comments.styl',
+    'src/styles/pages/calendar.styl',
+    'src/styles/pages/share.styl',
 ]
 
 gulp.task('doc', function (cb) {
@@ -76,7 +78,9 @@ gulp.task('scriptCommon', function () {
     ])
         .pipe(concat('common.js'))
         .pipe(gulp.dest('dist/scripts/'));
-    
+
+        gulp.src(['src/libs/My97DatePicker/**/*.*'])
+            .pipe(gulp.dest('dist/scripts/My97DatePicker/'))
 });
 gulp.task('script',()=>gulp
         .src(['src/*.js'])
@@ -85,7 +89,7 @@ gulp.task('script',()=>gulp
 gulp.task('default', function () {
     server.run({port: 3000})
     gulp.run('doc', 'image', 'css', 'script','scriptCommon');
-    gulp.watch(['src/styles/pages/**/*.styl'],function(){
+    gulp.watch(['src/styles/pages/**/*.styl','src/styles/common.styl'],function(){
         gulp.run('css');
     })
     gulp.watch('src/*.js',()=>gulp.run('script'))

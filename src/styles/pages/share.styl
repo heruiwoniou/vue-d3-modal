@@ -1,0 +1,271 @@
+@import '../var';
+html,body{
+    overflow: hidden;
+}
+html{
+    height: 100%
+}
+.app{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    padding: 0 20px 20px 20px;
+    .left{
+        position: absolute;
+        left: 20px;
+        top: 0;
+        right: 36%;
+        bottom: 70px;
+    }
+    .right{
+        background: #f2f2f2;
+        border-radius: 8px;
+        position: absolute;
+        right: 20px;
+        top: 0;
+        left: 66%;
+        bottom: 70px;
+        h1{
+            line-height: 35px;
+            font-size: 14px;
+            color: #f2f2f2 - 20%;
+            padding: 0 10px;
+            font-weight: normal;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            span{
+                color: #5282c3;
+                padding: 0 5px;
+            }
+            a{
+                position: absolute;
+                right: 5px;
+                color: #f2f2f2 - 20%;
+                svg{
+                    display: inline-block;
+                    vertical-align: middle;
+                    position: relative;
+                    top: -2px;
+                    path{
+                        fill: #fd8469;
+                    }
+                }
+                &:hover{
+                    color: #f2f2f2 - 40%;
+                    svg path{ fill: #fd8469 - 20%; }
+                }
+            }
+        }
+        .result-list{
+            position: absolute;
+            top: 35px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+    }
+    .bottom{
+        position: absolute;
+        left: 20px;
+        right: 20px;
+        bottom: 10px;
+        height: 60px;
+        text-align: right;
+        button{
+            margin-top: 10px;
+            height: 40px;
+            line-height: 38px;
+            padding: 0 20px;
+            color: #fff;
+            border: none;
+            outline: 0;
+            background: #0067b3;
+            border-radius: 6px;
+            box-sizing: border-box;
+            border: 1px solid #0067b3
+            cursor: pointer;
+            &.hollow{
+                background: transparent;
+                color: #0067b3;
+            }
+            &.disabled{
+                border-color: #ccc;
+                background: #ccc;
+                cursor: default;
+                &.hollow{
+                    background: transparent;
+                    color: #ccc;
+                }
+            }
+        }
+    }
+    .search-bar{
+        background: #f2f2f2;
+        border-radius: 8px;
+        height: 30px;
+        width: 100%;
+        position: relative;
+        input{
+            height: 100%;
+            width: 100%;
+            border:none;
+            background: transparent;
+            padding: 0 10px;
+            padding-left: 40px;
+            &:focus{
+                transition: padding-left .2s ease;
+                padding-left: 10px;
+                padding-right: 40px;
+                & ~ i{
+                    transition: margin-left .2s ease,left .2s ease;
+                    margin-left: 100%;
+                    left: -30px;
+                }
+            }
+        }
+        i{
+            position: absolute;
+            height: 20px;
+            width: 20px;
+            left: 10px;
+            top: 5px;
+        }
+    }
+    .search-list{
+        position: absolute;
+        top: 40px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        .person-container,ul{
+            display: none;
+        }
+        ul.root{
+            display: block;
+            margin-top: 1px;
+        }
+        li{
+            padding:0;
+            margin: 0;
+            margin-bottom 1px;
+            list-style: none;
+            &.expanded{
+                & > ul{ 
+                    display: block;
+                }
+                & > .person-container{
+                    display: block;
+                }
+                & > a:before{
+                    border-color:  transparent;
+                    border-width: 5px 5px 0px 5px;
+                    border-top-color: #ccc;
+                    left: 0px;
+                    top: -2.5px;
+                    margin-right: 5px;
+                }
+            }
+        }
+        li > a{
+            background: #f7f7f7;
+            line-height: 25px;
+            display: block;
+            color: #333;
+            &:hover{
+                background:  #f7f7f7 - 2%;
+            }
+            &:before{
+                position: relative;
+                left: 2.5px;
+                top: 0;
+                content:'';
+                width: 0px;
+                height: 0px;
+                display: inline-block;
+                margin: 0 10px 0 5px;
+                border:  5px transparent solid;
+                border-width: 5px 0 5px 5px;
+                border-left-color: #ccc;
+            }
+        }
+    }
+
+    .person{
+        overflow: hidden;
+        margin-top: 1px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        padding: 5px 0px;
+        cursor: default;
+        position: relative;
+        i,span{
+            vertical-align middle;
+        }
+        i{
+            display: inline-block;
+            background-position: 50%;
+            background-repeat: no-repeat;
+            background-size: contain;
+            height: 40px;
+            width: 40px;
+        }
+        a{
+            display: none;
+            height: 15px;
+            width: 15px;
+            font-size: 0;
+            vertical-align: middle;
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            margin-top: -7.5px;
+            svg{
+                fill: #ccc;
+            }
+        }
+        &:hover{
+            background:  #f7f7f7 - 2%;
+            a{
+                display: inline-block;
+            }
+        }
+        &.select{
+            a {
+                display: inline-block;
+                svg {
+                    fill: #8ceaab;
+                }
+            }
+        }
+    }
+    .search-list{
+        .person{
+            cursor: pointer;
+        }
+    }
+    .result-list{
+        .person{
+            padding: 5px 10px;
+            a{
+                cursor: pointer;
+                &:hover{
+                    svg{
+                        fill: #FF6336;
+                    }
+                }
+            }
+            span{
+                display: inline-block;
+                max-width: 145px;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+            }
+            &:hover{
+                background:  #f7f7f7 - 10%;
+            }
+        }
+    }
+}

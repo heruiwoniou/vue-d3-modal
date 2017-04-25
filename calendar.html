@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="dist/styles/common.css">
+    <link href="dist/styles/calendar.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app" id="app">
+        <table class="form">
+            <colgroup>
+                <col style="width: 80px">
+                <col>
+            </colgroup>
+            <tr>
+                <th>
+                    主题：
+                </th>
+                <td>
+                    <input type="text">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    开始时间：
+                </th>
+                <td>
+                    <input readonly type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})">
+                </td>
+            </tr>
+            <tr>
+                <th>结束时间:</th>
+                <td>
+                    <input  readonly type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})">
+                </td>
+            </tr>
+            <tr>
+                <th class="top">说明:</th>
+                <td>
+                    <textarea cols="30" rows="8"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="right">
+                    <button class="button" onclick="save()">提交</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+<script src="dist/scripts/My97DatePicker/WdatePicker.js"></script>
+<script>
+    function save(){
+        window.parent.WebApi.close('success');
+    }
+</script>
+</html>
