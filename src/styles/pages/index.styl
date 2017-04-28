@@ -77,7 +77,6 @@ body
                 display: inline-block;
                 vertical-align: middle;
                 color: white
-                width: toRem(75)
                 height: toRem(30)
                 margin: 0 toRem(30);
                 text-align: center
@@ -183,8 +182,9 @@ body
             margin-top: toRem(10)
             cursor: pointer
             border-radius: toRem(10)
-            &.active
             &:hover
+                background: rgba(0,103,179,.5)
+            &.active
                 background: rgb(0,103,179)
             &:nth-child(even)
                 margin-left: toRem(9)
@@ -275,7 +275,7 @@ body
                         padding: toRem(10) 0 0 toRem(10)
                     p:nth-child(2)
                         color: rgb(106,106,106)
-                        padding: toRem(10) 0 0 toRem(10)
+                        padding: toRem(10) toRem(10) 0 toRem(10)
                         overflow: hidden
                         text-overflow: ellipsis;
                         white-space: nowrap;

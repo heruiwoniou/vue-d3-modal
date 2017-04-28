@@ -11,6 +11,10 @@ let modals = {};
  * @param {number} options.width - 宽度
  * @param {number} options.height - 高
  * @param {number} options.titleHeight - 标题高
+ * @param {boolean} options.draggable - 是否可拖拽
+ * @param {object} options.offset - iframe偏移属性
+ * @param {number} options.offset.left - ifrmae左偏移
+ * @param {number} options.offset.top - iframe上偏移
  * @param {number} options.borderRadius - 圆角
  * @param {number} options.closeIconSize - 关闭按钮尺寸
  * @param {string} options.background - 背景
@@ -25,6 +29,11 @@ function Modal(options = {}) {
         width: options.width || document.documentElement.offsetWidth,
         height: options.height || document.documentElement.offsetHeight,
         titleHeight: options.titleHeight || 60,
+        draggable: options.draggable || true,
+        offset: {
+            top: ( options.offset && options.offset.top ? options.offset.top : 0 ),
+            left: ( options.offset && options.offset.left ? options.offset.left : 0 )
+        },
         closeIconSize: options.closeIconSize || 20,
         borderRadius: options.borderRadius || 8,
         background: options.background || 'white',

@@ -434,8 +434,11 @@
                              WebApi.modal({
                                 title:'请选择你需要分享的同学',
                                 src: 'share.html',
-                                width: 710,
-                                height: 730
+                                width: 510,
+                                height: 830,
+                                offset:{
+                                    left: -100
+                                }
                             }).then(function(cmd){
                                 console.log(cmd);
                                 // this.modal('news.html').then(function(){
