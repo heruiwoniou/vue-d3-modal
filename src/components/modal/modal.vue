@@ -265,25 +265,26 @@ export default {
                 },
                 drag: (e) => {
                     if(movetimes > 1){
-                        this.moving = true
+                        this.moving = true;
+                        if (e.pageX - dx < minw) {
+                            this.moveOffset.x = minw;
+                        } else if (e.pageX - dx > maxw) {
+                            this.moveOffset.x = maxw;
+                        } else {
+                            this.moveOffset.x = (e.pageX - dx);
+                        }
+                        if (e.pageY - dy < minh) {
+                            this.moveOffset.y = minh;
+                        } else if (e.pageY - dy > maxh) {
+                            this.moveOffset.y = maxh;
+                        } else {
+                            this.moveOffset.y = (e.pageY - dy);
+                        }
+                        this.translateSVG();
                     }else{
                         movetimes ++;
                     }
-                    if (e.pageX - dx < minw) {
-                        this.moveOffset.x = minw;
-                    } else if (e.pageX - dx > maxw) {
-                        this.moveOffset.x = maxw;
-                    } else {
-                        this.moveOffset.x = (e.pageX - dx);
-                    }
-                    if (e.pageY - dy < minh) {
-                        this.moveOffset.y = minh;
-                    } else if (e.pageY - dy > maxh) {
-                        this.moveOffset.y = maxh;
-                    } else {
-                        this.moveOffset.y = (e.pageY - dy);
-                    }
-                    this.translateSVG();
+                    
                 },
                 end: () => {
                     this.moving = false
