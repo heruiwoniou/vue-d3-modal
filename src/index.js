@@ -343,8 +343,9 @@
                                         allDay: false
                                     },
                                     {
-                                        title: '视频会议',
-                                        start: new Date(y, m, d, 10, 30),
+                                        title: '1',
+                                        start: new Date(y, m, d, 10, 29),
+                                        end: new Date(y, m, d, 14, 0),
                                         allDay: false
                                     },
                                     {
@@ -353,17 +354,12 @@
                                         end: '2013-09-21',
                                     },
                                     {
-                                        title: '午饭',
-                                        start: new Date(y, m, d, 12, 0),
+                                        title: '1',
+                                        start: new Date(y, m, d, 10, 30),
                                         end: new Date(y, m, d, 14, 0),
                                         allDay: false
                                     },
-                                    {
-                                        title: '生日聚会',
-                                        start: new Date(y, m, d+1, 19, 0),
-                                        end: new Date(y, m, d+1, 22, 30),
-                                        allDay: false
-                                    },
+                                    
                                     {
                                         title: '访问Helloweba主页',
                                         start: new Date(y, m, 28),
@@ -435,10 +431,7 @@
                                 title:'请选择你需要分享的同学',
                                 src: 'share.html',
                                 width: 510,
-                                height: 830,
-                                offset:{
-                                    left: -100
-                                }
+                                height: 830
                             }).then(function(cmd){
                                 console.log(cmd);
                                 // this.modal('news.html').then(function(){

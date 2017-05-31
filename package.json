@@ -42,8 +42,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rimraf dist/* && rollup -c && gulp",
-    "dev": "rollup -c -w "
+    "build": "rimraf dist/* && gulp"
   },
   "author": "",
   "license": "ISC"
