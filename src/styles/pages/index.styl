@@ -27,6 +27,7 @@ body
             background-repeat: no-repeat
         .button-enter
             background-image: url(images/icon-enter.png)
+            width: toRem(13)
         .button-mark
             background-image: url(images/icon-mark.png)
             &.mark
@@ -42,7 +43,8 @@ body
         z-index: 2;
         img 
             border: none
-            width: toRem(64);
+            height: toRem(60)
+            margin-bottom:toRem(4)
         p
             display: none;
             color: rgb(160,155,152)
@@ -89,6 +91,7 @@ body
                 border-top: toRem(2) solid rgb(103,103,103)
                 border-bottom: toRem(2) solid rgb(103,103,103)
             .circle-red
+                padding-right:toRem(10)
                 &:after
                     content:""
                     width: toRem(10)
@@ -96,7 +99,7 @@ body
                     background: red
                     position: absolute
                     top: toRem(1)
-                    right: toRem(4)
+                    right: 0
                     border-radius: 50%
         .search
             float: right
@@ -268,7 +271,6 @@ body
                     float: left
                     width: toRem(195)
                     height: toRem(70)
-                    border-bottom: toRem(1) solid rgb(106,106,106)
                     p:nth-child(1)
                         font-size: toRem(22)
                         color: rgb(156,191,210)
@@ -366,6 +368,7 @@ body
             z-index: 0;
             p 
                 display: block;
+                font-size: toRem(15)
     .footer
         width: 100%;
         height: toRem(90)

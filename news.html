@@ -31,22 +31,24 @@
                 <div class="panel">
                     <h1>北航新闻</h1>
                     <a href="javascript:;" class="more">更多</a>
-                    <ul>
-                        <template v-for="(i,index) in 12">
-                            <!--<li v-if="index==0">
-                                <span class="img">
-                                    <img src="dist/styles/images/nopic.jpg" alt="">
-                                </span>
-                                <h2>04-07</h2>
-                                <p>我校与四川省签署省校合作协议北航西部国际创新港开工</p>
-                            </li>-->
-                            <li>
-                                <a href="javascript:;">
-                                    <i class="button-mark"></i> 《成都日报》：北航西部国际创新港 正式开工建设<span class="datetime">[2017-04-10]</span>
-                                </a>
-                            </li>
-                        </template>
-                    </ul>
+                    <div  class="mCustomScrollbar" data-mcs-theme="minimal">
+                        <ul>
+                            <template v-for="(i,index) in 32">
+                                <!--<li v-if="index==0">
+                                    <span class="img">
+                                        <img src="dist/styles/images/nopic.jpg" alt="">
+                                    </span>
+                                    <h2>04-07</h2>
+                                    <p>我校与四川省签署省校合作协议北航西部国际创新港开工</p>
+                                </li>-->
+                                <li>
+                                    <a href="javascript:;">
+                                        <i class="button-mark"></i> 《成都日报》：北航西部国际创新港 正式开工建设<span class="datetime">[2017-04-10]</span>
+                                    </a>
+                                </li>
+                            </template>
+                        </ul>
+                   </div>
                 </div>
                 <div class="panel">
                     <h1>通知公告</h1>
@@ -71,29 +73,33 @@
                 <div class="panel">
                     <h1>活动资讯</h1>
                     <a href="javascript:;" class="more">更多</a>
-                    <ul>
-                        <template v-for="(i,index) in 12">
-                            <!--<li v-if="index==0">
-                                <span class="img">
-                                    <img src="dist/styles/images/nopic.jpg" alt="">
-                                </span>
-                                <h2>04-07</h2>
-                                <p>我校与四川省签署省校合作协议北航西部国际创新港开工</p>
-                            </li>-->
-                            <li>
-                                <a href="javascript:;">
-                                    《成都日报》：北航西部国际创新港 正式开工建设
-                                    <i class="button-mark"></i>
-                                    <span class="datetime">[2017-04-10]</span>
-                                </a>
-                            </li>
-                        </template>
+                    <div  class="mCustomScrollbar" data-mcs-theme="minimal">
+                        <ul>
+                            <template v-for="(i,index) in 32">
+                                <!--<li v-if="index==0">
+                                    <span class="img">
+                                        <img src="dist/styles/images/nopic.jpg" alt="">
+                                    </span>
+                                    <h2>04-07</h2>
+                                    <p>我校与四川省签署省校合作协议北航西部国际创新港开工</p>
+                                </li>-->
+                                <li>
+                                    <a href="javascript:;">
+                                        《成都日报》：北航西部国际创新港 正式开工建设
+                                        <i class="button-mark"></i>
+                                        <span class="datetime">[2017-04-10]</span>
+                                    </a>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div v-show="menuIndex == 1" key="attention" class="panel-container attention mCustomScrollbar" data-mcs-theme="minimal">
                 <div>
                     <div class="date-group" v-for="i in 5">
                         <h1>今天</h1>
+                        <div  class="mCustomScrollbar" data-mcs-theme="minimal">
                         <ul>
                             <li v-for="j in 12">
                                 <a href="javascript:;">
@@ -102,6 +108,7 @@
                                 </a>
                             </li>
                         </ul>
+                        </div>
                     </div>
                 </div>
             </div>
