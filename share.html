@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="dist/styles/common.css">
+    <link href="dist/styles/share.css" rel="stylesheet">
+</head>
+
+<body>
+    <svg style="display:none;" xmlns="http://www.w3.org/2000/svg">
+        <symbol id="sure" viewBox="0 0 1024 1024">
+            <path d="M512 997.052632a485.052632 485.052632 0 1 0 0-970.105264 485.052632 485.052632 0 0 0 0 970.105264z m0-53.894737a431.157895 431.157895 0 1 1 0-862.31579 431.157895 431.157895 0 0 1 0 862.31579zM282.947368 538.947368h485.861053V485.052632H256v53.894736h26.947368z" p-id="17236"/>
+        </symbol>
+        <symbol id="cancel" viewBox="60 60 910 910">
+            <path d="M512 961.610044c-247.920486 0-449.610044-201.689558-449.610044-449.610044s201.689558-449.610044 449.610044-449.610044 449.610044 201.689558 449.610044 449.610044-201.689558 449.610044-449.610044 449.610044z m0-846.325391c-218.761376 0-396.714324 177.952948-396.714324 396.714324s177.953971 396.714324 396.714324 396.714323 396.715347-177.952948 396.715347-396.714323S730.761376 115.284653 512 115.284653z" p-id="5500"/><path d="M277.772374 477.619982l149.59611 111.740943 336.747557-288.942784 37.539988 27.606754-374.287545 372.806821-179.845041-178.581258z" p-id="5501"/>
+        </symbol>
+    </svg>
+    <div class="app" id="app">
+        <div class="left">
+            <div class="search-bar">
+                <input type="text" placeholder="查询">
+                <i>
+                    <svg t="1493027666528" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1428" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%"><defs><style type="text/css"></style></defs><path fill="#c2c2c2" d="M953.504 908.256l-152.608-163.296c61.856-74.496 95.872-167.36 95.872-265.12 0-229.344-186.624-415.968-416.032-415.968-229.344 0-415.968 186.592-415.968 415.968s186.624 415.968 416 415.968c60.096-0.032 118.048-12.576 172.224-37.248 16.096-7.328 23.2-26.304 15.872-42.368-7.328-16.128-26.4-23.264-42.368-15.872-45.856 20.864-94.88 31.456-145.76 31.488-194.08 0-351.968-157.888-351.968-351.968 0-194.048 157.888-351.968 351.968-351.968 194.112 0 352.032 157.888 352.032 351.968 0 91.36-34.848 177.92-98.08 243.744-12.256 12.736-11.84 32.992 0.864 45.248 0.96 0.928 2.208 1.28 3.296 2.08 0.864 1.28 1.312 2.752 2.4 3.904l165.504 177.088c6.272 6.752 14.816 10.144 23.36 10.144 7.84 0 15.68-2.848 21.856-8.64C964.864 941.408 965.568 921.152 953.504 908.256z" p-id="1429"></path></svg>
+                </i>
+            </div>
+            <div class="search-list mCustomScrollbar" data-mcs-theme="dark">
+                <ul class="root">
+                    <tree-nodes v-for="item in source" :source="item"></tree-nodes>
+                </ul>
+            </div>
+        </div>
+        <div class="right">
+            <h1>
+                已选联系人:<span v-text="selected.length"></span>
+                <a href="javascript:;" @click="clear">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" t="1493091324202" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" p-id="13359" width="15" height="15"><defs><style type="text/css"/></defs><path d="M853.333 341.332c-25.6 0-42.67 17.067-42.67 42.667l0 503.464c0 34.135-25.6 51.2-51.2 51.2L264.532 938.663c-34.132 0-51.2-25.6-51.2-51.2L213.332 383.999c0-25.6-17.065-42.667-42.665-42.667S128 358.399 128 383.999l0 503.464c0 76.8 59.732 136.535 136.532 136.535l486.401 0c76.8 0 136.53-59.735 136.53-136.535L887.463 383.999C895.998 358.399 878.933 341.332 853.333 341.332zM443.731 810.663 443.731 383.999c0-25.6-17.065-42.667-34.132-42.667-17.067 0-51.2 17.067-51.2 42.667l0 426.664c0 25.6 17.067 42.67 42.667 42.67C426.666 853.333 443.731 836.263 443.731 810.663zM665.598 810.663 665.598 383.999c0-25.6-25.6-42.667-51.2-42.667-25.6 0-34.135 17.067-34.135 42.667l0 426.664c0 25.6 17.07 42.67 34.135 42.67S665.598 836.263 665.598 810.663zM938.663 170.667 725.333 170.667l0-59.735C725.333 51.2 674.133 0 614.398 0L409.599 0c-59.732 0-110.932 51.2-110.932 110.932l0 59.735L85.332 170.667c-25.6 0-42.665 17.065-42.665 42.665s17.065 42.667 42.665 42.667l853.33 0c25.6 0 42.67-17.067 42.67-42.667S964.263 170.667 938.663 170.667zM383.999 110.932c0-17.065 8.532-25.6 25.6-25.6l204.799 0c17.065 0 25.6 8.535 25.6 25.6l0 59.735L383.999 170.667 383.999 110.932z" p-id="13360"/></svg>
+                    清空
+                </a>
+            </h1>
+            <div class="result-list mCustomScrollbar" data-mcs-theme="dark">
+                <ul>
+                    <li class="person" v-for="item in selected">
+                        <i :style="{'background-image': 'url(' + item.icon + ')'}">
+                        </i>
+                        <span v-text="item.name" :title="item.name"></span>
+                        <a href="javascript:;" @click="remove(item)">
+                            <svg width="100%" height="100%">
+                                <use xlink:href="#sure"></use>
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="bottom">
+            <button @click="sure" :class="[selected.length == 0 ?'disabled':'']" :disabled="selected.length == 0">确认</button>
+            <button @click="close" class="hollow">取消</button>
+        </div>
+    </div>
+    <script type="text/x-template" id="node-template">
+        <li :class="[expanded?'expanded':'']">
+            <a :style="nodeDeepStyle" href="javascript:;" @click="expanded=!expanded">{{source.name}}</a>
+            <ul>
+                <tree-nodes v-for="item in trees" :source="item" :deep="deep + 1" :key="item.id"></tree-nodes>
+            </ul>
+            <div class="person-container">
+                <div v-for="item in nodes" :style="personDeepStyle" class="person" :key="item.id" @click="select(item)"  :class="{'select':item.select }">
+                    <i :style="{'background-image': 'url(' + item.icon + ')'}">
+                    </i>
+                    <span v-text="item.name" :title="item.name"></span>
+                    <a href="javascript:;">
+                        <svg width="100%" height="100%">
+                            <use xlink:href="#cancel"></use>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </li>
+    </script>
+</body>
+<script src="dist/scripts/common.js"></script>
+<script src="dist/scripts/share.js"></script>
+
+</html>

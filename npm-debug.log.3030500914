@@ -1,0 +1,36 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'D:\\Program Files (x86)\\nodejs\\node.exe',
+1 verbose cli   'D:\\Program Files (x86)\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'run',
+1 verbose cli   'dev' ]
+2 info using npm@3.10.9
+3 info using node@v6.9.2
+4 verbose run-script [ 'predev', 'dev', 'postdev' ]
+5 info lifecycle jsdoc@1.0.0~predev: jsdoc@1.0.0
+6 silly lifecycle jsdoc@1.0.0~predev: no script for predev, continuing
+7 info lifecycle jsdoc@1.0.0~dev: jsdoc@1.0.0
+8 verbose lifecycle jsdoc@1.0.0~dev: unsafe-perm in lifecycle true
+9 verbose lifecycle jsdoc@1.0.0~dev: PATH: D:\Program Files (x86)\nodejs\node_modules\npm\bin\node-gyp-bin;D:\Program\Git\service-hall\node_modules\.bin;C:\Program Files (x86)\MacType\;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\ImageMagick-7.0.1-Q16-HDRI;C:\Program Files (x86)\ImageMagick-7.0.1-Q8;C:\Program Files (x86)\ImageMagick-7.0.1-Q16;C:\Program Files\ImageMagick-7.0.1-Q8;C:\Program Files\ImageMagick-7.0.1-Q16;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft\Web Platform Installer\;C:\Program Files\TortoiseSVN\bin;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;D:\cmder;d:\Program Files (x86)\Bitvise SSH Client;D:\Program Files (x86)\nodejs\;C:\Users\Administrator\.windows-build-tools\python27;C:\Program Files (x86)\Yarn\bin;C:\Git\cmd;C:\Git\mingw32\bin;C:\Git\usr\bin;C:\ICW\bin;d:\Program Files (x86)\Microsoft VS Code\bin;C:\Users\Administrator\.babun;C:\Users\Administrator\AppData\Roaming\npm;C:\Users\Administrator\AppData\Local\atom\bin;C:\Users\Administrator\AppData\Local\Yarn\.bin;C:\Program Files (x86)\MacType
+10 verbose lifecycle jsdoc@1.0.0~dev: CWD: D:\Program\Git\service-hall
+11 silly lifecycle jsdoc@1.0.0~dev: Args: [ '/d /s /c', 'rollup -c -w ' ]
+12 verbose stack Error: kill ENOSYS
+12 verbose stack     at exports._errnoException (util.js:1022:11)
+12 verbose stack     at process.kill (internal/process.js:172:13)
+12 verbose stack     at process.listener (D:\Program Files (x86)\nodejs\node_modules\npm\node_modules\npmlog\node_modules\gauge\node_modules\signal-exit\index.js:86:15)
+12 verbose stack     at emitNone (events.js:91:20)
+12 verbose stack     at process.emit (events.js:185:7)
+12 verbose stack     at processEmit (D:\Program Files (x86)\nodejs\node_modules\npm\node_modules\npmlog\node_modules\gauge\node_modules\signal-exit\index.js:146:32)
+12 verbose stack     at processEmit (D:\Program Files (x86)\nodejs\node_modules\npm\node_modules\npm-registry-client\node_modules\npmlog\node_modules\gauge\node_modules\signal-exit\index.js:146:32)
+12 verbose stack     at Signal.wrap.onsignal (internal/process.js:199:44)
+13 verbose cwd D:\Program\Git\service-hall
+14 error Windows_NT 6.1.7601
+15 error argv "D:\\Program Files (x86)\\nodejs\\node.exe" "D:\\Program Files (x86)\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "run" "dev"
+16 error node v6.9.2
+17 error npm  v3.10.9
+18 error code ENOSYS
+19 error errno ENOSYS
+20 error syscall kill
+21 error kill ENOSYS
+22 error If you need help, you may report this error at:
+22 error     <https://github.com/npm/npm/issues>
+23 verbose exit [ 1, true ]

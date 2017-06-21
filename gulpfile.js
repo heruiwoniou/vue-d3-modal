@@ -10,7 +10,14 @@ var path = require('path'),
     concat = require('gulp-concat'),
     rename = require('gulp-rename');
 
-var styles = ['src/styles/pages/index.styl']
+var styles = [
+    'src/styles/pages/index.styl',
+    'src/styles/pages/news.styl',
+    'src/styles/pages/comment.styl',
+    'src/styles/pages/comments.styl',
+    'src/styles/pages/calendar.styl',
+    'src/styles/pages/share.styl',
+]
 
 gulp.task('doc', function (cb) {
     gulp.src([
@@ -67,11 +74,13 @@ gulp.task('scriptCommon', function () {
         'src/libs/clickoutside/index.js',
         'node_modules/d3/build/d3.min.js',
         'src/libs/fullcalendar.min.js',
-        'src/libs/jquery-ui-1.10.2.custom.min.js'
+        'src/libs/jquery-ui.min.js'
     ])
         .pipe(concat('common.js'))
         .pipe(gulp.dest('dist/scripts/'));
-    
+
+        gulp.src(['src/libs/My97DatePicker/**/*.*'])
+            .pipe(gulp.dest('dist/scripts/My97DatePicker/'))
 });
 gulp.task('script',()=>gulp
         .src(['src/*.js'])
@@ -80,7 +89,7 @@ gulp.task('script',()=>gulp
 gulp.task('default', function () {
     server.run({port: 3000})
     gulp.run('doc', 'image', 'css', 'script','scriptCommon');
-    gulp.watch(['src/styles/pages/**/*.styl'],function(){
+    gulp.watch(['src/styles/pages/**/*.styl','src/styles/common.styl'],function(){
         gulp.run('css');
     })
     gulp.watch('src/*.js',()=>gulp.run('script'))

@@ -2,6 +2,7 @@
     $(document)
         .ready(function () {
             var baseSeed  = 12 * 1920 / 380.600;
+            var dockPostion,indexResizeTimer,centerResizeTimer;
             var appVm = new Vue({
                     el: 'body > .app',
                     data: {
@@ -18,6 +19,8 @@
                             { name: '网信服务', icons: 'service8.png' },
                         ],
                         services: [
+                            //{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},
+                            
                             { name: '本专科奖学金申请' ,icon:'action1.png'},
                             { name: '本科课程表查询' ,icon:'action2.png'},
                             { name: '研究生中文成绩' ,icon:'action3.png'},
@@ -37,6 +40,34 @@
                             { name: '财务服务' ,icon:'action16.png'},
                             { name: '本科生学籍证明' ,icon:'action17.png'},
                             { name: '博士后基本信息维护' ,icon:'action18.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
+                            { name: '奖学金申请' ,icon:'action19.png'},
                             { name: '奖学金申请' ,icon:'action19.png'},
                         ], 
                         apps: [
@@ -73,7 +104,27 @@
 
                         mainMaxHeight: 0,
                         mainCenterMaxHeight: 0,
-                        searchMaxHeight: 0
+                        searchMaxHeight: 0,
+
+                        //doc内的内容项
+                        taskBar:[
+                            { caseid: 1, name: '博士后基本信息维护' ,icon:'action18.png'},
+                            { caseid: 2,name: '奖学金申请' ,icon:'action19.png'}
+                        ],
+                        insertTaskIndex: -1,
+                        //删除app面板的状态控制
+                        deletePanel: false,
+                        //drop后是否执行删除
+                        deleteAction: false,
+                        //是否已经初始化的状态控制
+                        isInit: false,
+                        //加载进度条的状态控制
+                        loading: true,
+                        //弹框的状态控制
+                        modalStatus:false,
+                        modalURI:'about:blank;',
+                        //dock的状态控制
+                        footBarStatus: true
                     },
 
                     computed: {
@@ -100,10 +151,31 @@
                                     this.calendarInit();
                                 }.bind(this))
                             }
+                        },
+                        mainContainerStyle:function(){
+                            clearTimeout(centerResizeTimer);
+                            centerResizeTimer = setTimeout(function(){
+                                var $parent = $('#df-self .main > div');
+                                if($parent.is(':visible')){
+                                    $parent.find('div:first').css({
+                                        maxHeight: $parent.css('maxHeight')
+                                    })
+                                }
+                            }.bind(this))
+                        },
+                        mainCenterContainerStyle:function(){
+                            clearTimeout(indexResizeTimer);
+                            indexResizeTimer = setTimeout(function(){
+                                var $parent = $('#main .main-container');
+                                if($parent.is(':visible')){
+                                    $parent.find('div:first').css({
+                                        maxHeight: $parent.css('maxHeight')
+                                    })
+                                }
+                            }.bind(this))
                         }
                     },
                     mounted:function(){
-                        document.getElementById('app').style.display = "block";
                         function clickTab(a,b,_this){
                             if($(_this).hasClass(a)){
                                 return
@@ -126,9 +198,110 @@
                             clickTab('active','.right .r-listBox ul',_this);
                         });
 
+                        var $dock = $('#dock');
                         
+                        $('#main .action').draggable({
+                            helper: "clone",
+                            appendTo:'body',
+                            containment:'.app',
+                            start:function( event, ui ){
+                                dockPostion = $dock.offset();
+                                dockPostion.width = $dock.width() + 20;
+                                dockPostion.itemWidth = dockPostion.width / $dock.find('>div').length;
+                            },
+                            drag:function( event, ui ){
+                                if(appVm.insertTaskIndex!=-1){
+                                    appVm.insertTaskIndex = Math.floor(( event.clientX - dockPostion.left + dockPostion.itemWidth / 2 ) / dockPostion.itemWidth)
+                                }
+                            }
+                        });
+                        $dock.droppable({
+                             accept: ".action",
+                             over:function( event, ui ){
+                                 appVm.insertTaskIndex = 0;
+                             },
+                             out:function( event, ui ){
+                                 appVm.insertTaskIndex = -1;
+                             },
+                             drop:function( event, ui ){
+                                 var index = (ui.helper.data('index'));
+                                 appVm.taskBar.splice(appVm.insertTaskIndex,0,$.extend({caseid : Math.round(Math.random() * 1e5)},appVm.services[index]));
+                                 appVm.$nextTick(function(){
+                                     appVm.taskBarInit();
+                                 })
+                                 appVm.insertTaskIndex = -1;
+                                 return false;
+                             }
+                        });
+                        this.taskBarInit();
+                        this.deletePanelInit();
+                        document.getElementById('app').style.display = "block";
+                        setTimeout(function(){
+                            this.isInit = true; //设置初始化完成
+                            this.loading = false; //设置进度条状态
+                        }.bind(this),200)
                     },
                     methods:{
+                        modal:function(src){
+                            return new Promise(function(resolve,reject){
+                                this.resolve = resolve;
+                                this.modalURI = src;
+                                this.visible = false;
+                                this.footBarStatus = false;
+                                setTimeout(function(){
+                                    this.modalStatus = true;
+                                }.bind(this),200)
+                            }.bind(this));
+                        },
+                        closeModal:function(){
+                            this.resolve();
+                            this.modalStatus = false;
+                            setTimeout(function(){
+                                this.visible = true;
+                                this.footBarStatus = true;
+                                this.modalURI = "about:blank;"
+                            }.bind(this),200)
+                        },
+                        gotoNews:function(){
+                            this.modal('news.html').then(function(){
+                                // alert('modal closed')
+                            });
+                        },
+                        deletePanelInit:function(){
+                            $(this.$refs.deletepanel).droppable({
+                                accept: ".task",
+                                over:function( event, ui ){
+                                    appVm.deleteAction = true;
+                                },
+                                out:function( event, ui ){
+                                    appVm.deleteAction = false;
+                                },
+                                drop:function(event,ui){
+                                    if(appVm.deleteAction) {
+                                        var index = +ui.helper.data('index');
+                                        appVm.taskBar.splice(index,1);
+                                    }
+                                    appVm.deletePanel = false;
+                                    appVm.deleteAction = false;
+                                    return false;
+                                }
+                            })
+                        },
+                        taskBarInit:function(){
+                            $(this.$refs.dock).find('div:not(.draggable)').draggable({
+                                revert : 'invalid',
+                                revertDuration: 200,
+                                containment:'window',
+                                start:function(){
+                                    console.log('s')
+                                    appVm.deletePanel = true;
+                                },
+                                stop:function(){
+                                    console.log('stop')
+                                    appVm.deletePanel = false;
+                                }
+                            });
+                        },
                         calendarInit:function(){
                             if(this.calendarInited) return;
                             this.calendarInited = true;
@@ -144,13 +317,13 @@
                                     right: 'prev today next '
                                 },
                                 firstDay:1,
-                                editable: true,
+                                editable: false,
                                 timeFormat: 'H:mm',
                                 axisFormat: 'H:mm',
                                 events: [
                                     {
                                         title: '全天计划\r\n#####\r\n写代码',
-                                        start: new Date(y, m, 1)
+                                        start: new Date(y, m, 2)
                                     },
                                     {
                                         title: '张家界四日游',
@@ -201,8 +374,34 @@
                                         title: '实战训练课',
                                         start: new Date(y, m, d+23)
                                     },
-                                ]
+                                ],
+                                eventClick:function(jsEvt,event){
+                                    // var $target = $(event.target).closest('.fc-event-inner');
+                                    // var offset = $target.offset();
+                                    // var width = $target.width();
+                                    // if(offset){
+                                        jsEvt.backgroundColor="#ea5532";
+                                        $('#calendar').fullCalendar( 'updateEvent', jsEvt )
+                                        WebApi.modal({
+                                            title:'新建日程',
+                                            src: 'calendar.html',
+                                            width: 500,
+                                            height: 410
+                                        }).then(function(cmd){
+                                            // this.modal('news.html').then(function(){
+                                            // // alert('modal closed')
+                                            // });
+                                            if(cmd == 'success'){
+                                                alert('保存成功，进行更新！')
+                                            }
+                                            delete jsEvt.backgroundColor;
+                                            $('#calendar').fullCalendar( 'updateEvent', jsEvt )
+                                        }.bind(this))
+                                    // }
+                                }
                             });
+
+                            
                         },
 
                         navChange:function(index){
@@ -231,7 +430,22 @@
                                 this.searched = true;
                             }.bind(this),2000)
                         },
-
+                        openShare:function(){
+                             WebApi.modal({
+                                title:'请选择你需要分享的同学',
+                                src: 'share.html',
+                                width: 510,
+                                height: 830,
+                                offset:{
+                                    left: -100
+                                }
+                            }).then(function(cmd){
+                                console.log(cmd);
+                                // this.modal('news.html').then(function(){
+                                // // alert('modal closed')
+                                // });
+                            }.bind(this))
+                        },
                         openSider:function(){
                             this.siderOpening = true;
                             this.sider = true;
@@ -246,6 +460,18 @@
                         closeSider:function(){
                             if(!this.sider || this.siderOpening) return;
                             this.sider = false;
+                        },
+                        dialog(){
+                            WebApi.modal({
+                                title:'校内讲座审批',
+                                src: 'comments.html',
+                                width: 710,
+                                height: 730
+                            }).then(function(cmd){
+                                // this.modal('news.html').then(function(){
+                                // // alert('modal closed')
+                                // });
+                            }.bind(this))
                         }
                     }
                 })
@@ -262,10 +488,9 @@
                             return;
                         fontSize = 12 * clientWidth / 380.600;
                         docEl.style.fontSize = fontSize + 'px';
-                        appVm.mainMaxHeight = docHeight - ( 383 / baseSeed ) * fontSize;
+                        appVm.mainMaxHeight = docHeight - ( 423 / baseSeed ) * fontSize;
                         appVm.mainCenterMaxHeight = docHeight - ( 322 / baseSeed ) * fontSize;
                         appVm.searchMaxHeight = docHeight - ( (280 + 175) / baseSeed ) * fontSize;
-                        
                         return recalc;
                     })();
                 if (!document.addEventListener) 

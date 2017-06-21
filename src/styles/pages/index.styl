@@ -1,5 +1,8 @@
 @import '../var';
 $panelBackground = rgba(255,255,255,.1)
+html,body{
+    overflow: hidden;
+}
 html
     height: 100%
     font-size: unit( $baseFontSize ,'px')
@@ -24,12 +27,32 @@ body
             background-repeat: no-repeat
         .button-enter
             background-image: url(images/icon-enter.png)
+            width: toRem(13)
         .button-mark
             background-image: url(images/icon-mark.png)
             &.mark
                 background-image: url(images/icon-mark-marked.png)
         .button-share
             background-image: url(images/icon-share.png)
+    .action
+        width: toRem(142)
+        height: toRem(64)
+        margin-top: toRem(30)
+        text-align: center
+        overflow: hidden;
+        z-index: 2;
+        img 
+            border: none
+            height: toRem(60)
+            margin-bottom:toRem(4)
+        p
+            display: none;
+            color: rgb(160,155,152)
+            font-size: toRem(14)
+            margin-top: toRem(15)
+            overflow: hidden
+            white-space: nowrap
+            text-overflow:ellipsis;
 .index-wrap
     position: absolute;
     height: 100%;
@@ -56,7 +79,6 @@ body
                 display: inline-block;
                 vertical-align: middle;
                 color: white
-                width: toRem(75)
                 height: toRem(30)
                 margin: 0 toRem(30);
                 text-align: center
@@ -69,6 +91,7 @@ body
                 border-top: toRem(2) solid rgb(103,103,103)
                 border-bottom: toRem(2) solid rgb(103,103,103)
             .circle-red
+                padding-right:toRem(10)
                 &:after
                     content:""
                     width: toRem(10)
@@ -76,7 +99,7 @@ body
                     background: red
                     position: absolute
                     top: toRem(1)
-                    right: toRem(4)
+                    right: 0
                     border-radius: 50%
         .search
             float: right
@@ -157,12 +180,14 @@ body
             height: toRem(120)
             background: $panelBackground
             text-align: center
+            overflow: hidden;
             float: left
             margin-top: toRem(10)
             cursor: pointer
             border-radius: toRem(10)
-            &.active
             &:hover
+                background: rgba(0,103,179,.5)
+            &.active
                 background: rgb(0,103,179)
             &:nth-child(even)
                 margin-left: toRem(9)
@@ -178,7 +203,13 @@ body
                 color: rgb(255,255,255,.6)
                 font-size: toRem(16)
                 overflow: hidden
-                white-space: nowrap
+                // white-space: nowrap
+                display: table-cell;
+                width: toRem(120);
+                height: toRem(48);
+                text-align: center;
+                vertical-align: middle;
+                line-height: 1.5;
     .right
         width: toRem(300)
         height: toRem(650)
@@ -223,7 +254,7 @@ body
                 span:nth-child(2)
                     float: right
         .person
-            margin-top:toRem(10)
+            // margin-top:toRem(10)
             .person-floor1
                 height: toRem(128)
                 background: $panelBackground
@@ -240,14 +271,13 @@ body
                     float: left
                     width: toRem(195)
                     height: toRem(70)
-                    border-bottom: toRem(1) solid rgb(106,106,106)
                     p:nth-child(1)
                         font-size: toRem(22)
                         color: rgb(156,191,210)
                         padding: toRem(10) 0 0 toRem(10)
                     p:nth-child(2)
                         color: rgb(106,106,106)
-                        padding: toRem(10) 0 0 toRem(10)
+                        padding: toRem(10) toRem(10) 0 toRem(10)
                         overflow: hidden
                         text-overflow: ellipsis;
                         white-space: nowrap;
@@ -257,10 +287,11 @@ body
                         width: toRem(40)
                         height: toRem(40)
                         margin-top: toRem(9)
+                        border-radius: 50%;
                         cursor: pointer
                         margin-right: toRem(10)
             .person-floor2
-                height: toRem(378)
+                height: toRem(503)
                 margin-top: toRem(10)
                 background: $panelBackground
                 border-radius: toRem(10)
@@ -272,7 +303,7 @@ body
                     margin-bottom:toRem(3)
                     padding-left: toRem(20)
                 .person-floor2-container
-                    height:toRem(329)
+                    height:toRem(450)
                 .collection
                     margin: toRem(16) toRem(20) 0 toRem(20)
                     border-bottom: 1px solid rgba(255,255,255,.1);
@@ -315,7 +346,7 @@ body
                         .button-panel
                             opacity: 1
     .main
-        min-height: toRem(512);
+        //min-height: toRem(512);
         margin-left: toRem(270)
         margin-right: toRem(320)
         background: $panelBackground
@@ -334,23 +365,16 @@ body
             float: left
             width: 11.1%
             height: toRem(115)
-            margin-top: toRem(30)
-            text-align: center
-            img 
-                border: none
-                width: toRem(64);
+            z-index: 0;
             p 
-                color: rgb(160,155,152)
-                font-size: toRem(14)
-                margin-top: toRem(15)
-                overflow: hidden
-                white-space: nowrap
-                text-overflow:ellipsis;
+                display: block;
+                font-size: toRem(15)
     .footer
         width: 100%;
         height: toRem(90)
         text-align: center;
         position: relative;
+        z-index: 2;
         .app-panel
             font-size: toRem(0);
             display: inline-block;
@@ -361,6 +385,15 @@ body
             background: rgba(255,255,255,.1)
             padding: 0 toRem(10)
             white-space nowrap
+            &.droppable
+                &>div.insertBefore:before
+                    content: ''
+                    display: inline-block;
+                    width: toRem(64)
+                &>div.insertAfter:after
+                    content: ''
+                    display: inline-block;
+                    width: toRem(64)
             &>div
                 margin: 0 toRem(10);
                 text-align: center
@@ -368,6 +401,8 @@ body
                 display: inline-block;
                 vertical-align: top;
                 position: relative
+                &.ui-draggable-dragging .alert
+                    display: none !important;
                 &:hover
                     .alert
                         display: block;
@@ -386,7 +421,8 @@ body
             .alert
                 position: absolute
                 display: none;
-                width: toRem(120)
+                min-width: toRem(100);
+                padding: 0 toRem(10)
                 height: toRem(30)
                 top: toRem(-47)
                 left: toRem(-30)
@@ -413,8 +449,21 @@ body
             .right,
             .main
                 opacity: 0
+.mask-layer
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0,.1);
+    z-index: 10;
+    svg
+        position: absolute;
+        top: 40%;
+        margin-top: -25px;
+        left: 50%;
 @import 'effects/fade';
 @import 'effects/side';
 @import 'control/search';
 @import 'control/sider';
+@import 'control/delete';
+@import 'control/modal';
 @import 'mycenter';
