@@ -11,8 +11,10 @@ var concat = require('gulp-concat')
 var rename = require('gulp-rename')
 
 var styles = [
-  'src/styles/pages/index.styl',
+  'src/styles/pages/index-dark.styl',
+  'src/styles/pages/index-white.styl',
   'src/styles/pages/news.styl',
+  'src/styles/pages/news-white.styl',
   'src/styles/pages/comment.styl',
   'src/styles/pages/comments.styl',
   'src/styles/pages/calendar.styl',
@@ -90,7 +92,7 @@ gulp.task('default', function () {
   server.run({port: 3000})
   gulp.run('doc', 'image', 'css', 'script', 'scriptCommon')
   gulp.watch([
-    'src/styles/pages/**/*.styl', 'src/styles/common.styl'
+    'src/styles/**/*.styl', 'src/styles/common.styl'
   ], function () {
     gulp.run('css')
   })

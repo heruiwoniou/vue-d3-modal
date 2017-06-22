@@ -8,7 +8,19 @@
     <!--[if lte IE 8]><style>body{display:none;}</style><script>(function(){window.onload = function(){document.write('<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><title>warn</title><style>html,body {height: 100%;margin: 0;padding: 0;}body {height: 80%;text-align: center;}body,div {white-space: nowrap;}body:before {content: \"\";display: inline-block;height: 100%;width: 1px;font-size: 0px;vertical-align: middle;}div,div span,div i {display: inline-block;vertical-align: middle;}div i {background: url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAZQTFRF/+cAAAAA21cJzAAAAAJ0Uk5T/wDltzBKAAAAO0lEQVR42uzVqxEAMAhEwaP/pmOiYpkJgn0FrOKTahYAAPAByG0rkCcAYCvgHgD8RnMAsAsAwBhwBBgA5xsOoZKWuLoAAAAASUVORK5CYII=\");width: 64px;height: 64px;}div{*margin-top: 18%;}</style></head><body><div><i></i><span>\u5f53\u524d\u7248\u672c\u4e0d\u517c\u5bb9\u0049\u0045\u0038\u53ca\u4ee5\u4e0b\u7248\u672c\uff0c\u8bf7\u5207\u6362\u6a21\u5f0f\u6216\u4f7f\u7528\u5176\u5b83\u73b0\u4ee3\u6d4f\u89c8\u5668</span></div></body></html>');}})();</script><![endif]-->
     <link rel="stylesheet" href="dist/styles/common.css">
     <link rel="stylesheet" href="dist/styles/components.css">
-    <link href="dist/styles/index-dark.css" rel="stylesheet">
+    <link href="dist/styles/index-white.css" rel="stylesheet">
+    <script src="cloud/three.min.js"></script>
+    <script type="text/javascript" src="cloud/Detector.js"></script>
+    <script id="vs" type="x-shader/x-vertex">
+        varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 ); }
+    </script>
+    <script id="fs" type="x-shader/x-fragment">
+        uniform sampler2D map; uniform vec3 fogColor; uniform float fogNear; uniform float fogFar; varying vec2 vUv; void main()
+        { float depth = gl_FragCoord.z / gl_FragCoord.w; float fogFactor = smoothstep( fogNear, fogFar, depth ); gl_FragColor
+        = texture2D( map, vUv ); gl_FragColor.w *= pow( gl_FragCoord.z, 20.0 ); gl_FragColor = mix( gl_FragColor, vec4( fogColor,
+        gl_FragColor.w ), fogFactor ); }
+    </script>
+
 </head>
 
 <body>
@@ -46,7 +58,7 @@
         <div class="index-wrap clear" :class="[visible ? ( isInit ? '': 'index-wrap--content-hide' ) : 'index-wrap--content-hide']">
             <div class="header">
                 <div class="logo">
-                    <img src="dist/styles/images/logo.png" width="100%" alt="">
+                    <img src="dist/styles/images/logo-white.png" width="100%" alt="">
                 </div>
                 <div class="nav">
                     <a href="javascript:void(0)" @click="appPageIndex = 0" :class="[appPageIndex == 0 ? 'active':'']">首页</a>
@@ -62,10 +74,13 @@
                     </div>
                 </transition>
             </div>
-            <div class="content clear" v-show="appPageIndex == 0">
+            <div class="content clear" :style="webglSupport ? { backgroundImage:'url()' }: null" v-show="appPageIndex == 0">
                 <div class="left">
                     <div class="service" v-for="(nav, index) in navs" @click="navChange(index)" :class="[index == navIndex ? 'active': '']">
-                        <div class="service-img-container">
+                        <div class="service-img-container" v-if="index === navIndex">
+                            <img :src="'dist/styles/images/' + nav.icons.replace(/white/i,'white-hover')">
+                        </div>
+                        <div class="service-img-container" v-else>
                             <img :src="'dist/styles/images/' + nav.icons">
                         </div>
                         <p>{{ nav.name }}</p>
@@ -123,7 +138,7 @@
                     </div>
                 </div>
             </div>
-            <div class="content clear" v-show="appPageIndex == 1" id="df-self">
+            <div class="content clear"  :style="webglSupport ? { backgroundImage:'url()' }: null" v-show="appPageIndex == 1" id="df-self">
                 <div class="left">
                     <div class="userP">
                         <img src="dist/styles/images/person.png" alt="">
@@ -1232,7 +1247,7 @@
                                         <div class="item">
                                             <span>
                                                 <img src="dist/styles/images/action3.png" alt="">
-                                            </span> 
+                                            </span>
                                             <div style="display:inline-block;">
                                                 <p style="line-height:25px;margin:0;font-weight:bold;height:20px;overflow:hidden;">研究生中文成绩</p>
                                                 <p style="line-height:18px;margin:0;height:20px;overflow:hidden;">研究生中文成绩</p>
@@ -1260,7 +1275,8 @@
     </div>
     <script src="dist/scripts/common.js"></script>
     <script src="dist/scripts/components.js"></script>
-    <script src="dist/scripts/index.js"></script>
+    <script src="dist/scripts/cloud.js"></script>
+    <script src="dist/scripts/index-white.js"></script>
 
 </body>
 

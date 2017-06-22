@@ -21,9 +21,9 @@
             display: block;
             padding: 0;
             border: none;
-            border-bottom: toRem(2) solid rgba(255,255,255,.5)
+            border-bottom: toRem(2) solid $searchBottomBorderColor;
             background: none;
-            color: white;
+            color: $baseFontColor;
             height: toRem(100)
             font-size: toRem(30)
             width: toRem(1160);
@@ -31,7 +31,7 @@
         a
             height: toRem(100);
             width: toRem(53);
-            background:url(images/search-icon.png) no-repeat center;
+            background:url($searchPanelIconImage) no-repeat center;
             background-size: toRem(53) toRem(54);
             position: absolute;
             left: 50%;
@@ -46,7 +46,7 @@
             line-height: toRem(300)
             font-size:toRem(14)
             text-align: center;
-            color white;
+            color $baseFontColor;
     .search-header
         width: toRem(1160);
         margin: 0 auto;
@@ -62,21 +62,21 @@
                 display: inline-block;
                 padding: 0 toRem(6) 0 toRem(12)
                 line-height: toRem(26)
-                background: rgba(255,255,255,.2)
+                background: $panelBackground;
                 border-radius: toRem(13);
-                color: #bcbcbc;
+                color: $baseFontHoverColor;
                 i
                     display: inline-block;
                     width: 10px;
                     height: 10px;
-                    background: url(images/icon-close-small.png) no-repeat center;
+                    background: url($searchSmallCloseIconImage) no-repeat center;
                     background-size: cover;
                     margin-left: toRem(5)
                     cursor: pointer;
         h2
             font-size: toRem(20)
             line-height: toRem(38);
-            color:white;
+            color:$baseFontColor;
             font-weight: normal;
     .search-result-header
         ul
@@ -89,7 +89,7 @@
                 border-bottom: toRem(2) solid transparent;
                 a
                     line-height: 2
-                    color:white;
+                    color: $baseFontColor;
                     font-size:toRem(18)
                 &.active
                     border-bottom-color #0067b3;
@@ -107,7 +107,7 @@
             h1
                 line-height: toRem(70)
                 font-size: toRem(14);
-                color: white;
+                color: $baseFontColor;
                 font-weight: normal;
                 transition: line-height .2s cubic-bezier(0.2,1,0.3,1);
                 overflow: hidden;
@@ -126,7 +126,7 @@
                 width: 19%
                 height: toRem(70)
                 margin: 0 .5% 1% .5%;
-                background: rgba(255,255,255,.1)
+                background: $panelBackground;
                 border-radius: toRem(7)
                 position: relative;
                 overflow: hidden;
@@ -136,7 +136,7 @@
                     margin-left toRem(67);
                     height: toRem(70)
                     width: 100%;
-                    background: rgba(255,255,255,.1);
+                    background: $panelBackground;
                     transform-origin: -5%;
                     transition: transform .2s cubic-bezier(0.2,1,0.3,1);
                 .button-panel

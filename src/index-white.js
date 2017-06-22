@@ -6,17 +6,18 @@
       var appVm = new Vue({
         el: 'body > .app',
         data: {
+          webglSupport: window.webglSupport,
           appPageIndex: 0,
           navIndex: 0,
           navs: [
-            { name: '人事服务', icons: 'service1.png' },
-            { name: '科研服务', icons: 'service2.png' },
-            { name: '财务服务', icons: 'service3.png' },
-            { name: '后勤服务', icons: 'service4.png' },
-            { name: '招生服务', icons: 'service5.png' },
-            { name: '教学服务', icons: 'service6.png' },
-            { name: '就业服务', icons: 'service7.png' },
-            { name: '网信服务', icons: 'service8.png' }
+            { name: '人事服务', icons: 'service1-white.png' },
+            { name: '科研服务', icons: 'service2-white.png' },
+            { name: '财务服务', icons: 'service3-white.png' },
+            { name: '后勤服务', icons: 'service4-white.png' },
+            { name: '招生服务', icons: 'service5-white.png' },
+            { name: '教学服务', icons: 'service6-white.png' },
+            { name: '就业服务', icons: 'service7-white.png' },
+            { name: '网信服务', icons: 'service8-white.png' }
           ],
           services: [
             // { name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},{ name: '本专科奖学金申请' ,icon:'action1.png'},
@@ -263,7 +264,7 @@
             }.bind(this), 200)
           },
           gotoNews: function () {
-            this.modal('news.html').then(function () {
+            this.modal('news-white.html').then(function () {
               // alert('modal closed')
             })
           },
@@ -452,7 +453,7 @@
             if (!this.sider || this.siderOpening) return
             this.sider = false
           },
-          dialog() {
+          dialog: function() {
             WebApi.modal({
               title: '校内讲座审批',
               src: 'comments.html',

@@ -1,37 +1,44 @@
-.sider-bar{
-    position: fixed
+.sider-bar {
+    position: fixed;
     right: 0;
     top: 0;
     bottom: 0;
     z-index: 1;
-    background: rgba(255,255,255,.5);
+    background: rgba(238, 238, 238, 0.5);
     width: toRem(330);
-    box-shadow: 0 0 toRem(10) toRem(5) rgba(0,0,0,.5)
-    &.big{
-        width: toRem(405)
+    box-shadow: 0 0 toRem(10) toRem(5) $siderBarShaddow;
+
+    &.big {
+        width: toRem(405);
     }
-    .sider-header{
+
+    .sider-header {
         color: #020201;
-        padding: 0 toRem(30)
-        h1,h2,h3{
+        padding: 0 toRem(30);
+
+        h1, h2, h3 {
             font-weight: normal;
         }
-        h1{
-            line-height: toRem(75)
-            font-size:toRem(30)
+
+        h1 {
+            line-height: toRem(75);
+            font-size: toRem(30);
         }
-        h2{
-            span{
+
+        h2 {
+            span {
                 font-size: toRem(20);
             }
         }
-        h3{
-            color:#383734;
+
+        h3 {
+            color: #383734;
             line-height: 2.5;
             font-size: toRem(14);
         }
     }
-    .sider-content{
+
+    .sider-content {
         position: absolute;
         top: toRem(136);
         bottom: 0;
@@ -39,88 +46,108 @@
         right: 0;
         padding-top: 1px;
     }
-    .sider-panel{
-        margin:toRem(15);
-        background: rgba(255,255,255,.5)
+
+    .sider-panel {
+        margin: toRem(15);
+        background: rgba(255, 255, 255, 0.5);
         border-radius: toRem(5);
     }
-    .sider-panel-header{
+
+    .sider-panel-header {
         border-top-left-radius: toRem(5);
         border-top-right-radius: toRem(5);
-        background: rgba(255,255,255,.7)
-        height: toRem(30)
-        line-height: toRem(30)
+        background: rgba(255, 255, 255, 0.7);
+        height: toRem(30);
+        line-height: toRem(30);
         font-size: toRem(16);
-        span{
+
+        span {
             display: inline-block;
             vertical-align: top;
             height: toRem(20);
             width: toRem(30);
             margin-top: toRem(5);
             text-align: center;
-            img{
+
+            img {
                 height: 100%;
             }
         }
     }
-    .sider-panel-content{
-       padding-top: 1px; 
+
+    .sider-panel-content {
+        padding-top: 1px;
     }
-    .empty-tip{
-        min-height: toRem(100)
+
+    .empty-tip {
+        min-height: toRem(100);
         text-align: center;
         line-height: toRem(100);
     }
-    .message{
+
+    .message {
         max-height: toRem(160);
-        ul{
+
+        ul {
             padding: toRem(15);
         }
-        ul li{
+
+        ul li {
             border-bottom: 1px solid #b6b6b6;
-            padding-bottom toRem(10)
-            h1{
-                float:left;
-                font-size: toRem(16)
+            padding-bottom: toRem(10);
+
+            h1 {
+                float: left;
+                font-size: toRem(16);
                 width: toRem(210);
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
             }
-            span{
-                float:right;
+
+            span {
+                float: right;
             }
-            p{
+
+            p {
                 display: block;
                 color: #464646;
             }
-            &>div{
+
+            &>div {
                 padding: toRem(10) 0;
                 overflow: hidden;
             }
         }
     }
-    .news{
+
+    .news {
         padding: toRem(15);
     }
-    .share{
+
+    .share {
         max-height: toRem(280);
         overflow: hidden;
-        ul{
-            padding: toRem(15)
+
+        ul {
+            padding: toRem(15);
         }
-        li{
+
+        li {
             overflow: hidden;
             position: relative;
-            padding-bottom: toRem(10)
-            &>div{
-                margin-left:toRem(80)
-                h1{
+            padding-bottom: toRem(10);
+
+            &>div {
+                margin-left: toRem(80);
+
+                h1 {
                     font-size: toRem(16);
                     font-weight: normal;
                     line-height: 1.2;
                 }
-                p{
+
+                p {
                     margin-top: toRem(12);
                     color: #5b5b5b;
                     line-height: 1;
@@ -128,47 +155,53 @@
                     text-overflow: ellipsis;
                     white-space: nowrap;
                 }
-                &>div{
-                    height:toRem(43);
-                    background: rgba(255,255,255,.5)
+
+                &>div {
+                    height: toRem(43);
+                    background: rgba(255, 255, 255, 0.5);
                     margin: toRem(10) 0;
                     border-radius: toRem(5);
                     line-height: toRem(43);
                     text-overflow: ellipsis;
                     overflow: hidden;
                     white-space: nowrap;
-                    span{
+
+                    span {
                         width: toRem(43);
                         height: 100%;
                         border-top-left-radius: toRem(5);
                         border-bottom-left-radius: toRem(5);
-                        background: rgba(255,255,255,.5);
-                        float:left;
+                        background: rgba(255, 255, 255, 0.5);
+                        float: left;
                         text-align: center;
                         font-size: 0;
-                        margin-right: toRem(10)
-                        img{
-                            width: toRem(33)
-                            height: toRem(33)
+                        margin-right: toRem(10);
+
+                        img {
+                            width: toRem(33);
+                            height: toRem(33);
                             display: inline-block;
                             vertical-align: middle;
                         }
                     }
                 }
-                a.comment{
-                    width:toRem(17)
-                    height:toRem(17)
-                    background:url(images/icon-comment.png) no-repeat center;
+
+                a.comment {
+                    width: toRem(17);
+                    height: toRem(17);
+                    background: url('images/icon-comment.png') no-repeat center;
                     background-size: cover;
-                    float:right;
+                    float: right;
                 }
             }
-            &>span{
-                float:left;
-                width:toRem(60);
+
+            &>span {
+                float: left;
+                width: toRem(60);
                 height: 100%;
-                float:left;
-                img{
+                float: left;
+
+                img {
                     border-radius: 50%;
                 }
             }
