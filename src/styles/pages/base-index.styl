@@ -253,7 +253,8 @@ body {
 
       &.active {
         background: rgb(0, 103, 179);
-        p{
+
+        p {
           color: $baseFontHoverColor;
         }
       }
@@ -514,9 +515,10 @@ body {
   .footer {
     width: 100%;
     height: toRem(90);
-    text-align: center;
     position: relative;
     z-index: 2;
+    transform-origin: center;
+    transition: transform .2s ease, margin-left .2s ease
 
     .app-panel {
       font-size: toRem(0);
@@ -524,6 +526,10 @@ body {
       vertical-align: top;
       min-width: toRem(100);
       height: toRem(90);
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%)
       border-radius: toRem(90);
       background: $panelBackground;
       padding: 0 toRem(10);
@@ -584,8 +590,10 @@ body {
         min-width: toRem(100);
         padding: 0 toRem(10);
         height: toRem(30);
-        top: toRem(-47);
-        left: toRem(-30);
+        top: 0%;
+        left: 50%;
+        transform: translate(-50%,-140%)
+        transform-origin: left;
         text-align: center;
         line-height: toRem(30);
         border-radius: toRem(3);
@@ -597,10 +605,11 @@ body {
       .alert:after {
         content: '';
         position: absolute;
-        bottom: toRem(-16);
-        left: toRem(53);
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 100%);
         border: toRem(8) solid transparent;
-        border-top-color: $panelBackground ;
+        border-top-color: $panelBackground;
       }
     }
   }

@@ -1109,11 +1109,11 @@
                     </div>
                 </div>
             </div>
-            <div class="footer" v-show="isInit && footBarStatus">
+            <div class="footer" v-show="isInit && footBarStatus" ref="footer" :style="scale < 1 ? { transform: 'scale(' + scale + ')', marginLeft: taskScaleLeft + 'px'} : { marginLeft: taskScaleLeft + 'px' }">
                 <div class="app-panel" ref="dock" :class="[insertTaskIndex !== -1 ? 'droppable':'']" id="dock">
-                    <div v-for="(task,index) in taskBar" :key="task.caseid" :data-index="index" class="task" :class="[insertTaskIndex == index ? 'insertBefore': insertTaskIndex >= taskBar.length && insertTaskIndex == index + 1 ? 'insertAfter' : '' ]">
+                    <div v-for="(task,index) in taskBar" ref="item" :key="task.caseid" :data-index="index" class="task" :class="[insertTaskIndex == index ? 'insertBefore': insertTaskIndex >= taskBar.length && insertTaskIndex == index + 1 ? 'insertAfter' : '' ]">
+                        <div class="alert" :style="scale < 1 ? { transform: 'scale(' + (1 / scale) + ') translate(-50%, -140%)'} : null">{{task.name}}</div>
                         <img class="footer-btn" :src="'dist/styles/images/' + task.icon">
-                        <div class="alert">{{task.name}}</div>
                     </div>
                 </div>
             </div>

@@ -125,7 +125,12 @@
           modalStatus: false,
           modalURI: 'about:blank;',
           // dock的状态控制
-          footBarStatus: true
+          footBarStatus: true,
+
+          scale: 1,
+          totalMargin: 0,
+          taskScaleLeft: 0,
+          dropHolderWidth: 0
         },
 
         computed: {
@@ -152,6 +157,9 @@
                 this.calendarInit()
               }.bind(this))
             }
+            this.$nextTick(function () {
+              this.taskBarSize()
+            }.bind(this))
           },
           mainContainerStyle: function () {
             clearTimeout(centerResizeTimer)
@@ -177,7 +185,8 @@
           }
         },
         mounted: function () {
-          function clickTab(a, b, _this) {
+          var that = this
+          function clickTab (a, b, _this) {
             if ($(_this).hasClass(a)) {
 
             } else {
@@ -208,12 +217,16 @@
             start: function (event, ui) {
               dockPostion = $dock.offset()
               dockPostion.width = $dock.width() + 20
-              dockPostion.itemWidth = dockPostion.width / $dock.find('>div').length
+              appVm.isDragging = true
+              dockPostion.itemWidth = dockPostion.width / $dock.find('>div').length * appVm.scale
             },
             drag: function (event, ui) {
               if (appVm.insertTaskIndex !== -1) {
                 appVm.insertTaskIndex = Math.floor((event.clientX - dockPostion.left + dockPostion.itemWidth / 2) / dockPostion.itemWidth)
               }
+            },
+            stop: function () {
+              appVm.isDragging = false
             }
           })
           $dock.droppable({
@@ -234,13 +247,43 @@
               return false
             }
           })
-          this.taskBarInit()
+          this.taskBarInit(true)
           this.deletePanelInit()
           document.getElementById('app').style.display = 'block'
           setTimeout(function () {
             this.isInit = true // 设置初始化完成
             this.loading = false // 设置进度条状态
           }.bind(this), 200)
+
+          $(document).on('mousemove', function (e) {
+            if (!that.isDragging) {
+              var i
+              var item
+              var dx
+              var dy
+              var scale
+              var margin
+              var docWidth = document.documentElement.offsetWidth
+              for (i = 0; i < that.taskBar.length; i++) {
+                item = that.$refs.item[i]
+                dx = e.clientX - (docWidth / 2 - ((that.$refs.dock.offsetWidth / 2 - (item.offsetLeft + item.offsetWidth / 2)) * that.scale)) - that.taskScaleLeft
+                dy = e.clientY - that.$refs.footer.offsetTop - (item.offsetTop + item.offsetHeight / 2) * that.scale - that.$refs.footer.offsetHeight * (1 - that.scale) / 2
+                scale = 1 - Math.sqrt(dx * dx + dy * dy)
+                scale = 2 - (item.offsetWidth * that.scale * 5.5 + 20 - scale) / (item.offsetWidth * that.scale * 5.5 + 20) + 0.4
+                if (scale < 1) {
+                  scale = 1
+                }
+                if (scale > 1.4) {
+                  scale = 1.4
+                }
+                item.style.transform = 'scale3d(' + scale + ',' + scale + ',1)'
+                item.style.zIndex = ~~(scale * 100.00)
+                margin = scale * that.margin + (scale - 1) * that.size
+                item.style.marginLeft = margin + 'px'
+                item.style.marginRight = margin + 'px'
+              }
+            }
+          })
         },
         methods: {
           modal: function (src) {
@@ -281,6 +324,9 @@
                 if (appVm.deleteAction) {
                   var index = +ui.helper.data('index')
                   appVm.taskBar.splice(index, 1)
+                  appVm.$nextTick(function () {
+                    appVm.taskBarSize()
+                  })
                 }
                 appVm.deletePanel = false
                 appVm.deleteAction = false
@@ -288,20 +334,68 @@
               }
             })
           },
-          taskBarInit: function () {
+
+          taskBarInit: function (isMounted) {
+            var ox
+            var oy
+            var oox
+            var ooy
+            var dx
+            var dy
+
             $(this.$refs.dock).find('div:not(.draggable)').draggable({
               revert: 'invalid',
               revertDuration: 200,
               containment: 'window',
-              start: function () {
-                console.log('s')
+              start: function (e, ui) {
+                // ui.helper.get(0).style.transform = 'scale(' + 1 / appVm.scale + ')'
+                ui.helper.get(0).style.transformOrigin = 'center'
                 appVm.deletePanel = true
+                oox = 0
+                ooy = 0
+                ox = e.clientX
+                oy = e.clientY
               },
-              stop: function () {
-                console.log('stop')
+              drag: function (e, ui) {
+                dx = e.clientX - ox
+                dy = e.clientY - oy
+                ui.position.left = (dx - oox) * (1 / appVm.scale)
+                ui.position.top = (dy - ooy) * (1 / appVm.scale)
+              },
+              stop: function (e, ui) {
+                ui.helper.get(0).style.transform = ''
                 appVm.deletePanel = false
               }
             })
+            this.taskBarSize(isMounted)
+          },
+          taskBarSize: function (isMounted) {
+            var totalMargin = this.appPageIndex === 0 ? (270 + 320) : (310 + 390)
+            var taskScaleLeft = this.appPageIndex === 0 ? (320 - 270) : (390 - 310)
+            if (isMounted) {
+              new When2do(function () {
+                return this.$refs.dock && this.$refs.dock.offsetWidth !== 0
+              }.bind(this), 5).then(function () {
+                this.totalMargin = totalMargin / baseSeed * fontSize
+                this.taskScaleLeft = -1 * taskScaleLeft / 2
+                this.dropHolderWidth = 64 / baseSeed * fontSize
+                this.taskPadding = 20 / baseSeed * fontSize
+
+                if (this.$refs.dock.offsetWidth !== 0 && this.$refs.dock.offsetWidth > this.$refs.footer.offsetWidth - this.totalMargin - this.dropHolderWidth - this.taskPadding) {
+                  this.scale = (this.$refs.footer.offsetWidth - this.totalMargin - this.dropHolderWidth - this.taskPadding) / this.$refs.dock.offsetWidth
+                } else {
+                  this.scale = 1
+                }
+              }.bind(this))
+            } else {
+              this.totalMargin = totalMargin / baseSeed * fontSize
+              this.taskScaleLeft = -1 * taskScaleLeft / 2
+              if (this.$refs.dock.offsetWidth !== 0 && this.$refs.dock.offsetWidth > this.$refs.footer.offsetWidth - this.totalMargin - this.dropHolderWidth - this.taskPadding) {
+                this.scale = (this.$refs.footer.offsetWidth - this.totalMargin - this.dropHolderWidth - this.taskPadding) / this.$refs.dock.offsetWidth
+              } else {
+                this.scale = 1
+              }
+            }
           },
           calendarInit: function () {
             if (this.calendarInited) return
@@ -453,7 +547,7 @@
             if (!this.sider || this.siderOpening) return
             this.sider = false
           },
-          dialog: function() {
+          dialog: function () {
             WebApi.modal({
               title: '校内讲座审批',
               src: 'comments.html',
@@ -473,7 +567,7 @@
         resizeEvt = 'orientationchange' in window
           ? 'orientationchange'
           : 'resize',
-        recalc = (function recalc() {
+        recalc = (function recalc () {
           var clientWidth = docEl.clientWidth
           var docHeight = document.documentElement.offsetHeight
           if (!clientWidth) { return }

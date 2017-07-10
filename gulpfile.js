@@ -77,7 +77,8 @@ gulp.task('scriptCommon', function () {
       'node_modules/d3/build/d3.min.js',
       'src/libs/moment.js',
       'src/libs/fullcalendar.min.js',
-      'src/libs/jquery-ui.min.js'
+      'src/libs/jquery-ui.min.js',
+      'src/libs/when2do/when2do.js'
     ])
     .pipe(concat('common.js'))
     .pipe(gulp.dest('dist/scripts/'))

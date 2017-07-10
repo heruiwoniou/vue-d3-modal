@@ -214,18 +214,23 @@
 			border-radius: toRem(5);
 			overflow: hidden;
 		}
-		.fc .fc-toolbar>*>:first-child{
-			color: $baseFontColor;
+		.fc-header{
+			line-height: toRem(70);
+			.fc-header-center{
+				vertical-align middle
+				h2{
+					padding-right: toRem(10)
+					color: $baseFontColor;
+				}
+			}
 		}
-		.fc-day-header {
-			line-height: toRem(50);
+		.fc-day-header{
 			background: $centerCalendarHeaderColor;
-			color: $baseFontColor;
 		}
-		.fc-bg td.fc-day{
+		.fc-grid .fc-widget-content{
 			background: $centerCalendarDayColor;
 		}
-		.fc-bg td.fc-other-month{
+		.fc-grid .fc-other-month{
 			background: $centerCalendarOtherMonthColor;
 		}
 	}
